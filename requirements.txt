@@ -1,0 +1,13 @@
+# Core numerical stack
+numpy>=1.24
+pandas>=2.0
+
+# Market data download (free daily prices)
+yfinance>=0.2.40
+
+# Reinforcement-learning environment interface
+gymnasium>=0.29
+
+# PPO implementation and its deep-learning backend
+stable-baselines3>=2.3
+torch>=2.0

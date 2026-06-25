@@ -112,8 +112,8 @@ fine-grained, interpretable factor-importance result rather than a single opaque
 
 | Component | Tooling |
 |---|---|
-| RL algorithm | PPO (Stable-Baselines3 / CleanRL-style) |
-| Portfolio environment | FinRL (AI4Finance) `gym`-style allocation env |
+| RL algorithm | PPO (Stable-Baselines3) |
+| Portfolio environment | Custom Gymnasium environment (minimal-dependency; full control of the reward seam) |
 | Evolutionary search | CMA-ES, Differential Evolution, L-SHADE (`pycma`, `pymoo` / custom) |
 | Regime detection | Hidden Markov Model (Hamilton-style regime switching) or transparent trend/drawdown rules |
 | Classical baseline | Riskfolio-Lib (static mean-CVaR / mean-variance efficient frontier) |
@@ -121,24 +121,70 @@ fine-grained, interpretable factor-importance result rather than a single opaque
 | ESG data | Public ESG sub-scores where available; proxies otherwise (carbon intensity → E, controversy counts → S, board-independence metrics → G) |
 | Language / stack | Python, NumPy, pandas, PyTorch |
 
-### Planned repository structure
+### Repository structure
+
+Currently implemented (the v0 backbone):
 
 ```
 ESG_Adaptive_RL/
 ├── README.md
 ├── LICENSE
 ├── requirements.txt
-├── data/                # cached prices, ESG scores, regime labels (causal)
-├── envs/                # FinRL-based ESG allocation environment
-├── rewards/             # multi-factor reward + per-regime weighting
-├── evolution/           # CMA-ES / DE / L-SHADE outer loop
-├── agents/              # PPO allocator (inner loop)
-├── regimes/             # HMM / rule-based detector, causal labeling
-├── meta/                # regime-switching meta-controller
-├── baselines/           # return-only RL, fixed-weight RL, Riskfolio frontier, 60/40, equal-weight
-├── eval/                # metrics, significance tests, figures
-└── experiments/         # configs + run scripts
+├── .gitignore
+├── train_single.py            # entry point: train + evaluate one fixed-weight allocator
+└── esg_adaptive_rl/
+    ├── __init__.py
+    ├── config.py              # universe, dates, lookback, reward weights, PPO settings
+    ├── data.py                # price download + time-indexed placeholder ESG table
+    ├── reward.py              # configurable multi-factor reward (the swappable seam)
+    ├── env.py                 # custom Gymnasium portfolio environment (look-ahead-safe)
+    └── metrics.py             # return, Sharpe, CVaR, drawdown, ESG profile
 ```
+
+Planned modules (not yet implemented):
+
+```
+evolution/   # CMA-ES / DE / L-SHADE outer loop over the reward-weight vector
+regimes/     # causal market-regime labeling + HMM / rule-based detector
+meta/        # regime-switching meta-controller over the per-regime policies
+baselines/   # return-only RL, fixed-weight RL, Riskfolio frontier, 60/40, equal-weight
+eval/        # significance tests, crisis-window robustness, figures
+```
+
+---
+
+## Implementation status
+
+This is an actively developing research repository. The lists below separate what the
+current code does from what remains to be built.
+
+### Implemented (v0 backbone)
+
+- Custom Gymnasium portfolio-allocation environment: long-only, fully invested, with
+  transaction costs and look-ahead-safe timing (the action never sees the same-day
+  return it is graded on).
+- Configurable multi-factor reward over `(return, E, S, G, tail-risk)`, with the weight
+  vector exposed as an explicit, swappable object — the seam every later stage plugs into.
+- Time-indexed placeholder ESG table (deterministic synthetic data), built so a real
+  historical ESG history can replace it with no change to the environment or agent.
+- Free daily price loader (yfinance) with a chronological train/test split.
+- Evaluation metrics: annualized return, Sharpe, CVaR, maximum drawdown, realized ESG
+  profile, and turnover.
+- Single fixed-weight PPO training-and-evaluation entry point (`train_single.py`).
+- The backbone is verified end-to-end on synthetic data: Gymnasium API compliance, the
+  reward, the metrics, and a PPO training loop all run.
+
+### Not yet implemented (planned)
+
+- Real, look-ahead-free historical ESG / impact data to replace the placeholder table.
+- Evolutionary outer loop (CMA-ES / DE / L-SHADE) that searches the reward-weight vector.
+- Causal market-regime labeling and a detector (HMM or transparent trend/drawdown rules).
+- Per-regime evolved schedules for the three regimes (bull / neutral / bear).
+- The regime-switching meta-controller over the per-regime policies.
+- Baselines: return-only RL, fixed-weight RL, the static convex ESG–CVaR frontier
+  (Riskfolio-Lib), equal-weight, 60/40, and a plain HMM-regime allocator.
+- Full evaluation: multiple seeds, significance tests, a crisis-window stress test, and
+  the headline factor-importance figure.
 
 ---
 
@@ -171,12 +217,14 @@ Reported **per regime and overall**, with significance tests across seeds:
 
 ## Roadmap
 
-- [ ] Single-regime pipeline end-to-end (env, allocator, one evolved schedule, baselines)
-- [ ] Multi-factor (E/S/G) objective + CVaR tail-risk term + metrics
+- [x] v0 backbone: custom env, multi-factor reward seam, placeholder ESG, metrics, and a
+  single fixed-weight PPO pipeline (validated end-to-end on synthetic data)
+- [ ] Real, look-ahead-free historical ESG / impact data
+- [ ] Evolutionary outer loop (CMA-ES / DE / L-SHADE) over the reward-weight vector
 - [ ] Causal regime labeling + detector
-- [ ] Evolve all three regime schedules → factor-importance figure
-- [ ] Meta-switcher + transaction costs
-- [ ] Full experiment grid, baselines, significance, crisis-window robustness
+- [ ] Per-regime evolved schedules (bull / neutral / bear) and the factor-importance figure
+- [ ] Regime-switching meta-controller
+- [ ] Baselines + full evaluation (multiple seeds, significance, crisis-window robustness)
 - [ ] Paper write-up + reproducibility release
 
 ## Author
