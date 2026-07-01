@@ -219,12 +219,12 @@ Reported **per regime and overall**, with significance tests across seeds:
 
 - [x] v0 backbone: custom env, multi-factor reward seam, placeholder ESG, metrics, and a
   single fixed-weight PPO pipeline (validated end-to-end on synthetic data)
-- [ ] Real, look-ahead-free historical ESG / impact data
-- [ ] Evolutionary outer loop (CMA-ES / DE / L-SHADE) over the reward-weight vector
-- [ ] Causal regime labeling + detector
+- [ ] Real, look-ahead-free historical ESG / impact data -- Ash
+- [ ] Evolutionary outer loop (CMA-ES / DE / L-SHADE) over the reward-weight vector -- Alan
+- [ ] Causal regime labeling + detector -- Satya
 - [ ] Per-regime evolved schedules (bull / neutral / bear) and the factor-importance figure
-- [ ] Regime-switching meta-controller
-- [ ] Baselines + full evaluation (multiple seeds, significance, crisis-window robustness)
+- [ ] Regime-switching meta-controller -- Gurjot
+- [ ] Baselines + full evaluation (multiple seeds, significance, crisis-window robustness) -- Gurjot
 - [ ] Paper write-up + reproducibility release
 
 ## Author
