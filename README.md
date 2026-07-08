@@ -5,7 +5,9 @@
 A reinforcement-learning framework for sustainable portfolio allocation in which the
 trade-off between financial return, ESG factors, and tail risk is **evolved separately for
 each market regime** (bull / neutral / bear), and a meta-controller switches between the
-regime-specialist policies as market conditions change.
+regime-specialist policies as market conditions change. The agent operates under a
+**strict, no-compromise mandate**: harmful companies are excluded from its investable
+universe entirely, so it can never hold them — in any regime.
 
 > Research code for a paper targeting **ICAIF 2026** (ACM International Conference on AI in
 > Finance). Status: **in development.**
@@ -33,6 +35,11 @@ that weighting — and we evolve a **different weighting for each market regime*
   order to score well under the current regime's preferences.
 - An evolutionary outer loop searches the reward-weight space; a PPO inner loop trains the
   allocator for each candidate.
+- **Two universes.** The agent's *investable* universe is ESG-eligible names only — harmful
+  companies (fossil fuels, weapons, tobacco, ...) are removed from its action space
+  entirely and can never be held, in any regime. Those names live only in a separate
+  *benchmark* universe (the full market), used solely to measure what the strict mandate
+  costs. Regime-adaptive E/S/G weighting operates *within* the values-compliant set.
 
 The headline deliverable is a **finding**: the three evolved weight vectors, side by side,
 reveal *which ESG factors matter in which regime* (e.g., "Governance and tail-risk dominate
@@ -43,9 +50,9 @@ in bear markets; Environmental and return dominate in bull markets").
 1. **Primary (finding):** Which factors — return, E, S, G, tail risk — drive a successful
    sustainable portfolio, and how does their relative importance shift across bull, neutral,
    and bear regimes?
-2. **Demonstration:** Under a regime-adaptive framework, is an ESG portfolio financially
-   competitive with (and more resilient under stress than) return-only and fixed-weight
-   baselines — and what does sustainability actually cost *when* it costs (an honest,
+2. **Demonstration:** A **strict-exclusion** allocator that never holds a harmful company is
+   made competitive by regime-adaptive E/S/G weighting. How close does it come to an
+   *unconstrained* market benchmark, and what does the strict mandate cost (an honest,
    regime-conditional "price of virtue")?
 
 ## Contributions (honest scope)
