@@ -1,0 +1,87 @@
+/Users/satyabiswal/Documents/Education/GATech/FinanceResearch/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Model is not converging.  Current: -4214.872513057759 is not greater than -4214.872490573787. Delta is -2.2483971406472847e-05
+
+============================================================================================
+  ESG REGIME EVALUATION — esg_index
+============================================================================================
+Bars: 3694  (2011-10-31 -> 2026-07-13)
+
+[TRAIN/TEST split @ 2021-01-01]  train=2308  test=1386
+
+  TRAIN (in-sample)   regime mix: Calm 49% / Choppy 40% / Stress 11%
+    Buy & Hold : CAGR  15.78%  Vol  18.03%  Sharpe  0.79  Sortino  0.94  MaxDD  -37.23%  Calmar  0.42
+    Overlay    : CAGR   9.51%  Vol  10.02%  Sharpe  0.76  Sortino  0.91  MaxDD  -11.18%  Calmar  0.85
+
+  TEST  (out-of-sample)   regime mix: Calm 38% / Choppy 48% / Stress 13%
+    Buy & Hold : CAGR  14.30%  Vol  16.33%  Sharpe  0.78  Sortino  1.15  MaxDD  -22.21%  Calmar  0.64
+    Overlay    : CAGR   6.88%  Vol   9.89%  Sharpe  0.52  Sortino  0.71  MaxDD  -14.43%  Calmar  0.48
+
+  TEST regime-conditional next-day return (does the OOS label mean anything?)
+           ann_ret  ann_vol   sharpe  count
+regime                                     
+S1_calm      0.021    0.120    0.173    532
+S2_choppy    0.199    0.157    1.266    668
+S3_stress    0.324    0.264    1.227    185
+
+[WALK-FORWARD  retrain monthly, expanding window]
+  regime mix: Calm 35% / Choppy 30% / Stress 35%
+    Buy & Hold : CAGR  15.19%  Vol  17.41%  Sharpe  0.78  Sortino  1.00  MaxDD  -37.23%  Calmar  0.41
+    Overlay    : CAGR   4.07%  Vol   8.40%  Sharpe  0.28  Sortino  0.30  MaxDD  -17.38%  Calmar  0.23
+
+============================================================================================
+  ESG REGIME EVALUATION — SUSA
+============================================================================================
+Bars: 5085  (2006-04-25 -> 2026-07-13)
+
+[TRAIN/TEST split @ 2021-01-01]  train=3699  test=1386
+
+  TRAIN (in-sample)   regime mix: Calm 54% / Choppy 25% / Stress 21%
+    Buy & Hold : CAGR   9.43%  Vol  19.23%  Sharpe  0.46  Sortino  0.56  MaxDD  -53.93%  Calmar  0.17
+    Overlay    : CAGR   8.63%  Vol   9.75%  Sharpe  0.69  Sortino  0.78  MaxDD  -13.51%  Calmar  0.64
+
+  TEST  (out-of-sample)   regime mix: Calm 44% / Choppy 37% / Stress 19%
+    Buy & Hold : CAGR  13.75%  Vol  17.13%  Sharpe  0.72  Sortino  1.03  MaxDD  -28.23%  Calmar  0.49
+    Overlay    : CAGR   8.75%  Vol   9.86%  Sharpe  0.70  Sortino  0.88  MaxDD  -17.36%  Calmar  0.50
+
+  TEST regime-conditional next-day return (does the OOS label mean anything?)
+           ann_ret  ann_vol   sharpe  count
+regime                                     
+S1_calm      0.117    0.121    0.968    610
+S2_choppy    0.138    0.156    0.884    518
+S3_stress    0.218    0.273    0.796    257
+
+[WALK-FORWARD  retrain monthly, expanding window]
+  regime mix: Calm 51% / Choppy 30% / Stress 19%
+    Buy & Hold : CAGR  10.53%  Vol  18.68%  Sharpe  0.52  Sortino  0.65  MaxDD  -53.93%  Calmar  0.20
+    Overlay    : CAGR   8.39%  Vol  10.12%  Sharpe  0.65  Sortino  0.76  MaxDD  -18.24%  Calmar  0.46
+
+============================================================================================
+  ESG REGIME EVALUATION — DSI
+============================================================================================
+Bars: 4630  (2008-02-15 -> 2026-07-14)
+
+[TRAIN/TEST split @ 2021-01-01]  train=3243  test=1387
+
+  TRAIN (in-sample)   regime mix: Calm 48% / Choppy 32% / Stress 20%
+    Buy & Hold : CAGR  10.61%  Vol  20.59%  Sharpe  0.50  Sortino  0.59  MaxDD  -49.91%  Calmar  0.21
+    Overlay    : CAGR   7.60%  Vol   9.71%  Sharpe  0.60  Sortino  0.67  MaxDD  -18.10%  Calmar  0.42
+
+  TEST  (out-of-sample)   regime mix: Calm 26% / Choppy 47% / Stress 27%
+    Buy & Hold : CAGR  14.76%  Vol  17.70%  Sharpe  0.75  Sortino  1.07  MaxDD  -28.36%  Calmar  0.52
+    Overlay    : CAGR   9.95%  Vol   8.54%  Sharpe  0.92  Sortino  1.07  MaxDD   -7.70%  Calmar  1.29
+
+  TEST regime-conditional next-day return (does the OOS label mean anything?)
+           ann_ret  ann_vol   sharpe  count
+regime                                     
+S1_calm      0.146    0.120    1.213    355
+S2_choppy    0.186    0.145    1.276    651
+S3_stress    0.105    0.254    0.413    380
+
+[WALK-FORWARD  retrain monthly, expanding window]
+  regime mix: Calm 43% / Choppy 34% / Stress 23%
+    Buy & Hold : CAGR  11.75%  Vol  19.77%  Sharpe  0.56  Sortino  0.69  MaxDD  -49.91%  Calmar  0.24
+    Overlay    : CAGR   7.60%  Vol  10.51%  Sharpe  0.56  Sortino  0.62  MaxDD  -27.85%  Calmar  0.27
+
+Done. Per-source CSVs written to results/.
+EXIT=0
