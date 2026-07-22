@@ -11,3 +11,9 @@ gymnasium>=0.29
 # PPO implementation and its deep-learning backend
 stable-baselines3>=2.3
 torch>=2.0
+
+# Nature-inspired search over the reward-weight vector (eight optimizers)
+cma>=4.0          # CMA-ES
+pypop7>=0.0.79    # xNES (Exponential Natural Evolution Strategy)
+mealpy>=3.0       # DE, L-SHADE, PSO, ACO-R, GWO, ABC
+scipy>=1.10       # transitive dependency of the above
