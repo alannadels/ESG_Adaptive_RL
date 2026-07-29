@@ -152,7 +152,9 @@ def _run_mealpy(algorithm: str, tracker: _BestTracker, cfg: EvolutionConfig) -> 
         "minmax": "max",
         "log_to": None,
     }
-    model = optimizer_cls(epoch=cfg.max_generations, pop_size=cfg.population_size)
+    # mealpy requires a population of at least 5; clamp so small configs still run.
+    pop_size = max(5, cfg.population_size)
+    model = optimizer_cls(epoch=cfg.max_generations, pop_size=pop_size)
     model.solve(problem, seed=cfg.seed)
 
 

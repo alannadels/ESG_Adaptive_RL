@@ -16,7 +16,7 @@ from __future__ import annotations
 
 import hashlib
 from dataclasses import dataclass
-from typing import Dict, List, Tuple
+from typing import Dict, List, Optional, Tuple
 
 import numpy as np
 import pandas as pd
@@ -104,19 +104,29 @@ def load_market_data(
     tickers: List[str],
     start: str,
     end: str,
+    esg_source: str = "synthetic",
+    esg_path: Optional[str] = None,
+    esg_anchor_year: int = 2025,
 ) -> MarketData:
-    """Download prices and assemble aligned returns and a placeholder ESG table.
+    """Download prices and assemble aligned returns and an ESG table.
 
     Args:
         tickers: Asset tickers to include, in the desired column order.
         start: Start date (``YYYY-MM-DD``), inclusive.
         end: End date (``YYYY-MM-DD``), exclusive per yfinance convention.
+        esg_source: ``"synthetic"`` for the deterministic placeholder table, or
+            ``"refinitiv"`` to load the real ESG scores from ``esg_path``.
+        esg_path: Path to the Refinitiv ESG CSV; required when
+            ``esg_source == "refinitiv"``.
+        esg_anchor_year: Calendar year that fiscal-year offset 0 (FY0) corresponds to in
+            the Refinitiv export (only used for ``esg_source == "refinitiv"``).
 
     Returns:
         A :class:`MarketData` bundle with aligned returns and ESG arrays.
 
     Raises:
-        ValueError: If no usable price data is returned for the requested universe.
+        ValueError: If no usable price data is returned, or if ``esg_source`` is
+            ``"refinitiv"`` without an ``esg_path``.
     """
     # auto_adjust=True returns split/dividend-adjusted prices under the "Close" field.
     raw = yf.download(
@@ -141,7 +151,18 @@ def load_market_data(
 
     dates = returns_df.index
     returns = returns_df.to_numpy(dtype=np.float64)
-    esg = _synthetic_esg(tickers, n_days=returns.shape[0])
+
+    # Attach the ESG table from the requested source. The real loader is imported lazily
+    # so a synthetic-only run needs no ESG file.
+    if esg_source == "refinitiv":
+        if esg_path is None:
+            raise ValueError("esg_path is required when esg_source='refinitiv'.")
+        from esg_adaptive_rl.esg_data import build_esg_arrays, load_refinitiv_esg
+
+        parsed = load_refinitiv_esg(esg_path)
+        esg = build_esg_arrays(parsed, list(tickers), dates, anchor_year=esg_anchor_year)
+    else:
+        esg = _synthetic_esg(tickers, n_days=returns.shape[0])
 
     return MarketData(dates=dates, tickers=list(tickers), returns=returns, esg=esg)
 
@@ -176,3 +197,60 @@ def split_by_date(
         )
 
     return _subset(train_mask), _subset(test_mask)
+
+
+def split_by_fraction(
+    data: MarketData,
+    train_fraction: float = 0.7,
+) -> Tuple[MarketData, MarketData]:
+    """Split a bundle chronologically by row fraction into (train, validation).
+
+    Useful for a regime subset, whose days span the whole timeline but are already in
+    date order: the earliest ``train_fraction`` of its rows become training data and the
+    remainder validation, keeping the validation period later than training.
+
+    Args:
+        data: The :class:`MarketData` bundle (rows assumed in date order).
+        train_fraction: Fraction of rows assigned to the training split.
+
+    Returns:
+        A ``(train, validation)`` tuple of :class:`MarketData` bundles.
+    """
+    n = data.returns.shape[0]
+    cut = int(n * train_fraction)
+
+    def _slice(sl: slice) -> MarketData:
+        return MarketData(
+            dates=data.dates[sl],
+            tickers=data.tickers,
+            returns=data.returns[sl],
+            esg={factor: matrix[sl] for factor, matrix in data.esg.items()},
+        )
+
+    return _slice(slice(0, cut)), _slice(slice(cut, n))
+
+
+def load_index_close(ticker: str, start: str, end: str) -> pd.Series:
+    """Download the adjusted daily close for a single index/ETF (e.g. SPY).
+
+    Used to define market regimes independently of the tradable universe.
+
+    Args:
+        ticker: The index/ETF ticker (e.g. ``"SPY"``).
+        start: Start date (``YYYY-MM-DD``), inclusive.
+        end: End date (``YYYY-MM-DD``), exclusive per yfinance convention.
+
+    Returns:
+        The adjusted-close price series indexed by date.
+
+    Raises:
+        ValueError: If no price data is returned.
+    """
+    raw = yf.download(ticker, start=start, end=end, auto_adjust=True, progress=False)
+    if raw.empty:
+        raise ValueError(f"yfinance returned no data for index {ticker!r}.")
+    close = raw["Close"]
+    # A single-ticker download can still come back as a one-column frame.
+    if isinstance(close, pd.DataFrame):
+        close = close.iloc[:, 0]
+    return close.dropna()
