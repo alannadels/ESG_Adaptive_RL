@@ -3,7 +3,8 @@
 This ties the pieces together into the project's core experiment:
 
     1. Label each trading day bull / neutral / bear from a market index (SPY) with a
-       causal moving-average rule (:mod:`esg_adaptive_rl.regimes`).
+       causal walk-forward HMM (default; MA rules available)
+       (:mod:`esg_adaptive_rl.regimes`).
     2. Split the dataset into three regime subsets.
     3. For each regime, run the eight-optimizer nature-inspired search
        (:mod:`evolution`) to discover the reward weighting that performs best on that
@@ -49,7 +50,9 @@ ESG_ANCHOR_YEAR = 2025
 def main() -> None:
     """Label regimes, split the dataset, and evolve a strategy per regime."""
     evo_cfg = EvolutionConfig()
-    regime_cfg = RegimeConfig()  # 50/200 SMA crossover, causal min-dwell
+    # Walk-forward 3-state HMM (default detector; see esg_regime/results/
+    # HEURISTICS_BENCHMARKS.md). MA rules remain available via detector="crossover".
+    regime_cfg = RegimeConfig(ticker=REGIME_INDEX)
     np.random.seed(evo_cfg.seed)
 
     # Load the tradable universe (prices + real ESG) and the regime-defining index.

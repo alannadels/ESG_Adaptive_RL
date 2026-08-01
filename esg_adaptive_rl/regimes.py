@@ -1,11 +1,19 @@
-"""Rule-based market-regime labeling (bull / neutral / bear).
+"""Market-regime labeling (bull / neutral / bear) — causal, no look-ahead.
 
 Labels each trading day of a market index (e.g. SPY) as ``bull``, ``neutral``, or
-``bear`` using well-established, *causal* moving-average rules — no look-ahead. These
-labels are used to split the daily dataset into three regime subsets, each of which trains
-its own specialist allocator.
+``bear``. These labels split the daily dataset into three regime subsets, each of
+which trains its own specialist allocator.
 
-Two pluggable detectors, both driven by :class:`RegimeConfig`:
+Three pluggable detectors, driven by :class:`RegimeConfig`:
+
+    - ``"hmm"`` (DEFAULT) : the 3-state walk-forward Gaussian HMM from
+      :mod:`esg_regime` (filtered posteriors, monthly expanding-window refits —
+      the one causal Markov-switching protocol). Its vol-ordered states map
+      S1_calm->bull, S2_choppy->neutral, S3_stress->bear. Chosen as default after
+      a 11-detector comparison across 6 universes (see
+      esg_regime/results/HEURISTICS_BENCHMARKS.md): stress/calm vol separation
+      2.73 vs 1.70 for the 50/200 crossover, overlay dSharpe +0.11 vs +0.03,
+      with SPY->ESG label transfer validated at 85-96% agreement.
 
     - ``"crossover"`` : a fast/slow moving-average crossover (default 50/200). The fast
       average tracks the recent trend, the slow the long trend; the sign of their gap
@@ -37,8 +45,12 @@ class RegimeConfig:
     """Configuration for the rule-based regime detector.
 
     Attributes:
-        detector: ``"crossover"`` (fast/slow MA crossover — the live detector) or
-            ``"trend"`` (price vs a single slow MA — the baseline).
+        detector: ``"hmm"`` (walk-forward 3-state HMM — the default),
+            ``"crossover"`` (fast/slow MA crossover) or ``"trend"`` (price vs a
+            single slow MA — the baseline).
+        ticker: The index whose cached OHLC history feeds the HMM detector
+            (the HMM's range-volatility feature needs high/low, which the
+            close-only ``prices`` input does not carry).
         fast_window: Fast moving-average window (crossover detector only).
         slow_window: Slow moving-average window (both detectors).
         ma_type: ``"sma"`` (equal-weighted) or ``"ema"`` (recent-weighted, more
@@ -50,7 +62,8 @@ class RegimeConfig:
             switch is confirmed (causal anti-whipsaw smoothing). ``0`` disables it.
     """
 
-    detector: str = "crossover"
+    detector: str = "hmm"
+    ticker: str = "SPY"
     fast_window: int = 50
     slow_window: int = 200
     ma_type: str = "sma"
@@ -172,9 +185,38 @@ def label_regimes(prices: pd.Series, cfg: RegimeConfig = RegimeConfig()) -> pd.S
         A Series of regime labels aligned to ``prices.index``.
     """
     prices = pd.Series(prices).astype(float)
+    if cfg.detector == "hmm":
+        return _hmm_labels(prices, cfg)
     raw = _raw_labels(prices, cfg)
     smoothed = _apply_min_dwell(raw, cfg.min_dwell)
     return pd.Series(smoothed, index=prices.index, name="regime")
+
+
+def _hmm_labels(prices: pd.Series, cfg: RegimeConfig) -> pd.Series:
+    """Walk-forward HMM labels for ``cfg.ticker``, aligned to ``prices.index``.
+
+    Delegates to :func:`esg_regime.benchmark_compare.hmm_labels`, which returns
+    (and caches) the point-in-time label path: the HMM is refit monthly on an
+    expanding window and decoded with filtered posteriors, so no day is labeled
+    by a model that saw it. The HMM's own OHLC history for ``cfg.ticker`` is
+    used for features; labels are then as-of aligned onto the requested dates
+    (same forward-fill convention as :func:`split_by_regime`). Days before the
+    HMM's warm-up are labeled ``neutral``.
+
+    Raises:
+        ImportError: If the ``esg_regime`` package (and its requirements, e.g.
+            ``hmmlearn``) is not importable — fall back to
+            ``RegimeConfig(detector="crossover")``.
+    """
+    from esg_regime.benchmark_compare import hmm_labels
+
+    lab = hmm_labels(cfg.ticker)
+    mapping = {"S1_calm": "bull", "S2_choppy": "neutral", "S3_stress": "bear"}
+    series = (lab.assign(date=pd.to_datetime(lab["date"]))
+                 .set_index("date")["regime"].map(mapping))
+    aligned = series.reindex(pd.to_datetime(prices.index), method="ffill")
+    return pd.Series(aligned.fillna("neutral").values, index=prices.index,
+                     name="regime")
 
 
 def split_by_regime(data, labels: pd.Series) -> Dict[str, "object"]:

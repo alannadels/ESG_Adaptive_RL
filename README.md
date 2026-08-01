@@ -122,7 +122,7 @@ fine-grained, interpretable factor-importance result rather than a single opaque
 | RL algorithm | PPO (Stable-Baselines3) |
 | Portfolio environment | Custom Gymnasium environment (minimal-dependency; full control of the reward seam) |
 | Evolutionary search | CMA-ES, Differential Evolution, L-SHADE (`pycma`, `pymoo` / custom) |
-| Regime detection | Hidden Markov Model (Hamilton-style regime switching) or transparent trend/drawdown rules |
+| Regime detection | **Walk-forward 3-state Gaussian HMM (default)** — filtered posteriors, monthly expanding-window refits (`esg_regime`); transparent MA/trend rules remain available (`detector="crossover"/"trend"`) |
 | Classical baseline | Riskfolio-Lib (static mean-CVaR / mean-variance efficient frontier) |
 | Market data | `yfinance` / Stooq (free daily prices) |
 | ESG data | Public ESG sub-scores where available; proxies otherwise (carbon intensity → E, controversy counts → S, board-independence metrics → G) |
@@ -160,6 +160,46 @@ eval/        # significance tests, crisis-window robustness, figures
 
 ---
 
+## Results so far — regime detection (validated, out-of-sample)
+
+The regime layer is built and validated. All results are **point-in-time**: features
+are standardized on lagged expanding windows, the HMM is refit monthly on an expanding
+window and decoded with *filtered* (forward-only) posteriors, and every overlay signal
+is lagged one day. Full write-ups live in
+[`esg_regime/results/`](esg_regime/results/) (`RESULTS.md`,
+`INDEX_COMPARISON.md`, `HEURISTICS_BENCHMARKS.md`, `METHODOLOGY.md`).
+
+**The regime labels are economically real.** Grouping next-day returns by the label
+assigned the prior day, stress-state days carry ~2-3x the volatility of calm days on
+every universe tested — 3 ESG ETFs (SUSA, DSI, ESGU), 3 broad benchmarks
+(S&P 500, SPY, QQQ), and 11 published ESG indices in an earlier 12-universe study:
+
+| Universe | Calm vol | Stress vol | Ratio |
+|---|---:|---:|---:|
+| SPY | 11.6% | 35.0% | **3.02** |
+| ESGU | 12.1% | 34.1% | 2.82 |
+| SUSA | 11.5% | 31.2% | 2.70 |
+
+**A regime overlay ~halves risk out-of-sample.** A naive 100/60/0 validation overlay
+(calm/choppy/stress, net of costs) cut max drawdown on 11 of 11 published ESG indices
+(average 54%; e.g. DSI test-period Sharpe 0.92 vs 0.75 buy-and-hold, max drawdown
+-7.7% vs -28.4%).
+
+**The HMM default is evidence-based.** An 11-detector comparison (HMM + 10 causal
+rule-based detectors from a 27-method literature catalog) across 6 universes ranks the
+HMM and a simple expanding vol-percentile rule at the top (stress/calm separation 2.73
+/ 2.85, overlay dSharpe +0.11 / +0.19); the 50/200 crossover, while the most *stable*
+label, is the weakest risk separator (1.70). Consecutive-down-day streak rules turn
+out to be short-term *reversal* signals, not regimes (next-day returns after 5 straight
+down days: +68% to +164% annualized).
+
+**Detecting regimes on SPY transfers to broad ESG universes.** SPY-detected labels
+agree 85-96% with each broad ESG universe's own labels and separate volatility equally
+well — validating `REGIME_INDEX = "SPY"`. (Caution remains for narrow/thematic
+universes, e.g. clean-energy.)
+
+---
+
 ## Implementation status
 
 This is an actively developing research repository. The lists below separate what the
@@ -180,13 +220,18 @@ current code does from what remains to be built.
 - Single fixed-weight PPO training-and-evaluation entry point (`train_single.py`).
 - The backbone is verified end-to-end on synthetic data: Gymnasium API compliance, the
   reward, the metrics, and a PPO training loop all run.
+- **Causal market-regime detection** (`esg_regime` + `esg_adaptive_rl/regimes.py`):
+  a walk-forward 3-state Gaussian HMM (the default detector) plus ten rule-based
+  alternatives (50/200 crossover, trend, 20% drawdown rule, vol-percentile, VIX
+  cutoffs, TSMOM, Lunde-Timmermann, ...), all validated look-ahead-free — see the
+  Results section below.
+- Rule-based regime labeling, per-regime evolutionary search over reward weights
+  (eight nature-inspired optimizers), and a real ESG loader (`evolve_regimes.py`).
 
 ### Not yet implemented (planned)
 
 - Real, look-ahead-free historical ESG / impact data to replace the placeholder table.
-- Evolutionary outer loop (CMA-ES / DE / L-SHADE) that searches the reward-weight vector.
-- Causal market-regime labeling and a detector (HMM or transparent trend/drawdown rules).
-- Per-regime evolved schedules for the three regimes (bull / neutral / bear).
+- Per-regime evolved schedules finalized for the three regimes (bull / neutral / bear).
 - The regime-switching meta-controller over the per-regime policies.
 - Baselines: return-only RL, fixed-weight RL, the static convex ESG–CVaR frontier
   (Riskfolio-Lib), equal-weight, 60/40, and a plain HMM-regime allocator.
