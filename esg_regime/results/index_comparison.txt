@@ -1,0 +1,110 @@
+Fitting the regime HMM on 12 ESG indices (parallel)...
+
+Model is not converging.  Current: -356.3242755779589 is not greater than -356.32336151842935. Delta is -0.0009140595295207277
+Model is not converging.  Current: -356.3242755779589 is not greater than -356.32336151842935. Delta is -0.0009140595295207277
+Model is not converging.  Current: -402.58920402512365 is not greater than -402.5888784235134. Delta is -0.00032560161025685375
+Model is not converging.  Current: -402.59056030173235 is not greater than -402.59053679229726. Delta is -2.3509435095547815e-05
+Model is not converging.  Current: -410.71723677895716 is not greater than -410.7171638962834. Delta is -7.28826737486088e-05
+Model is not converging.  Current: -476.33972033897163 is not greater than -476.32855493561294. Delta is -0.011165403358688764
+Model is not converging.  Current: -951.8658780924653 is not greater than -951.8646740778337. Delta is -0.0012040146316394384
+Model is not converging.  Current: -980.6151957419369 is not greater than -980.6148490580382. Delta is -0.000346683898669653
+Model is not converging.  Current: -1441.8377502131443 is not greater than -1441.837570672325. Delta is -0.00017954081931748078
+Model is not converging.  Current: -1629.151706423733 is not greater than -1629.151059315111. Delta is -0.000647108621933512
+Model is not converging.  Current: -1759.4442352542817 is not greater than -1759.438702952535. Delta is -0.005532301746598023
+Model is not converging.  Current: -1870.2538268465012 is not greater than -1870.2537930641593. Delta is -3.378234191586671e-05
+Model is not converging.  Current: -1955.5146793883457 is not greater than -1955.5145660329822. Delta is -0.00011335536350998154
+Model is not converging.  Current: -1955.514729673537 is not greater than -1955.514508345361. Delta is -0.00022132817593956133
+Model is not converging.  Current: -4214.872513057765 is not greater than -4214.872490573796. Delta is -2.248396867798874e-05
+Model is not converging.  Current: -2116.680255571689 is not greater than -2116.6797963634144. Delta is -0.0004592082746057713
+Model is not converging.  Current: -2164.533154912224 is not greater than -2164.533007856715. Delta is -0.00014705550893268082
+Model is not converging.  Current: -2164.533084836161 is not greater than -2164.5327813287395. Delta is -0.0003035074214494671
+Model is not converging.  Current: -2168.2509103239254 is not greater than -2168.2508170463007. Delta is -9.327762472821632e-05
+Model is not converging.  Current: -2168.251337634043 is not greater than -2168.2507902109573. Delta is -0.0005474230856634676
+Model is not converging.  Current: -2183.8889017586253 is not greater than -2183.8886274546685. Delta is -0.00027430395675764885
+Model is not converging.  Current: -2215.1118623650964 is not greater than -2215.1113270860615. Delta is -0.0005352790349206771
+Model is not converging.  Current: -2235.2480046059404 is not greater than -2235.2479403440943. Delta is -6.426184609154006e-05
+Model is not converging.  Current: -2373.9125908524975 is not greater than -2373.912465451537. Delta is -0.00012540096031443682
+Model is not converging.  Current: -2419.9230955707653 is not greater than -2419.92221497347. Delta is -0.0008805972952359298
+Model is not converging.  Current: -2419.9229286954846 is not greater than -2419.922183392003. Delta is -0.0007453034818354354
+Model is not converging.  Current: -2433.539438954948 is not greater than -2433.5394209156007. Delta is -1.8039347196463495e-05
+Model is not converging.  Current: -2470.2069982375942 is not greater than -2470.206766817963. Delta is -0.00023141963129091891
+Model is not converging.  Current: -2470.2074320779634 is not greater than -2470.2066720053385. Delta is -0.0007600726248710998
+Model is not converging.  Current: -2486.4127627302623 is not greater than -2486.412532775614. Delta is -0.00022995464814812294
+Model is not converging.  Current: -2486.4126364655363 is not greater than -2486.412610581552. Delta is -2.588398410807713e-05
+Model is not converging.  Current: -2621.9472392243715 is not greater than -2621.947068909723. Delta is -0.0001703146485851903
+Model is not converging.  Current: -2622.3934721342316 is not greater than -2622.393356980326. Delta is -0.00011515390542626847
+Model is not converging.  Current: -3130.221428324789 is not greater than -3130.2210038499634. Delta is -0.00042447482564966776
+Model is not converging.  Current: -3427.131188213344 is not greater than -3427.13068909725. Delta is -0.0004991160940335249
+Model is not converging.  Current: -9210.421619777408 is not greater than -9210.42121430523. Delta is -0.0004054721775901271
+Model is not converging.  Current: -1738.7209662628547 is not greater than -1738.720952463006. Delta is -1.3799848829876282e-05
+Model is not converging.  Current: -1887.7625945321142 is not greater than -1887.7625858640429. Delta is -8.668071359352325e-06
+Model is not converging.  Current: -1540.7645651940072 is not greater than -1540.7645021721908. Delta is -6.30218164587859e-05
+Model is not converging.  Current: -63.987721081851646 is not greater than -63.98719893874555. Delta is -0.0005221431060959958
+Model is not converging.  Current: -86.56167851751076 is not greater than -86.56046148725815. Delta is -0.0012170302526044452
+Model is not converging.  Current: -86.56098194908039 is not greater than -86.56030469766962. Delta is -0.0006772514107638017
+Model is not converging.  Current: -63.987721081851646 is not greater than -63.98719893874555. Delta is -0.0005221431060959958
+Model is not converging.  Current: -86.56167851751076 is not greater than -86.56046148725815. Delta is -0.0012170302526044452
+Model is not converging.  Current: -86.56098194908039 is not greater than -86.56030469766962. Delta is -0.0006772514107638017
+Model is not converging.  Current: -199.782468650287 is not greater than -199.78240645853757. Delta is -6.219174943566941e-05
+Model is not converging.  Current: -199.78245406986025 is not greater than -199.78245379259803. Delta is -2.772622167412919e-07
+Model is not converging.  Current: -3234.463603576007 is not greater than -3234.463461904785. Delta is -0.00014167122162689338
+============================================================================================================
+  REGIME QUALITY — does the HMM separate volatility states on each ESG index?
+============================================================================================================
+Index     Style                     Bars  Calm vol  Stress vol   Ratio  Stress%
+ESGV      broad ESG                 1657     13.0%       38.0%    2.92      17%
+NULV      ESG value                 2084     11.2%       32.5%    2.91      15%
+ESGU      broad ESG                 2107     12.1%       34.1%    2.82      19%
+SPYX      fossil-fuel free          2363     11.2%       30.5%    2.71      21%
+SUSA      broad ESG                 5085     11.5%       31.2%    2.70      19%
+CRBN      low carbon (global)       2607     11.0%       25.4%    2.31      24%
+DSI       values-screened           4630     13.8%       31.9%    2.31      23%
+ERTH      environmental             4654     17.7%       38.2%    2.16      23%
+ESGD      international ESG         2178     13.5%       28.5%    2.12      18%
+esg_index constructed               3694     11.7%       23.4%    2.00      35%
+SUSL      ESG leaders               1498     12.3%       22.7%    1.85      36%
+ICLN      clean-energy thematic     4235     19.7%       33.1%    1.68      46%
+
+============================================================================================================
+  ECONOMIC VALUE — regime overlay vs buy & hold (walk-forward, net of costs)
+============================================================================================================
+Index       B&H Sharpe  Ovl Sharpe   ΔSharpe   B&H MaxDD   Ovl MaxDD   DD cut
+ESGU              0.69        0.92     +0.23      -33.9%      -14.3%      58%
+ESGV              0.68        0.86     +0.17      -33.7%      -13.6%      60%
+SPYX              0.74        0.88     +0.14      -32.8%      -18.3%      44%
+SUSA              0.52        0.65     +0.13      -53.9%      -18.2%      66%
+NULV              0.53        0.60     +0.07      -37.0%       -9.3%      75%
+ICLN              0.08        0.12     +0.04      -72.5%      -33.5%      54%
+SUSL              0.87        0.90     +0.04      -27.0%       -8.3%      69%
+DSI               0.56        0.56     -0.00      -49.9%      -27.8%      44%
+CRBN              0.69        0.64     -0.05      -33.1%      -14.7%      56%
+ERTH              0.21        0.12     -0.09      -64.2%      -42.8%      33%
+ESGD              0.42        0.20     -0.23      -33.7%      -23.1%      31%
+esg_index         0.78        0.28     -0.51      -37.2%      -17.4%      53%
+
+============================================================================================================
+  CONSTRUCTED BASKET vs PUBLISHED ESG INDICES
+============================================================================================================
+  Score-constructed basket : vol ratio 2.00 | ΔSharpe -0.51 | DD cut 53%
+  Published ESG indices    : vol ratio 2.41 (median 2.31, range 1.68–2.92) | ΔSharpe +0.04 | DD cut 54%
+  Indices where the overlay IMPROVES Sharpe : 7/11
+  Indices where the overlay CUTS drawdown   : 11/11
+
+============================================================================================================
+  LABEL AGREEMENT with the score-constructed basket (shared dates)
+============================================================================================================
+Index       Shared days   Exact match  Stress recall
+CRBN               2600           67%            77%
+SPYX               2356           63%            65%
+ESGV               1650           60%            58%
+ESGU               2100           57%            50%
+NULV               2077           55%            45%
+ESGD               2171           54%            47%
+SUSA               3694           53%            31%
+DSI                3694           51%            43%
+SUSL               1491           50%            78%
+ERTH               3694           49%            43%
+ICLN               3694           43%            58%
+
+Saved results/index_comparison.csv + results/index_agreement.csv
+EXIT=0

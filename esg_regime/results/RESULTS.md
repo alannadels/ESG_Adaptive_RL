@@ -60,6 +60,18 @@ train/test split can't see. On the shorter high-ESG basket the walk-forward is
 over-conservative early (Stress 35% of days when training data is thin), which
 drags its CAGR; the better-calibrated train/test protocol puts Stress at ~11–13%.
 
+## Follow-up: published ESG indices beat the constructed basket
+
+A 12-index comparison (`INDEX_COMPARISON.md`) re-ran this identical pipeline on
+published ESG indices. Result: every one of the 12 separates volatility states
+(stress/calm ratio 1.68–2.92), and the **published indices outperform the
+score-constructed basket** on both regime quality (2.41 vs 2.00 mean ratio) and
+economics (ΔSharpe +0.04 vs −0.51). Drawdown protection held on 11/11 indices
+(avg 54% cut). The constructed basket over-labels Stress (35% of days), traceable
+to the synthetic cross-sectional OHLC in `build_esg_index.py` inflating the
+Parkinson range-vol feature. **Recommendation: use ESGU/ESGV/SUSA as the regime
+substrate.**
+
 ## Caveats
 
 - The overlay is a **risk-management** demonstration, not a return-maximizing
