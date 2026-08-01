@@ -1,0 +1,220 @@
+{
+  "methods": [
+    {
+      "name": "NBER Business Cycle Dating Committee chronology",
+      "rule": "No mechanical rule. Committee dates peaks/troughs of US economic activity by judged depth, diffusion, and duration using monthly indicators (real personal income less transfers, nonfarm payrolls, household employment, real PCE, real manufacturing and trade sales, industrial production; quarterly real GDP/GDI). Regime_t = recession if month t lies between a dated peak and trough, else expansion. Daily use: broadcast the monthly label to all trading days in the month. Strict point-in-time variant: switch the label only on the committee ANNOUNCEMENT date, not the dated turning point.",
+      "causal": false,
+      "states": "2 states: expansion / recession. 3-state mapping: expansion -> bull/Calm, recession -> bear/Stress; no natural neutral (optionally label the announcement-lag window, from dated turn to announcement, as Choppy). Only the announcement-date variant is usable causally.",
+      "source": "NBER Business Cycle Dating Committee, nber.org/research/business-cycle-dating (chronology to 1854).",
+      "notes": "Canonical benchmark macro regime labels; announcement lags 4-21 months (Dec-2007 peak announced Dec-2008; Apr-2020 trough announced Jul-2021). Using final dates as point-in-time features is the classic look-ahead bug. Dates the business cycle, not the stock market; equity bears typically lead recessions. Deduplicates two input entries (committee description + recession-indicator-as-label)."
+    },
+    {
+      "name": "Dow Theory (classical Dow-Hamilton-Rhea)",
+      "rule": "Primary bull: both DJIA and DJ Transports make successive higher highs AND higher lows on closes; primary bear: both make lower highs and lower lows. Reversal signaled when, after a secondary reaction (counter-trend move ~3 weeks-3 months), BOTH averages close beyond the prior secondary-reaction extreme; one average alone is non-confirmation (no signal). Closing prices only; no fixed percentage or duration thresholds in the classical texts.",
+      "causal": false,
+      "states": "2 primary states (bull/bear) plus secondary reactions. 3-state mapping: confirmed primary bull -> bull/Calm; confirmed primary bear -> bear/Stress; secondary reactions and non-confirmation periods -> neutral/Choppy.",
+      "source": "Charles H. Dow, WSJ editorials c.1900-1902; W.P. Hamilton, 'The Stock Market Barometer' (1922); Robert Rhea, 'The Dow Theory' (1932). Academic evaluation: Brown, Goetzmann & Kumar (1998).",
+      "notes": "Marked non-causal because the classical formulation is discretionary \u2014 identifying qualifying secondary reactions requires judgment and swing points are typically identified with hindsight. A fixed mechanical codification (e.g., zigzag threshold or Schannep, below) can be made causal but results depend heavily on the codification."
+    },
+    {
+      "name": "Bry-Boschan (1971) / Harding-Pagan BBQ turning-point algorithm",
+      "rule": "Monthly: (1) candidate peaks/troughs = local max/min within +/-5 months (on a 12-month-MA smoothed then progressively unsmoothed series); (2) enforce peak/trough alternation; (3) censor: no turns within 6 months of sample ends, minimum cycle 15 months, minimum phase 5 months. Quarterly BBQ variant (Harding-Pagan 2002): +/-2-quarter window, minimum cycle 5 quarters, minimum phase 2 quarters.",
+      "causal": false,
+      "states": "Expansion/contraction phases between dated peaks and troughs. 3-state mapping: expansion -> bull/Calm, contraction -> bear/Stress; no neutral. Use only as retrospective ground-truth labels for evaluating causal classifiers, never as agent input.",
+      "source": "Bry, G. & Boschan, C. (1971), NBER Technical Paper 20; Harding, D. & Pagan, A. (2002), Journal of Monetary Economics 49(2), 365-381.",
+      "notes": "Retrospective by construction: the local-extremum window and end-censoring require future data, so the last ~window+censor months are never classifiable in real time. Parent algorithm of Pagan-Sossounov (below)."
+    },
+    {
+      "name": "Hamilton (1989) Markov-switching model, filtered probabilities",
+      "rule": "Fit a 2-state Markov-switching model by MLE (original: MS-AR(4) on quarterly GNP growth, regime-switching mean; equity application: monthly/daily returns with regime-dependent mean mu_s and variance sigma_s^2, constant transition matrix). CAUSAL classification: filtered probability P(S_t = bear | data through t) from the Hamilton recursive filter, thresholded at 0.5, with parameters re-estimated on an expanding window (e.g., refit monthly, minimum 10-year burn-in). Retrospective variant: smoothed probability P(S_t | full sample) > 0.5 (Hamilton's original NBER-matching results).",
+      "causal": true,
+      "states": "2 latent soft states (expansion/recession or low-vol-bull/high-vol-bear); extendable to K states. 3-state mapping via probability banding: filtered P(bear) < 0.2 -> bull/Calm; 0.2-0.8 -> neutral/Choppy; > 0.8 -> bear/Stress (bands give hysteresis and a natural transitional state).",
+      "source": "Hamilton, J.D. (1989), Econometrica 57(2), 357-384.",
+      "notes": "Deduplicates two input entries. Causal ONLY with filtered (not smoothed) probabilities AND expanding-window parameter re-estimation; full-sample fits leak future information \u2014 the single most common look-ahead bug in this literature. Filtered probabilities are noisy near turning points (require n consecutive periods above threshold before switching). Fragile: label switching, multimodal likelihood, sensitivity to structural breaks."
+    },
+    {
+      "name": "20% bear-market rule (industry / S&P Dow Jones convention)",
+      "rule": "Track running maximum of closes P_max and running drawdown D_t = 1 - P_t/P_max. Bear flag ON when the index closes >= 20% below its most recent cycle closing high; bear ends (new bull) when the index closes >= 20% above the bear-market closing low. Point-in-time state variable: the in-bear/not-in-bear flag evaluated on closes only. Conventional episode DATING (bear backdated to the peak, bull backdated to the trough) is retrospective and must not be used as a causal label.",
+      "causal": true,
+      "states": "2 states: bull / bear (real-time flag). 3-state mapping: bear flag ON -> bear/Stress; flag OFF with current drawdown-from-running-max < 10% -> bull/Calm; flag OFF with drawdown 10-20% (correction zone, bear not yet confirmed) -> neutral/Choppy.",
+      "source": "Wall Street / S&P Dow Jones Indices convention (adjudicated by S&P DJI, e.g., Silverblatt); formalized as the lambda=0.20 case in Lunde & Timmermann (2004), JBES 22(3); tabulated by Yardeni Research.",
+      "notes": "Deduplicates three input entries (naive 20% convention, S&P DJI rule, industry drawdown convention). The flag is fully causal and the most defensible simple point-in-time bull/bear label; weaknesses: arbitrary threshold, regime flip lags the true peak by the full 20% decline, borderline 19.8-19.9% episodes (1990, 2011, 2018) classified inconsistently across vendors (close vs intraday, price vs total return)."
+    },
+    {
+      "name": "Drawdown-band rule (pullback / correction / bear)",
+      "rule": "State_t from drawdown D_t = 1 - P_t/P_max (running max of closes): D < 5% = normal; 5-10% = pullback; 10-20% = correction; >= 20% = bear. Simplified 3-band default: 0-10% / 10-20% / >20%. Correction conventionally ends when the index regains the prior peak (D returns to 0); for a causal daily label just read the current band each close.",
+      "causal": true,
+      "states": "3-4 graded drawdown states. 3-state mapping is direct and is the recommended default causal baseline for this study: D < 10% -> bull/Calm; 10-20% -> neutral/Choppy; >= 20% -> bear/Stress.",
+      "source": "Wall Street / S&P Dow Jones Indices convention; documented by Charles Schwab ('What Is a Market Correction?'), Fidelity, Hartford Funds.",
+      "notes": "Fully causal on the current-band reading (retroactive dating of episode starts/ends at peaks/troughs is not). Round-number thresholds with no statistical derivation; corrections occur roughly annually so the middle state is frequent and short-lived; add hysteresis (e.g., exit a band only after a 1-2% buffer) to reduce boundary whipsaw."
+    },
+    {
+      "name": "200-day SMA rule (price vs trailing moving average; Faber 10-month variant)",
+      "rule": "Bull/risk-on when close_t > SMA_200(closes through t); bear/risk-off when below. Faber monthly variant: evaluate only at month-end vs the 10-month SMA (hold if above, cash if below). Siegel band variant: switch bull only on a close >= 1% above the 200-day SMA, bear only on a close >= 1% below (band reduces whipsaw).",
+      "causal": true,
+      "states": "2 states: above-MA (risk-on/bull) vs below-MA (risk-off/bear). 3-state mapping: close > 1.01 x SMA200 -> bull/Calm; close < 0.99 x SMA200 -> bear/Stress; within the +/-1% band -> neutral/Choppy (the Siegel band becomes the Choppy state).",
+      "source": "Long-standing industry convention; Faber, M. (2007), 'A Quantitative Approach to Tactical Asset Allocation', Journal of Wealth Management 9(4) (SSRN 962461); Siegel, 'Stocks for the Long Run' (200-day SMA, 1% band, DJIA 1886-2006).",
+      "notes": "Deduplicates two input entries. Fully causal, trivially computable, the most used practitioner regime filter; below-MA days show markedly lower mean returns and ~30% higher vol. Weaknesses: whipsaws in sideways markets, lag at V-bottoms, sensitivity to lookback choice (150/200/250 all used)."
+    },
+    {
+      "name": "Golden cross / death cross (50/200-day SMA crossover)",
+      "rule": "Golden cross: SMA_50 crosses above SMA_200 (daily closes) -> bull regime begins; death cross: SMA_50 crosses below SMA_200 -> bear regime begins; regime persists until the opposite cross. Optional validation filter: require the 200-day SMA itself to be rising (golden) or falling (death).",
+      "causal": true,
+      "states": "2 mutually exclusive states after the first cross. 3-state mapping: golden regime -> bull/Calm; death regime -> bear/Stress; neutral/Choppy when |SMA_50/SMA_200 - 1| < 1% (SMAs entangled, cross imminent) or when the 200-day slope is flat (e.g., |20-day change of SMA200| < 0.5%).",
+      "source": "Technical-analysis industry convention (no single origin); documented by Fidelity, StockCharts, Cabot Wealth SPY tests.",
+      "notes": "Fully causal and unambiguous \u2014 a good mechanical baseline. Heavily lagging: golden cross prints on average ~15-20% above the actual S&P 500 bottom; death crosses often occur near local lows. Reported false-signal rates ~30-35% on the S&P 500."
+    },
+    {
+      "name": "GARCH(1,1) conditional-volatility bands",
+      "rule": "Fit sigma^2_t = omega + alpha*eps^2_{t-1} + beta*sigma^2_{t-1} on daily returns (typical equity estimates alpha ~0.08-0.10, beta ~0.88-0.91), re-estimated on an expanding or rolling window (e.g., refit monthly, >= 5-year burn-in). One-step-ahead sigma_t uses only data through t-1. Regime: compare sigma_t to unconditional vol sigma_bar = sqrt(omega/(1-alpha-beta)); default bands at 1.0x and 1.5x sigma_bar (or trailing percentiles of fitted sigma_t). RiskMetrics EWMA (lambda = 0.94 daily) is the parameter-free substitute.",
+      "causal": true,
+      "states": "2-3 vol-level states. 3-state mapping: sigma_t < sigma_bar -> Calm; sigma_bar <= sigma_t < 1.5 x sigma_bar -> Choppy; sigma_t >= 1.5 x sigma_bar -> Stress. (Volatility scheme; combine with a trend rule for bull/neutral/bear semantics.)",
+      "source": "Bollerslev, T. (1986), Journal of Econometrics 31(3), 307-327; band thresholding is standard vol-target/risk-parity practice.",
+      "notes": "sigma_t is causal given parameters, but a single full-sample fit leaks \u2014 refit on expanding windows for point-in-time use. Reacts faster than 21-day realized vol (exponential weighting). Single-regime GARCH mean-reverts smoothly, so these are level bands, not structural breaks."
+    },
+    {
+      "name": "Maheu-McCurdy (2000) duration-dependent Markov switching on equity returns",
+      "rule": "2-state Markov-switching model on monthly stock returns with switching mean AND variance, and transition probabilities that are logistic functions of duration in the current state (duration memory capped at tau_max = 24 months). Bull = high mean/low variance; bear = negative mean/high variance. Causal classification: filtered P(bear | data through t) > 0.5, parameters from expanding-window refits. Maheu-McCurdy-Song (2012) 4-state extension: bull, bull correction, bear, bear rally.",
+      "causal": true,
+      "states": "2 states (bull/bear); 4 in the 2012 extension. 3-state mapping: 2-state version \u2014 filtered P(bear) < 0.2 -> bull, 0.2-0.8 -> neutral, > 0.8 -> bear; 4-state version \u2014 bull -> bull/Calm, bull-correction and bear-rally -> neutral/Choppy, bear -> bear/Stress.",
+      "source": "Maheu, J.M. & McCurdy, T.H. (2000), JBES 18(1), 100-112; Maheu, McCurdy & Song (2012), JBES 30(3), 391-403. See also Chauvet & Potter (2000), J. Empirical Finance.",
+      "notes": "The canonical statistical (vs rule-based) academic definition of equity bull/bear regimes. Same causality caveats as Hamilton: filtered + expanding estimation only; smoothed probabilities are retrospective. Monthly by design; daily application requires refitting at daily frequency or holding the monthly label within-month."
+    },
+    {
+      "name": "Ang-Bekaert (2002) two-regime normal/bear switching returns",
+      "rule": "Markov regime-switching model on monthly equity returns (originally international, joint): regime 1 = normal (higher mean, lower vol, lower cross-market correlations); regime 2 = bear (low/negative mean, much higher vol, higher correlations). Causal classification: Hamilton-filter filtered probabilities with recursively re-estimated parameters; threshold at 0.5.",
+      "causal": true,
+      "states": "2 states: normal and bear (high-vol, high-correlation). 3-state mapping: filtered P(bear) < 0.2 -> bull/Calm; 0.2-0.8 -> neutral/Choppy; > 0.8 -> bear/Stress.",
+      "source": "Ang, A. & Bekaert, G. (2002), Review of Financial Studies 15(4), 1137-1187; Ang & Bekaert (2004), Financial Analysts Journal 60(2), 86-99.",
+      "notes": "The canonical regime definition cited by regime-aware portfolio (and RL) papers; motivated by correlations and vols rising together in bad times. Identical filtered-vs-smoothed causality caveat as all Markov-switching estimators."
+    },
+    {
+      "name": "Pagan-Sossounov (2003) bull/bear dating (Bry-Boschan adaptation for equities)",
+      "rule": "On monthly (log) index levels: (1) candidate peak (trough) at t if P_t is the max (min) within +/-8 months; (2) enforce alternation (keep highest of consecutive peaks, lowest of consecutive troughs); (3) censor: no turns within 6 months of sample ends; eliminate cycles < 16 months; eliminate phases < 4 months UNLESS a single-month price change exceeds 20%; iterate censoring to convergence. Parameters: tau_window=8, tau_censor=6, tau_phase=4, tau_cycle=16, theta=20%. Label trough-to-peak = bull, peak-to-trough = bear.",
+      "causal": false,
+      "states": "2 exhaustive states: bull / bear with exact dated turning points. 3-state mapping: bull -> bull/Calm, bear -> bear/Stress; no neutral. Use ONLY as retrospective ground truth for evaluating the causal methods in this catalog \u2014 never as an agent feature (labels near sample end need up to 8 future months).",
+      "source": "Pagan, A.R. & Sossounov, K.A. (2003), Journal of Applied Econometrics 18(1), 23-46, doi:10.1002/jae.664; implemented in Zakamulin's bbdetection R package.",
+      "notes": "Deduplicates two input entries. The academic standard for ex-post bull/bear labeling. Parameters calibrated for monthly data; naive daily rescaling (x21) interacts badly with the one-month 20% override. Known pathology: tau_window > tau_phase can cause missed states \u2014 visually check output. Training on these labels silently injects look-ahead."
+    },
+    {
+      "name": "Lunde-Timmermann (2004) first-passage threshold filter",
+      "rule": "Asymmetric threshold pair (lambda1, lambda2), baseline (20%, 15%); also (20,10), (15,15), (15,10); robustness grid 5-30% in 5% steps. In a bull state track running max P_max since the last trough: first close below (1-lambda2)*P_max switches to bear (peak dated at the P_max date). In a bear state track running min P_min: first close above (1+lambda1)*P_min switches to bull (trough dated at P_min date). Daily closes; no minimum phase duration. lambda1 > lambda2 compensates for equity drift.",
+      "causal": true,
+      "states": "2 states: bull / bear via first-passage times. 3-state mapping: confirmed bull with drawdown-from-P_max < lambda2/2 -> bull/Calm; confirmed bear with rally-from-P_min < lambda1/2 -> bear/Stress; unconfirmed middle zone (drawdown > lambda2/2 while still bull, or rally > lambda1/2 while still bear) -> neutral/Choppy.",
+      "source": "Lunde, A. & Timmermann, A. (2004), JBES 22(3), 253-273, doi:10.1198/073500104000000136.",
+      "notes": "Deduplicates two input entries. The CURRENT state at t uses only prices through t \u2014 causal and backtest-safe \u2014 but the turning point itself is backdated once confirmed, so the peak-to-trigger interval is initially misclassified in real time; never train on the backdated labels. Frequency-robust (relative thresholds, no calendar windows). No minimum duration -> many short spells in high-vol episodes (1929-1934). Origin of duration-dependence findings that motivated Maheu-McCurdy."
+    },
+    {
+      "name": "Guidolin-Timmermann (2007) four-state multivariate regime switching",
+      "rule": "4-state multivariate Markov-switching model fit to joint monthly returns of large-cap stocks, small-cap stocks, and bonds. Estimated states: crash (large negative mean, high vol; transitory), slow growth (persistent), bull (persistent), recovery (transitory). Causal classification: filtered state probabilities with expanding-window re-estimation; state = argmax_k P(S_t = k | data through t).",
+      "causal": true,
+      "states": "4 states: crash, slow growth, bull, recovery. 3-state mapping: bull -> bull/Calm; slow growth and recovery -> neutral/Choppy; crash -> bear/Stress.",
+      "source": "Guidolin, M. & Timmermann, A. (2007), Journal of Economic Dynamics and Control 31(11), 3503-3544 (St. Louis Fed WP 2005-002).",
+      "notes": "Evidence that 2 states are statistically insufficient for joint stock-bond dynamics; the standard template when a project wants more than binary bull/bear. Same filtered-vs-smoothed and expanding-estimation caveats as all MS models; multivariate estimation needs long samples."
+    },
+    {
+      "name": "Markov-switching volatility models (SWARCH / MS-GARCH, filtered)",
+      "rule": "K-state hidden Markov model (K=2 or 3) with regime-switching variance dynamics. Recommended implementation: Haas-Mittnik-Paolella (2004) specification \u2014 K parallel GARCH(1,1) processes, one per regime, plus a KxK transition matrix \u2014 as in the MSGARCH R package (Ardia et al. 2019). CAUSAL classification: day t assigned to k* = argmax_k of FILTERED P(S_t = k | data through t) (0.5 cutoff for K=2), with parameters re-estimated on expanding windows. Smoothed/Viterbi full-sample decoding is the non-causal variant.",
+      "causal": true,
+      "states": "K=2 (low/high vol) canonical; K=3 (low/medium/high) common for equity indices. 3-state mapping: K=3 maps directly low -> Calm, medium -> Choppy, high -> Stress; K=2 maps via probability bands (P(high) < 0.2 Calm, 0.2-0.8 Choppy, > 0.8 Stress).",
+      "source": "Hamilton & Susmel (1994), J. Econometrics 64:307-333 (SWARCH); Gray (1996), JFE 42:27-62; Klaassen (2002); Haas, Mittnik & Paolella (2004), J. Financial Econometrics 2:493-530; Ardia et al. (2019), J. Statistical Software 91(4) (MSGARCH package).",
+      "notes": "Causal flag holds ONLY for filtered probabilities + expanding estimation; smoothed probabilities are the single most common look-ahead bug in regime backtests. Estimation fragile (label switching, local optima, long samples needed); daily regimes highly persistent (p_ii > 0.95). Beats single-regime GARCH mainly in high-vol episodes."
+    },
+    {
+      "name": "Realized-volatility threshold / percentile regimes",
+      "rule": "RV_t = sqrt(252) x std(daily returns over trailing 21 trading days) (annualized; 10-day faster / 63-day slower variants). Classification defaults: (a) trailing-252-day or expanding-window terciles (33rd/67th percentiles) for 3 states; (b) expanding-window 75th percentile for 2-state calm/turbulent; (c) fixed absolute cutoffs RV < 10% / 10-20% / > 20% annualized; (d) crisis flag at the 90th percentile. All percentiles computed on data through t-1 only.",
+      "causal": true,
+      "states": "2-4 states depending on variant. 3-state mapping is direct: bottom tercile (or RV < 10%) -> Calm; middle (10-20%) -> Choppy; top tercile (or RV > 20%) -> Stress. Volatility scheme; pair with a trend rule for bull/neutral/bear.",
+      "source": "Standard construction in the empirical vol literature; traces to Schwert (1989, JF); 21-day sqrt(252) window with expanding 75th-percentile rule as used in momentum vol-filter studies; underlies Moreira-Muir (2017).",
+      "notes": "Causal ONLY with trailing/expanding percentiles \u2014 full-sample percentile splits (common in academic in-sample work) are not. Lags true vol state by construction (a crash day takes days to move a 21-day window); shorter windows react faster but are noisier. No forward-looking component, unlike VIX."
+    },
+    {
+      "name": "VIX fixed-threshold buckets",
+      "rule": "Classify day t by the VIX close (use the t-1 close for strict point-in-time decisions at the t open). Standard practitioner buckets: VIX < 12 low/complacent; 12-20 normal; 20-30 elevated; > 30 high stress; > 40 extreme/crisis. Simplified 3-band default: < 20 / 20-30 / > 30 (long-run VIX mean ~19-20 anchors the 20 boundary). 2-state institutional variant: VIX > 25 (or 30) = risk-off.",
+      "causal": true,
+      "states": "3-5 discrete vol states. 3-state mapping: VIX < 20 -> Calm; 20-30 -> Choppy; > 30 -> Stress. Add hysteresis (e.g., 2-point buffer or 3-day confirmation) to avoid boundary whipsaw.",
+      "source": "Industry convention; S&P DJI 'A Practitioner's Guide to Reading VIX' (spglobal.com/spdji); Cboe VIX White Paper; VIX>25 institutional cutoff per RegimeFolio (arXiv:2510.14986).",
+      "notes": "Fully causal (VIX observable in real time) and the most transparent baseline. Thresholds ad hoc and non-stationary (2012-2019 sits in one bucket for years); VIX embeds a variance risk premium (~3-4 points above realized on average). Requires VIX data alongside the index price series."
+    },
+    {
+      "name": "VIX rolling-percentile (tercile/quartile) regimes",
+      "rule": "Percentile of today's VIX within the trailing 252-day VIX distribution (data through t-1). Tercile rule: Low < 33rd pct, Mid 33rd-67th, High > 67th (trailing tercile boundaries average ~17.8 and ~23.1). Quartile variant: 25th/75th cutoffs (~16.6, ~25.3). Crisis flag: > 90th percentile (~29).",
+      "causal": true,
+      "states": "3 states (terciles) canonical; 2-state tails or crisis-flag variants. 3-state mapping is direct: Low tercile -> Calm, Mid -> Choppy, High tercile -> Stress.",
+      "source": "RegimeFolio (arXiv:2510.14986), which finds trailing terciles give the best regime balance vs fixed and quartile cutoffs; 90th-percentile stress cutoff per arXiv:2604.23315.",
+      "notes": "Causal only with trailing/expanding windows \u2014 full-sample percentiles leak. Adapts to secular vol-level shifts (fixes fixed-threshold non-stationarity) but by construction puts ~1/3 of days in each state, so 'High' in a calm year is not comparable to 2008. Sensitive to window length (252d standard)."
+    },
+    {
+      "name": "Kritzman-Li (2010) Mahalanobis turbulence index",
+      "rule": "For an n-asset daily return vector r_t: d_t = (r_t - mu)' Sigma^{-1} (r_t - mu), with mu and Sigma estimated on a strictly PRIOR expanding window (burn-in 5-10 years; shrinkage on Sigma for larger n). Turbulent when d_t (optionally smoothed with a trailing 10-day mean) exceeds the trailing 75th percentile (80th in the portfoliooptimizer.io reference; FinRL's DRL ensemble uses ~90th-99th of an in-sample window as a hard risk-off switch). Multi-state banding at ~50th/85th/95th/99th percentiles. Under normality d_t ~ chi-square(n), so theoretical cutoffs can substitute.",
+      "causal": true,
+      "states": "2 states (calm/turbulent) canonical; 4-5 banded variants. 3-state mapping: d_t < 75th trailing pct -> Calm; 75th-95th -> Choppy; > 95th -> Stress.",
+      "source": "Kritzman, M. & Li, Y. (2010), Financial Analysts Journal 66(5), 30-41, doi:10.2469/faj.v66.n5.3; precursor Chow-Jacquier-Kritzman-Lowry (1999, FAJ); applied as risk-off switch in Yang et al. (2020), ACM ICAIF (FinRL ensemble).",
+      "notes": "Deduplicates two input entries. Causal ONLY when mu, Sigma, and the threshold come from trailing/expanding windows \u2014 the original paper uses full-sample moments (look-ahead). Unique advantage: detects correlation breaks that univariate VIX/RV miss. Weaknesses: unstable Sigma inversion for large n, chi-square cutoffs unreliable under fat tails, partly coincident rather than leading. Needs a multi-asset return panel, not just the single index."
+    },
+    {
+      "name": "Time-series momentum sign (TSMOM, Moskowitz-Ooi-Pedersen 2012)",
+      "rule": "signal_t = sign(excess return over the trailing 12 months), evaluated monthly (or daily on a rolling 252-day window for daily labels). Positive -> up-trend/long; negative -> down-trend/short. In the paper, positions are scaled to a 40% annualized ex-ante vol target per instrument using a 60-day exponentially weighted vol estimator and held 1 month.",
+      "causal": true,
+      "states": "2 states per asset: up-trend vs down-trend. 3-state mapping: add a dead zone \u2014 12-month excess return > +1 x its trailing vol-implied standard error -> bull/Calm; < -1 x -> bear/Stress; in between -> neutral/Choppy (simple fixed-band alternative: +/-5% cumulative 12-month return).",
+      "source": "Moskowitz, T.J., Ooi, Y.H. & Pedersen, L.H. (2012), Journal of Financial Economics 104(2), 228-250.",
+      "notes": "Fully causal; the de facto academic benchmark for trend regimes. Profits largest in extreme markets (the 'TSMOM smile'), so trend sign doubles as a crisis-hedging signal. Single-lookback sign is noisy at reversals \u2014 practitioners blend 1/3/12-month lookbacks (Hurst-Ooi-Pedersen 2017). Highly correlated with the 10-month-SMA rule."
+    },
+    {
+      "name": "Baz et al. (2015) multi-horizon EWMA-MACD trend score (CTA standard)",
+      "rule": "Three MACD-style crossovers x_k = EWMA_short(S) - EWMA_long(L) with span pairs (8,24), (16,48), (32,96). Normalize each: divide by the 63-day rolling std of price, then by the 252-day rolling std of that ratio; map through u(x) = x * exp(-x^2/4) / 0.89; average the three for a final trend score in roughly [-1, +1]. All components trailing; computable daily.",
+      "causal": true,
+      "states": "Continuous score in [-1,1]: sign = trend direction, magnitude = conviction. 3-state mapping: score > +0.25 -> bull/Calm; score < -0.25 -> bear/Stress; |score| <= 0.25 -> neutral/Choppy (flat/trendless zone).",
+      "source": "Baz, Granger, Harvey, Le Roux & Rattray (2015), 'Dissecting Investment Strategies in the Cross Section and Time Series', SSRN 2695101; adopted as the trend feature in Lim-Zohren-Roberts (2019) and the Momentum Transformer line.",
+      "notes": "The canonical published approximation of what trend-following CTAs actually trade; fully causal. Multi-horizon blending and vol normalization make it less whipsaw-prone than single-lookback rules; the response function tapers exposure in overextended trends. Parameters are convention, not optimized. Natural graded regime feature for RL state vectors."
+    },
+    {
+      "name": "Moreira-Muir (2017) inverse-variance exposure (volatility-managed)",
+      "rule": "Signal: previous month's realized variance of daily returns RV^2_{t-1} (~22 daily returns). Exposure weight w_t = c / RV^2_{t-1}, with c a scale normalization (set on an expanding window for strict causality; equalizes unconditional variance with buy-and-hold). Practical adaptation: cap w_t (e.g., 1.5x) and/or bucket RV^2 by trailing percentile. Industry cousin: vol targeting with 1/sigma instead of 1/sigma^2.",
+      "causal": true,
+      "states": "Continuous exposure in (0, cap], not a discrete classifier: high-vol = de-risk, low-vol = lever. 3-state mapping: bucket trailing-percentile of RV^2 into terciles \u2014 bottom -> Calm, middle -> Choppy, top -> Stress (equivalently w_t above/around/below its own terciles).",
+      "source": "Moreira, A. & Muir, T. (2017), Journal of Finance 72(4), 1611-1644, doi:10.1111/jofi.12513.",
+      "notes": "Fully causal (prior-month returns only). Headline market alpha ~4.9%/yr because vol is persistent but does not proportionally forecast returns. Follow-up caveats: gains concentrate in few factors/episodes, high turnover and leverage needs, Cederburg et al. (2020) find no out-of-sample utility gains for real-time versions. Best treated as a continuous regime-exposure mapping, with discretization only for reporting."
+    },
+    {
+      "name": "Ned Davis Research (NDR) amplitude-plus-duration bull/bear definition",
+      "rule": "As published (DJIA): bear = >= 30% drop after 50 calendar days OR >= 13% decline after 145 calendar days; bull = >= 30% rise after 50 days OR >= 13% rise after 155 days; 30% Value Line Geometric reversals also qualify (since 1965). Criteria measured at peak/trough dates, so canonical NDR tables are assigned ex post. Derived CAUSAL detector for this study: flag bear on the first day drawdown-from-running-peak >= 13% AND >= 145 calendar days have elapsed since the running peak, OR drawdown >= 30% with >= 50 days elapsed; symmetric rule off the running trough for bulls.",
+      "causal": false,
+      "states": "2 states: bull / bear episodes. 3-state mapping (derived causal detector): bear flag ON -> bear/Stress; flag OFF with drawdown >= 13% but duration criterion not yet met -> neutral/Choppy; otherwise -> bull/Calm.",
+      "source": "Ned Davis Research; cited via Jeff Hirsch / Stock Trader's Almanac (jeffhirsch.tumblr.com posts 137748126213, 139139671288) and Franklin Templeton NDR-licensed chart packs.",
+      "notes": "Marked non-causal because NDR's published dating is ex post (trough known only after subsequent bull criteria are met); the derived lagged detector above is causal but is a reconstruction, not how NDR publishes. The duration requirement is NDR's fix for the 20% rule labeling sharp-but-brief selloffs as bears. Defined on DJIA, not the S&P 500."
+    },
+    {
+      "name": "Schannep Dow Theory for the 21st Century (mechanized)",
+      "rule": "Recalibrated thresholds: bull = >= 19% advance, bear = >= 16% decline. Three indices: DJIA, DJTA, S&P 500. After a qualifying secondary reaction, the counter-trend bounce must move >= 3% on DJIA or DJTA while falling short of the prior extreme; a subsequent close beyond the secondary-reaction extreme confirmed by a MAJORITY of the three indices triggers the buy/sell signal. Auxiliary mechanical 'capitulation' indicator for bear bottoms (17 signals since 1953; first signal averages within 5.0% and 12.5 days of the low).",
+      "causal": true,
+      "states": "2 states: bull/bear with published in/out signals; capitulation as an auxiliary bottoming state. 3-state mapping: buy-signal regime -> bull/Calm; sell-signal regime -> bear/Stress; qualifying secondary-reaction and capitulation windows -> neutral/Choppy.",
+      "source": "Schannep, J., 'Dow Theory for the 21st Century' (Wiley, 2008); real-time record at thedowtheory.com.",
+      "notes": "The best-documented attempt to make Dow Theory operational point-in-time (rules published against real-time signals), though residual judgment remains in classifying secondary reactions. Self-reported 13.69% annualized vs 10.86% buy-and-hold over ~72 years \u2014 vendor-reported, not independently audited. Requires three index series."
+    },
+    {
+      "name": "Gaussian HMM regime detection (Baum-Welch, as used feeding RL agents)",
+      "rule": "Fit a K-state (K=2 or 3) Gaussian HMM via Baum-Welch on daily returns (optionally returns + realized vol or spreads), with parameters trained ONLY on a window strictly preceding deployment (or re-fit on rolling windows). At each decision time use FORWARD-algorithm filtered probabilities P(S_t = k | data through t); take argmax or append the probability vector to the observation. Label states post hoc by estimated moments (low-vol/bull, transitional, high-vol/crisis).",
+      "causal": true,
+      "states": "K latent states, typically 2 (calm/turbulent) or 3 (low-vol, transitional, high-vol). 3-state mapping: K=3 maps directly \u2014 low-vol/high-mean -> Calm/bull, transitional -> Choppy/neutral, high-vol/low-mean -> Stress/bear; K=2 via probability bands (0.2/0.8).",
+      "source": "e.g., Verma, Putri & Lesupi (2026), arXiv:2605.27848 (3-state Gaussian HMM on SPY/TLT/GLD); 'HMM-Based Market Regime Detection with RL for Portfolio Management', IEEE (2025); practitioner lineage QuantStart/QSTrader.",
+      "notes": "The nonstructural cousin of Hamilton/MS-GARCH. Causal only if (a) parameters come from a prior/rolling training window and (b) forward filtered \u2014 not full-sample smoothed/Viterbi \u2014 probabilities are used; many published RL papers violate one or both (pervasive look-ahead bug). State semantics assigned by inspecting moments, not intrinsic; label switching across refits must be handled (e.g., sort states by variance)."
+    },
+    {
+      "name": "Trailing return-sign bull/neutral/bear label (DRL convention)",
+      "rule": "Regime_t from the cumulative index return over a trailing window of n days (defaults: n = 60 trading days; 20-252 used): bull if cumulative return > +b, bear if < -b, sideways/neutral if within +/-b (default band b = 5% over the window; b = 0 gives the 2-state version). Computable each close from past prices only. The related whole-test-period labeling (label each evaluation sub-period by its own full-period return) is NOT causal.",
+      "causal": true,
+      "states": "2 or 3 states: bull / (sideways) / bear. 3-state mapping is direct and native: > +5% over 60d -> bull/Calm; within +/-5% -> neutral/Choppy; < -5% -> bear/Stress.",
+      "source": "Convention across the DRL trading literature: 'Autonomous Trading Across Bull, Bear, and Sideways Markets with RL' (2025); Millea (2021), Data 6(11):119; FinRL benchmark papers.",
+      "notes": "Cheap, causal, and the most common regime feature in RL state vectors; effectively a coarse version of TSMOM with a dead zone. Sensitive to window length; flips frequently in choppy markets (mitigate with hysteresis). The ex-post whole-period variant is legitimate only for evaluation reporting, never as agent input."
+    },
+    {
+      "name": "Consecutive up/down day streaks (anti-pattern; entry trigger, not a regime)",
+      "rule": "No authoritative convention defines a regime by N consecutive down/up days. Operational use (Connors): streaks are short-term mean-reversion ENTRY triggers inside a 200-day-SMA-defined bull regime \u2014 e.g., Multiple Days Down (close > 200d SMA, close < 5d SMA, down >= 4 of last 5 days -> buy); 3-Day High/Low (3 consecutive lower highs and lower lows, close > 200d SMA -> buy); R3 (RSI(2) falling 3 straight days to < 10, close > 200d SMA -> buy).",
+      "causal": true,
+      "states": "No regime states \u2014 momentary triggers within an SMA-defined regime. 3-state mapping: DO NOT map; a '3 down days = bear' rule fires on ~10% of all days (up-day probability ~53-54%, streaks ~geometric) and carries almost no regime information. If retained at all, use only as a within-Calm timing feature; note practitioner interpretation of down-streaks in uptrends is contrarian (buy), the OPPOSITE sign of a bear reading.",
+      "source": "Connors, L. & Alvarez, C., 'Short Term Trading Strategies That Work' (2008); 'High Probability ETF Trading'; StockCharts ChartSchool RSI(2); streak statistics via Advisor Perspectives/dshort.",
+      "notes": "Included as a documented design warning: trivially causal to compute but not a regime definition anywhere authoritative. Long streaks are rare tail events (9-day losing streak Nov 2016 was the longest in 35+ years). The regime in Connors systems is the 200-day SMA; the streak only times entries."
+    }
+  ]
+}
