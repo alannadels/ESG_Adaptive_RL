@@ -50,9 +50,13 @@ ESG_ANCHOR_YEAR = 2025
 def main() -> None:
     """Label regimes, split the dataset, and evolve a strategy per regime."""
     evo_cfg = EvolutionConfig()
-    # Walk-forward 3-state HMM (default detector; see esg_regime/results/
-    # HEURISTICS_BENCHMARKS.md). MA rules remain available via detector="crossover".
-    regime_cfg = RegimeConfig(ticker=REGIME_INDEX)
+    # Causal 50/200 SMA crossover — the live-matched rule-based detector this project
+    # standardizes on, and the one the committed Dataset/regime_datasets/*.csv were
+    # built with, so training labels match the cached splits. The walk-forward HMM
+    # (RegimeConfig's default) remains available and is benchmarked in
+    # esg_regime/results/HEURISTICS_BENCHMARKS.md, but is pinned off here for
+    # consistency with the shared datasets.
+    regime_cfg = RegimeConfig(ticker=REGIME_INDEX, detector="crossover")
     np.random.seed(evo_cfg.seed)
 
     # Load the tradable universe (prices + real ESG) and the regime-defining index.

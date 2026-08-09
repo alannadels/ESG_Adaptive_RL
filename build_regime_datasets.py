@@ -77,8 +77,12 @@ def main() -> None:
     )
     index_prices = load_index_close(REGIME_INDEX, START_DATE, END_DATE)
 
-    # 2. Regime labels on the index.
-    labels = label_regimes(index_prices, RegimeConfig())
+    # 2. Regime labels on the index. Pinned to the causal 50/200 SMA crossover — the
+    # live-matched rule-based detector this project standardizes on. (RegimeConfig now
+    # defaults to the walk-forward HMM; it is benchmarked in
+    # esg_regime/results/HEURISTICS_BENCHMARKS.md but pinned off here so the cached
+    # datasets and labels are reproducible from the crossover with no extra dependency.)
+    labels = label_regimes(index_prices, RegimeConfig(detector="crossover"))
 
     # 3. Split the dataset into regime subsets.
     subsets = split_by_regime(data, labels)
