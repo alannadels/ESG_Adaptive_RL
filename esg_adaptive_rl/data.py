@@ -135,6 +135,7 @@ def load_market_data(
         end=end,
         auto_adjust=True,
         progress=False,
+        repair=True,  # fix yfinance split/price glitches (e.g. an unadjusted JCI split)
     )
     if raw.empty:
         raise ValueError("yfinance returned no data for the requested universe/date range.")
@@ -246,7 +247,7 @@ def load_index_close(ticker: str, start: str, end: str) -> pd.Series:
     Raises:
         ValueError: If no price data is returned.
     """
-    raw = yf.download(ticker, start=start, end=end, auto_adjust=True, progress=False)
+    raw = yf.download(ticker, start=start, end=end, auto_adjust=True, progress=False, repair=True)
     if raw.empty:
         raise ValueError(f"yfinance returned no data for index {ticker!r}.")
     close = raw["Close"]
@@ -254,3 +255,34 @@ def load_index_close(ticker: str, start: str, end: str) -> pd.Series:
     if isinstance(close, pd.DataFrame):
         close = close.iloc[:, 0]
     return close.dropna()
+
+
+def load_regime_dataset(path: str) -> MarketData:
+    """Load a cached regime CSV back into a :class:`MarketData` bundle.
+
+    Reads a long-format regime file (``date, ticker, return, esg_E, esg_S, esg_G``, as
+    written by ``build_regime_datasets.py``) and reshapes it into the arrays the
+    environment expects — so the team can train directly on the shared, look-ahead-safe
+    splits without re-downloading anything.
+
+    Args:
+        path: Path to a regime CSV (e.g. ``Dataset/regime_datasets/bear.csv``).
+
+    Returns:
+        A :class:`MarketData` bundle for that regime's days.
+    """
+    df = pd.read_csv(path, parse_dates=["date"])
+    tickers = sorted(df["ticker"].unique())
+    returns = df.pivot(index="date", columns="ticker", values="return").reindex(columns=tickers)
+    esg = {
+        pillar: df.pivot(index="date", columns="ticker", values=f"esg_{pillar}")
+        .reindex(columns=tickers)
+        .to_numpy(dtype=np.float64)
+        for pillar in ("E", "S", "G")
+    }
+    return MarketData(
+        dates=returns.index,
+        tickers=list(tickers),
+        returns=returns.to_numpy(dtype=np.float64),
+        esg=esg,
+    )

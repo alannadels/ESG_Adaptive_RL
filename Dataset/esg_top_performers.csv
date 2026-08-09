@@ -1,0 +1,496 @@
+year,sector,rank,ticker,value,signal
+2017,Communication Services,1,DIS,64.8832,esg
+2017,Communication Services,2,GOOGL,62.2739,esg
+2017,Communication Services,3,T,60.4943,esg
+2017,Communication Services,4,CMCSA,60.2306,esg
+2017,Communication Services,5,VZ,56.7228,esg
+2017,Consumer Discretionary,1,HAS,85.6627,esg
+2017,Consumer Discretionary,2,GM,84.9424,esg
+2017,Consumer Discretionary,3,BBY,82.1869,esg
+2017,Consumer Discretionary,4,LOW,81.3893,esg
+2017,Consumer Discretionary,5,HD,80.0617,esg
+2017,Consumer Staples,1,TGT,88.2072,esg
+2017,Consumer Staples,2,CL,87.6454,esg
+2017,Consumer Staples,3,MO,86.2951,esg
+2017,Consumer Staples,4,PEP,81.5215,esg
+2017,Consumer Staples,5,PM,78.6114,esg
+2017,Energy,1,CVX,88.4034,esg
+2017,Energy,2,HAL,78.5794,esg
+2017,Energy,3,XOM,77.9088,esg
+2017,Energy,4,COP,75.3196,esg
+2017,Energy,5,BKR,69.221,esg
+2017,Financials,1,STT,87.6557,esg
+2017,Financials,2,C,83.0302,esg
+2017,Financials,3,JPM,81.5213,esg
+2017,Financials,4,WFC,81.1902,esg
+2017,Financials,5,PNC,80.3222,esg
+2017,Health Care,1,A,88.4762,esg
+2017,Health Care,2,JNJ,87.2923,esg
+2017,Health Care,3,BAX,85.7161,esg
+2017,Health Care,4,CVS,85.029,esg
+2017,Health Care,5,HUM,84.1873,esg
+2017,Industrials,1,MMM,88.1284,esg
+2017,Industrials,2,LMT,82.7396,esg
+2017,Industrials,3,WM,82.4393,esg
+2017,Industrials,4,GE,80.7391,esg
+2017,Industrials,5,NOC,79.6956,esg
+2017,Information Technology,1,MSFT,91.2886,esg
+2017,Information Technology,2,INTC,89.25,esg
+2017,Information Technology,3,CSCO,87.694,esg
+2017,Information Technology,4,TXN,86.9673,esg
+2017,Information Technology,5,ADSK,81.8071,esg
+2017,Materials,1,CRH,84.9826,esg
+2017,Materials,2,FCX,83.7902,esg
+2017,Materials,3,NEM,81.8338,esg
+2017,Materials,4,SW,80.0725,esg
+2017,Materials,5,BALL,78.7124,esg
+2017,Real Estate,1,CBRE,88.7669,esg
+2017,Real Estate,2,VTR,81.2381,esg
+2017,Real Estate,3,HST,80.9868,esg
+2017,Real Estate,4,PLD,80.6113,esg
+2017,Real Estate,5,WY,76.5743,esg
+2017,Utilities,1,PCG,87.8821,esg
+2017,Utilities,2,D,81.258,esg
+2017,Utilities,3,NRG,79.473,esg
+2017,Utilities,4,DUK,75.1578,esg
+2017,Utilities,5,AWK,74.3113,esg
+2018,Communication Services,1,DIS,65.5713,esg
+2018,Communication Services,2,VZ,65.1307,esg
+2018,Communication Services,3,T,61.4158,esg
+2018,Communication Services,4,GOOGL,54.9356,esg
+2018,Communication Services,5,OMC,54.7727,esg
+2018,Consumer Discretionary,1,GM,89.3463,esg
+2018,Consumer Discretionary,2,HAS,89.0591,esg
+2018,Consumer Discretionary,3,BBY,85.5206,esg
+2018,Consumer Discretionary,4,F,80.2204,esg
+2018,Consumer Discretionary,5,CCL,80.0096,esg
+2018,Consumer Staples,1,MO,88.8373,esg
+2018,Consumer Staples,2,TGT,88.5055,esg
+2018,Consumer Staples,3,CL,87.0615,esg
+2018,Consumer Staples,4,PM,84.8892,esg
+2018,Consumer Staples,5,KR,84.2397,esg
+2018,Energy,1,HAL,84.7767,esg
+2018,Energy,2,CVX,81.2654,esg
+2018,Energy,3,BKR,80.0997,esg
+2018,Energy,4,XOM,75.7364,esg
+2018,Energy,5,SLB,71.1531,esg
+2018,Financials,1,C,88.8236,esg
+2018,Financials,2,STT,88.5821,esg
+2018,Financials,3,SPGI,87.1102,esg
+2018,Financials,4,ALL,82.967,esg
+2018,Financials,5,JPM,82.8527,esg
+2018,Health Care,1,A,88.185,esg
+2018,Health Care,2,HUM,85.9436,esg
+2018,Health Care,3,JNJ,85.7695,esg
+2018,Health Care,4,BAX,84.8072,esg
+2018,Health Care,5,MRK,82.6116,esg
+2018,Industrials,1,WM,91.5929,esg
+2018,Industrials,2,MMM,90.5276,esg
+2018,Industrials,3,GE,86.8278,esg
+2018,Industrials,4,LMT,86.3267,esg
+2018,Industrials,5,LDOS,83.8754,esg
+2018,Information Technology,1,MSFT,90.7027,esg
+2018,Information Technology,2,CSCO,88.1996,esg
+2018,Information Technology,3,INTC,86.0165,esg
+2018,Information Technology,4,ACN,84.1796,esg
+2018,Information Technology,5,INTU,83.7911,esg
+2018,Materials,1,NEM,87.4072,esg
+2018,Materials,2,FCX,84.0769,esg
+2018,Materials,3,CRH,82.015,esg
+2018,Materials,4,IFF,78.7232,esg
+2018,Materials,5,SW,76.1091,esg
+2018,Real Estate,1,CBRE,88.8431,esg
+2018,Real Estate,2,WY,82.5103,esg
+2018,Real Estate,3,VTR,81.9323,esg
+2018,Real Estate,4,PLD,80.6584,esg
+2018,Real Estate,5,HST,78.8979,esg
+2018,Utilities,1,PCG,85.8717,esg
+2018,Utilities,2,D,81.9426,esg
+2018,Utilities,3,SRE,81.7939,esg
+2018,Utilities,4,NRG,80.7722,esg
+2018,Utilities,5,DUK,75.5673,esg
+2019,Communication Services,1,DIS,70.752,esg
+2019,Communication Services,2,VZ,70.34,esg
+2019,Communication Services,3,GOOGL,65.0904,esg
+2019,Communication Services,4,T,63.9403,esg
+2019,Communication Services,5,CMCSA,61.9904,esg
+2019,Consumer Discretionary,1,GM,86.1654,esg
+2019,Consumer Discretionary,2,BBY,85.7329,esg
+2019,Consumer Discretionary,3,F,82.7658,esg
+2019,Consumer Discretionary,4,CCL,82.7405,esg
+2019,Consumer Discretionary,5,AMZN,82.4101,esg
+2019,Consumer Staples,1,MO,89.2596,esg
+2019,Consumer Staples,2,PM,87.5285,esg
+2019,Consumer Staples,3,PEP,85.3557,esg
+2019,Consumer Staples,4,KR,81.8658,esg
+2019,Consumer Staples,5,CL,81.8311,esg
+2019,Energy,1,HAL,87.3539,esg
+2019,Energy,2,BKR,83.625,esg
+2019,Energy,3,XOM,82.8394,esg
+2019,Energy,4,OXY,78.1285,esg
+2019,Energy,5,CVX,76.4629,esg
+2019,Financials,1,SPGI,91.3346,esg
+2019,Financials,2,C,88.5739,esg
+2019,Financials,3,STT,87.1958,esg
+2019,Financials,4,BNY,84.1961,esg
+2019,Financials,5,WFC,82.0763,esg
+2019,Health Care,1,A,89.0785,esg
+2019,Health Care,2,HUM,86.4983,esg
+2019,Health Care,3,BAX,86.4936,esg
+2019,Health Care,4,JNJ,86.0229,esg
+2019,Health Care,5,GILD,84.1915,esg
+2019,Industrials,1,WM,89.5276,esg
+2019,Industrials,2,MMM,88.3922,esg
+2019,Industrials,3,NOC,84.4555,esg
+2019,Industrials,4,GE,83.1747,esg
+2019,Industrials,5,JCI,81.9387,esg
+2019,Information Technology,1,MSFT,93.2873,esg
+2019,Information Technology,2,INTC,88.4361,esg
+2019,Information Technology,3,CSCO,87.2196,esg
+2019,Information Technology,4,IBM,86.3281,esg
+2019,Information Technology,5,FLEX,84.7246,esg
+2019,Materials,1,NEM,85.9197,esg
+2019,Materials,2,LIN,85.8966,esg
+2019,Materials,3,APD,84.4195,esg
+2019,Materials,4,FCX,82.866,esg
+2019,Materials,5,CRH,82.1794,esg
+2019,Real Estate,1,CBRE,92.6048,esg
+2019,Real Estate,2,HST,88.1293,esg
+2019,Real Estate,3,VTR,85.6193,esg
+2019,Real Estate,4,KIM,80.8678,esg
+2019,Real Estate,5,DOC,79.112,esg
+2019,Utilities,1,PCG,88.6162,esg
+2019,Utilities,2,D,81.0011,esg
+2019,Utilities,3,DTE,78.2175,esg
+2019,Utilities,4,XEL,77.5111,esg
+2019,Utilities,5,NRG,75.8226,esg
+2020,Communication Services,1,DIS,74.7923,esg
+2020,Communication Services,2,VZ,74.4928,esg
+2020,Communication Services,3,GOOGL,72.4596,esg
+2020,Communication Services,4,OMC,67.715,esg
+2020,Communication Services,5,T,67.6554,esg
+2020,Consumer Discretionary,1,CCL,86.6736,esg
+2020,Consumer Discretionary,2,HLT,86.0982,esg
+2020,Consumer Discretionary,3,AMZN,84.6268,esg
+2020,Consumer Discretionary,4,GM,82.2259,esg
+2020,Consumer Discretionary,5,F,80.9619,esg
+2020,Consumer Staples,1,MO,90.3273,esg
+2020,Consumer Staples,2,PM,89.0186,esg
+2020,Consumer Staples,3,PEP,87.6788,esg
+2020,Consumer Staples,4,KR,83.0437,esg
+2020,Consumer Staples,5,TGT,83.0431,esg
+2020,Energy,1,HAL,91.3986,esg
+2020,Energy,2,KMI,84.9816,esg
+2020,Energy,3,CVX,83.9454,esg
+2020,Energy,4,XOM,83.8512,esg
+2020,Energy,5,BKR,83.6312,esg
+2020,Financials,1,SPGI,89.9551,esg
+2020,Financials,2,C,88.1877,esg
+2020,Financials,3,BAC,86.9821,esg
+2020,Financials,4,STT,86.4122,esg
+2020,Financials,5,JPM,84.1892,esg
+2020,Health Care,1,A,88.2972,esg
+2020,Health Care,2,HUM,87.1374,esg
+2020,Health Care,3,JNJ,85.4756,esg
+2020,Health Care,4,BSX,84.6225,esg
+2020,Health Care,5,GILD,84.4828,esg
+2020,Industrials,1,MMM,89.9576,esg
+2020,Industrials,2,WM,87.895,esg
+2020,Industrials,3,JCI,86.7219,esg
+2020,Industrials,4,LMT,86.1282,esg
+2020,Industrials,5,GE,85.7783,esg
+2020,Information Technology,1,MSFT,92.9355,esg
+2020,Information Technology,2,INTC,88.6593,esg
+2020,Information Technology,3,TXN,88.5515,esg
+2020,Information Technology,4,CSCO,87.9284,esg
+2020,Information Technology,5,FLEX,85.0746,esg
+2020,Materials,1,CRH,92.4241,esg
+2020,Materials,2,LIN,87.9667,esg
+2020,Materials,3,IFF,87.0932,esg
+2020,Materials,4,NEM,83.374,esg
+2020,Materials,5,FCX,81.7809,esg
+2020,Real Estate,1,HST,89.909,esg
+2020,Real Estate,2,DOC,86.6496,esg
+2020,Real Estate,3,CBRE,85.2748,esg
+2020,Real Estate,4,VTR,84.7975,esg
+2020,Real Estate,5,KIM,80.1174,esg
+2020,Utilities,1,XEL,87.7448,esg
+2020,Utilities,2,EIX,84.3364,esg
+2020,Utilities,3,D,82.8614,esg
+2020,Utilities,4,NEE,76.5219,esg
+2020,Utilities,5,PCG,75.8464,esg
+2021,Communication Services,1,DIS,79.3564,esg
+2021,Communication Services,2,FOXA,75.0689,esg
+2021,Communication Services,3,VZ,74.4569,esg
+2021,Communication Services,4,GOOGL,74.2463,esg
+2021,Communication Services,5,T,73.4412,esg
+2021,Consumer Discretionary,1,CCL,86.9929,esg
+2021,Consumer Discretionary,2,HLT,85.199,esg
+2021,Consumer Discretionary,3,AMZN,84.0798,esg
+2021,Consumer Discretionary,4,MAR,84.0006,esg
+2021,Consumer Discretionary,5,YUM,82.9159,esg
+2021,Consumer Staples,1,PM,89.7882,esg
+2021,Consumer Staples,2,PEP,89.5766,esg
+2021,Consumer Staples,3,CL,88.4468,esg
+2021,Consumer Staples,4,TGT,86.6809,esg
+2021,Consumer Staples,5,KR,84.4691,esg
+2021,Energy,1,BKR,89.625,esg
+2021,Energy,2,HAL,88.8512,esg
+2021,Energy,3,KMI,87.2134,esg
+2021,Energy,4,CVX,81.8409,esg
+2021,Energy,5,OXY,78.0091,esg
+2021,Financials,1,SPGI,90.5423,esg
+2021,Financials,2,C,88.8435,esg
+2021,Financials,3,GS,88.3924,esg
+2021,Financials,4,STT,86.3236,esg
+2021,Financials,5,BAC,85.6315,esg
+2021,Health Care,1,HUM,89.2007,esg
+2021,Health Care,2,A,87.8781,esg
+2021,Health Care,3,ELV,87.6272,esg
+2021,Health Care,4,JNJ,86.4083,esg
+2021,Health Care,5,GILD,85.0771,esg
+2021,Industrials,1,MMM,93.8662,esg
+2021,Industrials,2,WM,87.31,esg
+2021,Industrials,3,J,83.4286,esg
+2021,Industrials,4,XYL,83.0697,esg
+2021,Industrials,5,GE,82.2118,esg
+2021,Information Technology,1,MSFT,93.3715,esg
+2021,Information Technology,2,CDNS,87.4223,esg
+2021,Information Technology,3,CSCO,86.828,esg
+2021,Information Technology,4,FLEX,85.3509,esg
+2021,Information Technology,5,MSI,84.7387,esg
+2021,Materials,1,CRH,91.2021,esg
+2021,Materials,2,NEM,88.0157,esg
+2021,Materials,3,IFF,86.235,esg
+2021,Materials,4,LIN,86.0625,esg
+2021,Materials,5,SW,85.5952,esg
+2021,Real Estate,1,VTR,88.6053,esg
+2021,Real Estate,2,DOC,85.6254,esg
+2021,Real Estate,3,CBRE,85.5382,esg
+2021,Real Estate,4,HST,85.148,esg
+2021,Real Estate,5,KIM,81.5683,esg
+2021,Utilities,1,XEL,84.7865,esg
+2021,Utilities,2,EIX,83.8032,esg
+2021,Utilities,3,AWK,80.4558,esg
+2021,Utilities,4,D,79.3339,esg
+2021,Utilities,5,DTE,78.7352,esg
+2022,Communication Services,1,GOOGL,76.7372,esg
+2022,Communication Services,2,FOXA,75.4799,esg
+2022,Communication Services,3,PSKY,74.168,esg
+2022,Communication Services,4,T,73.0202,esg
+2022,Communication Services,5,OMC,72.6462,esg
+2022,Consumer Discretionary,1,HAS,85.4195,esg
+2022,Consumer Discretionary,2,BBY,82.2483,esg
+2022,Consumer Discretionary,3,HLT,82.0987,esg
+2022,Consumer Discretionary,4,YUM,80.2949,esg
+2022,Consumer Discretionary,5,CCL,80.0087,esg
+2022,Consumer Staples,1,CL,89.349,esg
+2022,Consumer Staples,2,PEP,88.122,esg
+2022,Consumer Staples,3,HSY,88.0143,esg
+2022,Consumer Staples,4,MO,86.3356,esg
+2022,Consumer Staples,5,PM,85.0092,esg
+2022,Energy,1,BKR,89.5953,esg
+2022,Energy,2,HAL,86.4505,esg
+2022,Energy,3,KMI,84.1399,esg
+2022,Energy,4,OXY,76.9221,esg
+2022,Energy,5,MPC,76.5965,esg
+2022,Financials,1,GS,86.6428,esg
+2022,Financials,2,SPGI,85.863,esg
+2022,Financials,3,C,85.4783,esg
+2022,Financials,4,BAC,85.2797,esg
+2022,Financials,5,HIG,82.3835,esg
+2022,Health Care,1,JNJ,90.6162,esg
+2022,Health Care,2,CVS,88.6552,esg
+2022,Health Care,3,A,88.4052,esg
+2022,Health Care,4,BAX,86.0927,esg
+2022,Health Care,5,ELV,84.4264,esg
+2022,Industrials,1,MMM,89.9939,esg
+2022,Industrials,2,WM,85.7095,esg
+2022,Industrials,3,J,85.3733,esg
+2022,Industrials,4,XYL,84.7821,esg
+2022,Industrials,5,CAT,84.166,esg
+2022,Information Technology,1,MSFT,92.9059,esg
+2022,Information Technology,2,MSI,86.3827,esg
+2022,Information Technology,3,FLEX,85.1321,esg
+2022,Information Technology,4,CSCO,83.6134,esg
+2022,Information Technology,5,AMAT,83.4336,esg
+2022,Materials,1,DOW,90.499,esg
+2022,Materials,2,LIN,90.0824,esg
+2022,Materials,3,CRH,89.6079,esg
+2022,Materials,4,NEM,89.1632,esg
+2022,Materials,5,APD,83.5817,esg
+2022,Real Estate,1,CBRE,88.4272,esg
+2022,Real Estate,2,HST,87.4637,esg
+2022,Real Estate,3,DOC,87.3962,esg
+2022,Real Estate,4,VTR,86.0569,esg
+2022,Real Estate,5,WY,85.2639,esg
+2022,Utilities,1,PCG,82.8837,esg
+2022,Utilities,2,D,81.4969,esg
+2022,Utilities,3,XEL,79.4953,esg
+2022,Utilities,4,NEE,79.4072,esg
+2022,Utilities,5,AWK,79.0563,esg
+2023,Communication Services,1,GOOGL,78.6576,esg
+2023,Communication Services,2,T,77.3985,esg
+2023,Communication Services,3,PSKY,72.8695,esg
+2023,Communication Services,4,OMC,72.363,esg
+2023,Communication Services,5,DIS,69.6155,esg
+2023,Consumer Discretionary,1,BBY,82.1127,esg
+2023,Consumer Discretionary,2,HAS,81.9659,esg
+2023,Consumer Discretionary,3,CCL,81.9284,esg
+2023,Consumer Discretionary,4,SBUX,79.7512,esg
+2023,Consumer Discretionary,5,WSM,79.5309,esg
+2023,Consumer Staples,1,PM,88.6908,esg
+2023,Consumer Staples,2,CL,88.2237,esg
+2023,Consumer Staples,3,MO,86.8836,esg
+2023,Consumer Staples,4,HSY,84.2761,esg
+2023,Consumer Staples,5,TGT,83.6917,esg
+2023,Energy,1,KMI,83.7171,esg
+2023,Energy,2,HAL,82.546,esg
+2023,Energy,3,BKR,81.5651,esg
+2023,Energy,4,MPC,78.7218,esg
+2023,Energy,5,OXY,75.652,esg
+2023,Financials,1,SPGI,88.0402,esg
+2023,Financials,2,GS,87.023,esg
+2023,Financials,3,C,86.6829,esg
+2023,Financials,4,BAC,84.2527,esg
+2023,Financials,5,MTB,83.832,esg
+2023,Health Care,1,JNJ,87.9304,esg
+2023,Health Care,2,BDX,86.181,esg
+2023,Health Care,3,CVS,85.8014,esg
+2023,Health Care,4,ABT,83.0759,esg
+2023,Health Care,5,A,82.505,esg
+2023,Industrials,1,MMM,90.9212,esg
+2023,Industrials,2,WM,84.5368,esg
+2023,Industrials,3,CAT,82.7749,esg
+2023,Industrials,4,BA,82.6401,esg
+2023,Industrials,5,DE,82.5454,esg
+2023,Information Technology,1,MSFT,89.0868,esg
+2023,Information Technology,2,AMAT,86.1897,esg
+2023,Information Technology,3,FLEX,85.6756,esg
+2023,Information Technology,4,INTC,84.7271,esg
+2023,Information Technology,5,CSCO,83.7753,esg
+2023,Materials,1,DOW,92.1417,esg
+2023,Materials,2,CRH,88.0348,esg
+2023,Materials,3,NEM,86.8308,esg
+2023,Materials,4,LIN,84.3411,esg
+2023,Materials,5,APD,82.0571,esg
+2023,Real Estate,1,CBRE,86.852,esg
+2023,Real Estate,2,FRT,85.766,esg
+2023,Real Estate,3,HST,85.6782,esg
+2023,Real Estate,4,AMT,85.3826,esg
+2023,Real Estate,5,DOC,83.9998,esg
+2023,Utilities,1,PCG,85.405,esg
+2023,Utilities,2,AWK,79.8685,esg
+2023,Utilities,3,D,78.7654,esg
+2023,Utilities,4,XEL,76.5747,esg
+2023,Utilities,5,EIX,75.7944,esg
+2024,Communication Services,1,T,78.5964,esg
+2024,Communication Services,2,GOOGL,78.3633,esg
+2024,Communication Services,3,VZ,71.8817,esg
+2024,Communication Services,4,PSKY,71.6708,esg
+2024,Communication Services,5,DIS,71.0084,esg
+2024,Consumer Discretionary,1,TSCO,85.2054,esg
+2024,Consumer Discretionary,2,CCL,84.2673,esg
+2024,Consumer Discretionary,3,HAS,82.3969,esg
+2024,Consumer Discretionary,4,BBY,81.5919,esg
+2024,Consumer Discretionary,5,HLT,79.9372,esg
+2024,Consumer Staples,1,PM,88.5514,esg
+2024,Consumer Staples,2,MO,85.5498,esg
+2024,Consumer Staples,3,HSY,84.1419,esg
+2024,Consumer Staples,4,BG,82.9482,esg
+2024,Consumer Staples,5,CL,82.8235,esg
+2024,Energy,1,HAL,83.5274,esg
+2024,Energy,2,KMI,83.1746,esg
+2024,Energy,3,MPC,80.4068,esg
+2024,Energy,4,BKR,79.0744,esg
+2024,Energy,5,OXY,77.4541,esg
+2024,Financials,1,BAC,88.6758,esg
+2024,Financials,2,C,86.3635,esg
+2024,Financials,3,SPGI,85.7538,esg
+2024,Financials,4,BNY,85.201,esg
+2024,Financials,5,MTB,82.0194,esg
+2024,Health Care,1,BIIB,87.3477,esg
+2024,Health Care,2,JNJ,85.9528,esg
+2024,Health Care,3,BDX,85.3359,esg
+2024,Health Care,4,ABT,83.5955,esg
+2024,Health Care,5,BSX,83.417,esg
+2024,Industrials,1,MMM,88.5017,esg
+2024,Industrials,2,WM,84.2598,esg
+2024,Industrials,3,LMT,83.2207,esg
+2024,Industrials,4,XYL,81.0126,esg
+2024,Industrials,5,JCI,80.5137,esg
+2024,Information Technology,1,MSFT,87.6162,esg
+2024,Information Technology,2,LITE,85.8032,esg
+2024,Information Technology,3,AMAT,83.8402,esg
+2024,Information Technology,4,ACN,83.5227,esg
+2024,Information Technology,5,INTC,82.6658,esg
+2024,Materials,1,NEM,87.1536,esg
+2024,Materials,2,LIN,86.6594,esg
+2024,Materials,3,DOW,85.4164,esg
+2024,Materials,4,IFF,85.158,esg
+2024,Materials,5,CRH,84.0413,esg
+2024,Real Estate,1,VTR,86.4597,esg
+2024,Real Estate,2,DOC,84.6948,esg
+2024,Real Estate,3,AMT,81.2201,esg
+2024,Real Estate,4,FRT,80.6835,esg
+2024,Real Estate,5,KIM,80.5296,esg
+2024,Utilities,1,EIX,81.8799,esg
+2024,Utilities,2,AWK,77.3821,esg
+2024,Utilities,3,SRE,76.0393,esg
+2024,Utilities,4,AES,74.8843,esg
+2024,Utilities,5,ES,73.6053,esg
+2025,Communication Services,1,DIS,82.7511,esg
+2025,Communication Services,2,GOOGL,79.0965,esg
+2025,Communication Services,3,T,72.1706,esg
+2025,Communication Services,4,TMUS,71.0887,esg
+2025,Communication Services,5,WBD,70.4831,esg
+2025,Consumer Discretionary,1,CCL,85.0022,esg
+2025,Consumer Discretionary,2,TSCO,83.3384,esg
+2025,Consumer Discretionary,3,HLT,81.6222,esg
+2025,Consumer Discretionary,4,YUM,79.413,esg
+2025,Consumer Discretionary,5,BBY,77.5852,esg
+2025,Consumer Staples,1,PM,87.3908,esg
+2025,Consumer Staples,2,MO,85.2059,esg
+2025,Consumer Staples,3,BG,84.4737,esg
+2025,Consumer Staples,4,TGT,82.9613,esg
+2025,Consumer Staples,5,HSY,81.9859,esg
+2025,Energy,1,KMI,81.4647,esg
+2025,Energy,2,HAL,80.9555,esg
+2025,Energy,3,BKR,80.7873,esg
+2025,Energy,4,OKE,79.4976,esg
+2025,Energy,5,OXY,79.3561,esg
+2025,Financials,1,BAC,87.5979,esg
+2025,Financials,2,SPGI,86.0355,esg
+2025,Financials,3,C,85.1201,esg
+2025,Financials,4,BNY,85.0062,esg
+2025,Financials,5,NDAQ,80.0837,esg
+2025,Health Care,1,JNJ,89.4676,esg
+2025,Health Care,2,BDX,87.3096,esg
+2025,Health Care,3,GILD,87.0029,esg
+2025,Health Care,4,BIIB,83.5663,esg
+2025,Health Care,5,ABT,83.5044,esg
+2025,Industrials,1,LMT,85.5615,esg
+2025,Industrials,2,MMM,84.2266,esg
+2025,Industrials,3,UBER,81.8014,esg
+2025,Industrials,4,EMR,81.3544,esg
+2025,Industrials,5,BA,80.128,esg
+2025,Information Technology,1,MSFT,87.503,esg
+2025,Information Technology,2,NXPI,87.0674,esg
+2025,Information Technology,3,CDNS,86.7167,esg
+2025,Information Technology,4,LITE,84.2991,esg
+2025,Information Technology,5,AMAT,82.6558,esg
+2025,Materials,1,NEM,87.1238,esg
+2025,Materials,2,CRH,85.8277,esg
+2025,Materials,3,DOW,84.2025,esg
+2025,Materials,4,ECL,83.9233,esg
+2025,Materials,5,FCX,83.4575,esg
+2025,Real Estate,1,O,84.933,esg
+2025,Real Estate,2,HST,84.1946,esg
+2025,Real Estate,3,DOC,82.7243,esg
+2025,Real Estate,4,CPT,81.583,esg
+2025,Real Estate,5,KIM,79.8022,esg
+2025,Utilities,1,EIX,76.0253,esg
+2025,Utilities,2,AWK,75.1945,esg
+2025,Utilities,3,SRE,74.4249,esg
+2025,Utilities,4,ES,74.2909,esg
+2025,Utilities,5,AES,73.9736,esg

@@ -1,0 +1,9 @@
+ticker,esg_years,ret_years,sector,min_years
+GOOGL,9,3,Communication Services,3
+MPC,3,5,Energy,3
+CRH,9,4,Materials,4
+SW,3,3,Materials,3
+CBRE,7,4,Real Estate,4
+AWK,6,3,Utilities,3
+NRG,3,5,Utilities,3
+PCG,6,3,Utilities,3

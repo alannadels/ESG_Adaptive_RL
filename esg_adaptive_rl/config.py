@@ -14,25 +14,32 @@ from esg_adaptive_rl.reward import RewardWeights
 # --------------------------------------------------------------------------------------
 # Universe
 # --------------------------------------------------------------------------------------
-# A small, deliberately mixed set of large, liquid names spanning clean-energy,
-# traditional-energy, technology, financial, consumer, and industrial sectors. This is a
-# placeholder universe for the backbone; it is meant only to exercise the pipeline and
-# can be replaced freely.
+# The values-screened investable universe, by one clean criterion: the top-5 ESG
+# performers in each of the 10 non-Energy GICS sectors (S&P 500, ranked by average
+# 2017-2025 Refinitiv ESG), skipping fossil-fuel, tobacco, and defense companies (the
+# next-best ESG name takes their place, including defense contractors GICS codes outside
+# "Aerospace & Defense", e.g. LDOS). Restricted to names with pre-2008 price history so
+# the backtest reaches the 2008 crisis. The Energy sector is dropped entirely (it is all
+# fossil fuel). 50 names across 10 sectors (5 each).
 UNIVERSE: List[str] = [
-    "NEE", "ENPH", "FSLR",   # renewables / clean energy
-    "XOM", "CVX", "COP",     # traditional energy
-    "AAPL", "MSFT", "NVDA",  # technology
-    "JPM", "BAC",            # financials
-    "PG", "KO",              # consumer staples
-    "TSLA", "GE",            # auto / industrial
+    "DIS", "GOOGL", "T", "VZ", "OMC",       # Communication Services
+    "CCL", "HAS", "BBY", "F", "YUM",        # Consumer Discretionary
+    "CL", "PEP", "TGT", "HSY", "BG",        # Consumer Staples
+    "C", "SPGI", "BAC", "STT", "JPM",       # Financials
+    "JNJ", "A", "GILD", "BAX", "BDX",       # Health Care
+    "MMM", "WM", "JCI", "CAT", "FDX",       # Industrials
+    "MSFT", "INTC", "CSCO", "FLEX", "ACN",  # Information Technology
+    "CRH", "NEM", "LIN", "IFF", "FCX",      # Materials
+    "CBRE", "HST", "VTR", "DOC", "WY",      # Real Estate
+    "PCG", "D", "XEL", "EIX", "SRE",        # Utilities
 ]
 
 # --------------------------------------------------------------------------------------
 # Date ranges (chronological train/test split to avoid look-ahead)
 # --------------------------------------------------------------------------------------
-START_DATE: str = "2015-01-01"
-END_DATE: str = "2023-12-31"
-SPLIT_DATE: str = "2021-01-01"  # train: dates < this; test: dates >= this
+START_DATE: str = "2005-01-01"
+END_DATE: str = "2026-08-01"
+SPLIT_DATE: str = "2020-01-01"  # train: dates < this; test: dates >= this
 
 # --------------------------------------------------------------------------------------
 # Environment

@@ -1,0 +1,496 @@
+year,sector,rank,ticker,value,signal
+2017,Communication Services,1,TTWO,1.2272,return
+2017,Communication Services,2,TKO,0.6972,return
+2017,Communication Services,3,TTD,0.6527,return
+2017,Communication Services,4,LYV,0.6004,return
+2017,Communication Services,5,NFLX,0.5506,return
+2017,Consumer Discretionary,1,NVR,1.102,return
+2017,Consumer Discretionary,2,WYNN,0.9809,return
+2017,Consumer Discretionary,3,DHI,0.8906,return
+2017,Consumer Discretionary,4,PHM,0.8343,return
+2017,Consumer Discretionary,5,MAR,0.6624,return
+2017,Consumer Staples,1,EL,0.6868,return
+2017,Consumer Staples,2,BF-B,0.5501,return
+2017,Consumer Staples,3,STZ,0.5069,return
+2017,Consumer Staples,4,WMT,0.4656,return
+2017,Consumer Staples,5,MNST,0.4274,return
+2017,Energy,1,TPL,0.5118,return
+2017,Energy,2,VLO,0.3999,return
+2017,Energy,3,MPC,0.3478,return
+2017,Energy,4,FANG,0.2493,return
+2017,Energy,5,PSX,0.2095,return
+2017,Financials,1,XYZ,1.5437,return
+2017,Financials,2,PYPL,0.8652,return
+2017,Financials,3,APO,0.8529,return
+2017,Financials,4,CBOE,0.7049,return
+2017,Financials,5,IBKR,0.6375,return
+2017,Health Care,1,ALGN,1.3113,return
+2017,Health Care,2,VRTX,1.0342,return
+2017,Health Care,3,PODD,0.8312,return
+2017,Health Care,4,CNC,0.7852,return
+2017,Health Care,5,ISRG,0.7264,return
+2017,Industrials,1,BLDR,0.9863,return
+2017,Industrials,2,BA,0.9471,return
+2017,Industrials,3,CAT,0.7503,return
+2017,Industrials,4,URI,0.6282,return
+2017,Industrials,5,CPRT,0.5589,return
+2017,Information Technology,1,ANET,1.4344,return
+2017,Information Technology,2,FSLR,1.1041,return
+2017,Information Technology,3,MU,0.8759,return
+2017,Information Technology,4,NVDA,0.8199,return
+2017,Information Technology,5,LRCX,0.7621,return
+2017,Materials,1,AVY,0.6675,return
+2017,Materials,2,SHW,0.5411,return
+2017,Materials,3,SW,0.5043,return
+2017,Materials,4,ALB,0.5022,return
+2017,Materials,5,PKG,0.4551,return
+2017,Real Estate,1,SBAC,0.582,return
+2017,Real Estate,2,CSGP,0.5754,return
+2017,Real Estate,3,AMT,0.3771,return
+2017,Real Estate,4,CBRE,0.3754,return
+2017,Real Estate,5,CCI,0.3297,return
+2017,Utilities,1,NRG,1.3369,return
+2017,Utilities,2,NEE,0.344,return
+2017,Utilities,3,AWK,0.2901,return
+2017,Utilities,4,XEL,0.2191,return
+2017,Utilities,5,PEG,0.2177,return
+2018,Communication Services,1,TTD,1.5379,return
+2018,Communication Services,2,TKO,1.4635,return
+2018,Communication Services,3,NFLX,0.3944,return
+2018,Communication Services,4,LYV,0.1569,return
+2018,Communication Services,5,VZ,0.1126,return
+2018,Consumer Discretionary,1,CVNA,0.7108,return
+2018,Consumer Discretionary,2,DECK,0.5944,return
+2018,Consumer Discretionary,3,LULU,0.5474,return
+2018,Consumer Discretionary,4,CMG,0.4939,return
+2018,Consumer Discretionary,5,ORLY,0.4315,return
+2018,Consumer Staples,1,KDP,0.6597,return
+2018,Consumer Staples,2,MKC,0.3901,return
+2018,Consumer Staples,3,CHD,0.3323,return
+2018,Consumer Staples,4,HRL,0.1969,return
+2018,Consumer Staples,5,DG,0.1755,return
+2018,Energy,1,TPL,0.2221,return
+2018,Energy,2,COP,0.1563,return
+2018,Energy,3,OKE,0.0627,return
+2018,Energy,4,MPC,-0.0823,return
+2018,Energy,5,CVX,-0.0975,return
+2018,Financials,1,XYZ,0.6178,return
+2018,Financials,2,CME,0.3215,return
+2018,Financials,3,MA,0.2531,return
+2018,Financials,4,AJG,0.1919,return
+2018,Financials,5,MSCI,0.1795,return
+2018,Health Care,1,DXCM,1.0875,return
+2018,Health Care,2,VEEV,0.6158,return
+2018,Health Care,3,HCA,0.4337,return
+2018,Health Care,4,BSX,0.4256,return
+2018,Health Care,5,LLY,0.4045,return
+2018,Industrials,1,AXON,0.6509,return
+2018,Industrials,2,UAL,0.2423,return
+2018,Industrials,3,TDG,0.2383,return
+2018,Industrials,4,GWW,0.2169,return
+2018,Industrials,5,ROL,0.177,return
+2018,Information Technology,1,AMD,0.7957,return
+2018,Information Technology,2,CIEN,0.6202,return
+2018,Information Technology,3,FTNT,0.612,return
+2018,Information Technology,4,WDAY,0.5695,return
+2018,Information Technology,5,ZBRA,0.534,return
+2018,Materials,1,BALL,0.2265,return
+2018,Materials,2,MOS,0.1422,return
+2018,Materials,3,ECL,0.1107,return
+2018,Materials,4,CF,0.0513,return
+2018,Materials,5,LIN,0.0301,return
+2018,Real Estate,1,O,0.1595,return
+2018,Real Estate,2,WELL,0.1531,return
+2018,Real Estate,3,DOC,0.1369,return
+2018,Real Estate,4,CSGP,0.136,return
+2018,Real Estate,5,AMT,0.1332,return
+2018,Utilities,1,NRG,0.3959,return
+2018,Utilities,2,AES,0.3902,return
+2018,Utilities,3,FE,0.2785,return
+2018,Utilities,4,VST,0.2495,return
+2018,Utilities,5,EXC,0.1833,return
+2019,Communication Services,1,TTD,1.2383,return
+2019,Communication Services,2,CHTR,0.7022,return
+2019,Communication Services,3,META,0.5657,return
+2019,Communication Services,4,T,0.4848,return
+2019,Communication Services,5,ECHO,0.4555,return
+2019,Consumer Discretionary,1,CVNA,1.8141,return
+2019,Consumer Discretionary,2,CMG,0.9387,return
+2019,Consumer Discretionary,3,LULU,0.905,return
+2019,Consumer Discretionary,4,BBY,0.705,return
+2019,Consumer Discretionary,5,GRMN,0.5813,return
+2019,Consumer Staples,1,TGT,1.0017,return
+2019,Consumer Staples,2,TSN,0.7391,return
+2019,Consumer Staples,3,EL,0.6034,return
+2019,Consumer Staples,4,DG,0.4571,return
+2019,Consumer Staples,5,COST,0.457,return
+2019,Energy,1,OKE,0.4776,return
+2019,Energy,2,TPL,0.4544,return
+2019,Energy,3,KMI,0.4443,return
+2019,Energy,4,PSX,0.3397,return
+2019,Energy,5,VLO,0.3027,return
+2019,Financials,1,ARES,1.1013,return
+2019,Financials,2,APO,1.0646,return
+2019,Financials,3,BX,0.9633,return
+2019,Financials,4,GPN,0.7725,return
+2019,Financials,5,MSCI,0.7719,return
+2019,Health Care,1,PODD,1.1583,return
+2019,Health Care,2,DXCM,0.8259,return
+2019,Health Care,3,VEEV,0.5748,return
+2019,Health Care,4,ZTS,0.5571,return
+2019,Health Care,5,WST,0.5413,return
+2019,Industrials,1,BLDR,1.3291,return
+2019,Industrials,2,GNRC,1.0239,return
+2019,Industrials,3,IR,0.928,return
+2019,Industrials,4,CPRT,0.9033,return
+2019,Industrials,5,LDOS,0.8882,return
+2019,Information Technology,1,AMD,1.4843,return
+2019,Information Technology,2,LRCX,1.1933,return
+2019,Information Technology,3,TER,1.1893,return
+2019,Information Technology,4,KLAC,1.0399,return
+2019,Information Technology,5,FICO,1.0036,return
+2019,Materials,1,MLM,0.6418,return
+2019,Materials,2,CRH,0.5705,return
+2019,Materials,3,SW,0.5037,return
+2019,Materials,4,APD,0.5002,return
+2019,Materials,5,SHW,0.497,return
+2019,Real Estate,1,CSGP,0.7736,return
+2019,Real Estate,2,EQIX,0.6886,return
+2019,Real Estate,3,PLD,0.5587,return
+2019,Real Estate,4,CBRE,0.5307,return
+2019,Real Estate,5,INVH,0.5227,return
+2019,Utilities,1,SO,0.5165,return
+2019,Utilities,2,ETR,0.4431,return
+2019,Utilities,3,SRE,0.4401,return
+2019,Utilities,4,NEE,0.4269,return
+2019,Utilities,5,AES,0.4216,return
+2020,Communication Services,1,TTD,2.0834,return
+2020,Communication Services,2,TMUS,0.7196,return
+2020,Communication Services,3,TTWO,0.6972,return
+2020,Communication Services,4,NFLX,0.6711,return
+2020,Communication Services,5,CHTR,0.3638,return
+2020,Consumer Discretionary,1,TSLA,7.4344,return
+2020,Consumer Discretionary,2,CVNA,1.6023,return
+2020,Consumer Discretionary,3,AMZN,0.7626,return
+2020,Consumer Discretionary,4,DECK,0.6983,return
+2020,Consumer Discretionary,5,CMG,0.6565,return
+2020,Consumer Staples,1,MNST,0.4552,return
+2020,Consumer Staples,2,TGT,0.4047,return
+2020,Consumer Staples,3,DG,0.3589,return
+2020,Consumer Staples,4,CLX,0.3446,return
+2020,Consumer Staples,5,COST,0.3267,return
+2020,Energy,1,EQT,0.1727,return
+2020,Energy,2,TPL,-0.032,return
+2020,Energy,3,WMB,-0.082,return
+2020,Energy,4,BKR,-0.1515,return
+2020,Energy,5,HAL,-0.2123,return
+2020,Financials,1,XYZ,2.4789,return
+2020,Financials,2,PYPL,1.1651,return
+2020,Financials,3,MSCI,0.7438,return
+2020,Financials,4,ERIE,0.5239,return
+2020,Financials,5,BLK,0.4721,return
+2020,Health Care,1,MRNA,4.341,return
+2020,Health Care,2,VEEV,0.9355,return
+2020,Health Care,3,ALGN,0.9151,return
+2020,Health Care,4,IDXX,0.9143,return
+2020,Health Care,5,WST,0.8905,return
+2020,Industrials,1,GNRC,1.2608,return
+2020,Industrials,2,ROL,0.7847,return
+2020,Industrials,3,PWR,0.7774,return
+2020,Industrials,4,FDX,0.7427,return
+2020,Industrials,5,UBER,0.7149,return
+2020,Information Technology,1,CRWD,3.2474,return
+2020,Information Technology,2,DDOG,1.6056,return
+2020,Information Technology,3,COHR,1.256,return
+2020,Information Technology,4,NVDA,1.223,return
+2020,Information Technology,5,MPWR,1.0749,return
+2020,Materials,1,ALB,1.0539,return
+2020,Materials,2,FCX,0.9906,return
+2020,Materials,3,BALL,0.4519,return
+2020,Materials,4,NEM,0.4028,return
+2020,Materials,5,CTVA,0.3349,return
+2020,Real Estate,1,CSGP,0.5448,return
+2020,Real Estate,2,EQIX,0.2422,return
+2020,Real Estate,3,DLR,0.2037,return
+2020,Real Estate,4,SBAC,0.1781,return
+2020,Real Estate,5,CCI,0.1549,return
+2020,Utilities,1,NEE,0.3006,return
+2020,Utilities,2,AWK,0.2688,return
+2020,Utilities,3,AES,0.2215,return
+2020,Utilities,4,PCG,0.1463,return
+2020,Utilities,5,XEL,0.0777,return
+2021,Communication Services,1,GOOGL,0.653,return
+2021,Communication Services,2,LYV,0.6289,return
+2021,Communication Services,3,FOXA,0.2824,return
+2021,Communication Services,4,NWSA,0.252,return
+2021,Communication Services,5,ECHO,0.2435,return
+2021,Consumer Discretionary,1,F,1.3748,return
+2021,Consumer Discretionary,2,AZO,0.7684,return
+2021,Consumer Discretionary,3,TSCO,0.7157,return
+2021,Consumer Discretionary,4,WSM,0.686,return
+2021,Consumer Discretionary,5,LOW,0.6334,return
+2021,Consumer Staples,1,COST,0.5182,return
+2021,Consumer Staples,2,BG,0.4587,return
+2021,Consumer Staples,3,KR,0.4541,return
+2021,Consumer Staples,4,EL,0.4004,return
+2021,Consumer Staples,5,TSN,0.3847,return
+2021,Energy,1,DVN,1.9589,return
+2021,Energy,2,FANG,1.2751,return
+2021,Energy,3,TRGP,1.0015,return
+2021,Energy,4,APA,0.9076,return
+2021,Energy,5,EOG,0.8862,return
+2021,Financials,1,BX,1.0711,return
+2021,Financials,2,KKR,0.8576,return
+2021,Financials,3,ARES,0.7775,return
+2021,Financials,4,FITB,0.6246,return
+2021,Financials,5,WFC,0.6115,return
+2021,Health Care,1,MRNA,1.4311,return
+2021,Health Care,2,PFE,0.667,return
+2021,Health Care,3,LLY,0.6608,return
+2021,Health Care,4,WST,0.6588,return
+2021,Health Care,5,TECH,0.634,return
+2021,Industrials,1,BLDR,1.1002,return
+2021,Industrials,2,FIX,0.8898,return
+2021,Industrials,3,ODFL,0.8415,return
+2021,Industrials,4,JCI,0.7742,return
+2021,Industrials,5,TXT,0.5993,return
+2021,Information Technology,1,FTNT,1.4197,return
+2021,Information Technology,2,NVDA,1.2548,return
+2021,Information Technology,3,IT,1.087,return
+2021,Information Technology,4,ON,1.0752,return
+2021,Information Technology,5,ANET,0.9789,return
+2021,Materials,1,NUE,1.1845,return
+2021,Materials,2,CF,0.8718,return
+2021,Materials,3,MOS,0.7215,return
+2021,Materials,4,STLD,0.7142,return
+2021,Materials,5,FCX,0.6141,return
+2021,Real Estate,1,EXR,1.0098,return
+2021,Real Estate,2,SPG,0.9572,return
+2021,Real Estate,3,IRM,0.8775,return
+2021,Real Estate,4,MAA,0.8587,return
+2021,Real Estate,5,CPT,0.8318,return
+2021,Utilities,1,FE,0.4181,return
+2021,Utilities,2,EXC,0.4148,return
+2021,Utilities,3,CNP,0.3241,return
+2021,Utilities,4,EVRG,0.2799,return
+2021,Utilities,5,AWK,0.2483,return
+2022,Communication Services,1,TKO,0.399,return
+2022,Communication Services,2,TMUS,0.2071,return
+2022,Communication Services,3,OMC,0.1572,return
+2022,Communication Services,4,T,0.0647,return
+2022,Communication Services,5,FOXA,-0.1661,return
+2022,Consumer Discretionary,1,LVS,0.2771,return
+2022,Consumer Discretionary,2,GPC,0.2682,return
+2022,Consumer Discretionary,3,ORLY,0.1951,return
+2022,Consumer Discretionary,4,AZO,0.1764,return
+2022,Consumer Discretionary,5,ULTA,0.1376,return
+2022,Consumer Staples,1,ADM,0.3998,return
+2022,Consumer Staples,2,GIS,0.2809,return
+2022,Consumer Staples,3,HSY,0.2186,return
+2022,Consumer Staples,4,SJM,0.2006,return
+2022,Consumer Staples,5,KHC,0.1818,return
+2022,Energy,1,OXY,1.191,return
+2022,Energy,2,TPL,0.9129,return
+2022,Energy,3,XOM,0.8741,return
+2022,Energy,4,MPC,0.8662,return
+2022,Energy,5,SLB,0.8115,return
+2022,Financials,1,ACGL,0.4124,return
+2022,Financials,2,WRB,0.3392,return
+2022,Financials,3,ERIE,0.3203,return
+2022,Financials,4,GL,0.2969,return
+2022,Financials,5,PGR,0.2681,return
+2022,Health Care,1,CAH,0.5408,return
+2022,Health Care,2,MCK,0.5182,return
+2022,Health Care,3,MRK,0.4942,return
+2022,Health Care,4,CI,0.4668,return
+2022,Health Care,5,LLY,0.3426,return
+2022,Industrials,1,NOC,0.4302,return
+2022,Industrials,2,LMT,0.4048,return
+2022,Industrials,3,DE,0.2659,return
+2022,Industrials,4,HII,0.2633,return
+2022,Industrials,5,PWR,0.2463,return
+2022,Information Technology,1,SMCI,0.868,return
+2022,Information Technology,2,FSLR,0.7186,return
+2022,Information Technology,3,FICO,0.3803,return
+2022,Information Technology,4,FLEX,0.1708,return
+2022,Information Technology,5,IBM,0.1064,return
+2022,Materials,1,STLD,0.6014,return
+2022,Materials,2,CTVA,0.2558,return
+2022,Materials,3,CF,0.2229,return
+2022,Materials,4,NUE,0.1739,return
+2022,Materials,5,MOS,0.128,return
+2022,Real Estate,1,VICI,0.1301,return
+2022,Real Estate,2,IRM,-0.0008,return
+2022,Real Estate,3,CSGP,-0.0221,return
+2022,Real Estate,4,HST,-0.0462,return
+2022,Real Estate,5,O,-0.0737,return
+2022,Utilities,1,PCG,0.3394,return
+2022,Utilities,2,AES,0.2169,return
+2022,Utilities,3,SRE,0.203,return
+2022,Utilities,4,ED,0.1565,return
+2022,Utilities,5,PNW,0.1301,return
+2023,Communication Services,1,APP,2.7844,return
+2023,Communication Services,2,META,1.9413,return
+2023,Communication Services,3,NFLX,0.6511,return
+2023,Communication Services,4,TTD,0.6052,return
+2023,Communication Services,5,GOOGL,0.5832,return
+2023,Consumer Discretionary,1,CVNA,10.1688,return
+2023,Consumer Discretionary,2,RCL,1.6197,return
+2023,Consumer Discretionary,3,CCL,1.3002,return
+2023,Consumer Discretionary,4,PHM,1.2876,return
+2023,Consumer Discretionary,5,DASH,1.0256,return
+2023,Consumer Staples,1,COST,0.49,return
+2023,Consumer Staples,2,CASY,0.2327,return
+2023,Consumer Staples,3,TAP,0.2215,return
+2023,Consumer Staples,4,CHD,0.1872,return
+2023,Consumer Staples,5,MNST,0.1348,return
+2023,Energy,1,PSX,0.3307,return
+2023,Energy,2,MPC,0.3046,return
+2023,Energy,3,TRGP,0.2101,return
+2023,Energy,4,FANG,0.1966,return
+2023,Energy,5,BKR,0.1858,return
+2023,Financials,1,COIN,3.9144,return
+2023,Financials,2,BX,0.8275,return
+2023,Financials,3,KKR,0.8048,return
+2023,Financials,4,ARES,0.7952,return
+2023,Financials,5,HOOD,0.5651,return
+2023,Health Care,1,LLY,0.6091,return
+2023,Health Care,2,WST,0.4997,return
+2023,Health Care,3,VRTX,0.409,return
+2023,Health Care,4,DVA,0.403,return
+2023,Health Care,5,IDXX,0.3606,return
+2023,Industrials,1,VRT,2.5181,return
+2023,Industrials,2,BLDR,1.5731,return
+2023,Industrials,3,UBER,1.4897,return
+2023,Industrials,4,GE,0.9571,return
+2023,Industrials,5,LII,0.8955,return
+2023,Information Technology,1,SMCI,2.4624,return
+2023,Information Technology,2,NVDA,2.3902,return
+2023,Information Technology,3,PLTR,1.6745,return
+2023,Information Technology,4,CRWD,1.4249,return
+2023,Information Technology,5,AMD,1.2759,return
+2023,Materials,1,CRH,0.8133,return
+2023,Materials,2,MLM,0.4862,return
+2023,Materials,3,ECL,0.3794,return
+2023,Materials,4,NUE,0.3375,return
+2023,Materials,5,SHW,0.3273,return
+2023,Real Estate,1,IRM,0.4653,return
+2023,Real Estate,2,WELL,0.4179,return
+2023,Real Estate,3,DLR,0.3995,return
+2023,Real Estate,4,SPG,0.2924,return
+2023,Real Estate,5,HST,0.2761,return
+2023,Utilities,1,VST,0.7074,return
+2023,Utilities,2,NRG,0.6937,return
+2023,Utilities,3,CEG,0.3724,return
+2023,Utilities,4,EIX,0.1738,return
+2023,Utilities,5,PCG,0.1095,return
+2024,Communication Services,1,APP,7.1262,return
+2024,Communication Services,2,NFLX,0.8307,return
+2024,Communication Services,3,TKO,0.742,return
+2024,Communication Services,4,FOXA,0.6631,return
+2024,Communication Services,5,META,0.6605,return
+2024,Consumer Discretionary,1,CVNA,2.8413,return
+2024,Consumer Discretionary,2,WSM,0.8656,return
+2024,Consumer Discretionary,3,TPR,0.828,return
+2024,Consumer Discretionary,4,DECK,0.823,return
+2024,Consumer Discretionary,5,RCL,0.7898,return
+2024,Consumer Staples,1,WMT,0.7399,return
+2024,Consumer Staples,2,CASY,0.4501,return
+2024,Consumer Staples,3,MO,0.4076,return
+2024,Consumer Staples,4,COST,0.3962,return
+2024,Consumer Staples,5,KR,0.3691,return
+2024,Energy,1,TPL,1.1531,return
+2024,Energy,2,TRGP,1.1012,return
+2024,Energy,3,KMI,0.6444,return
+2024,Energy,4,WMB,0.6235,return
+2024,Energy,5,OKE,0.501,return
+2024,Financials,1,HOOD,1.9246,return
+2024,Financials,2,IBKR,1.1443,return
+2024,Financials,3,APO,0.7988,return
+2024,Financials,4,KKR,0.7965,return
+2024,Financials,5,SYF,0.7401,return
+2024,Health Care,1,ISRG,0.5472,return
+2024,Health Care,2,BSX,0.5451,return
+2024,Health Care,3,DVA,0.4275,return
+2024,Health Care,4,RMD,0.3418,return
+2024,Health Care,5,LLY,0.333,return
+2024,Industrials,1,VRT,1.3682,return
+2024,Industrials,2,UAL,1.3534,return
+2024,Industrials,3,AXON,1.3006,return
+2024,Industrials,4,EME,1.1127,return
+2024,Industrials,5,FIX,1.0689,return
+2024,Information Technology,1,PLTR,3.4048,return
+2024,Information Technology,2,NVDA,1.7125,return
+2024,Information Technology,3,COHR,1.1762,return
+2024,Information Technology,4,AVGO,1.1049,return
+2024,Information Technology,5,CIEN,0.8842,return
+2024,Materials,1,IP,0.5532,return
+2024,Materials,2,PKG,0.417,return
+2024,Materials,3,SW,0.3764,return
+2024,Materials,4,CRH,0.3593,return
+2024,Materials,5,CTVA,0.2024,return
+2024,Real Estate,1,IRM,0.5448,return
+2024,Real Estate,2,WELL,0.4307,return
+2024,Real Estate,3,CBRE,0.4104,return
+2024,Real Estate,4,DLR,0.359,return
+2024,Real Estate,5,SPG,0.2692,return
+2024,Utilities,1,VST,2.6153,return
+2024,Utilities,2,CEG,0.9271,return
+2024,Utilities,3,NRG,0.7858,return
+2024,Utilities,4,ETR,0.5596,return
+2024,Utilities,5,NI,0.4348,return
+2025,Communication Services,1,ECHO,3.7467,return
+2025,Communication Services,2,WBD,1.7266,return
+2025,Communication Services,3,APP,1.0808,return
+2025,Communication Services,4,GOOGL,0.6599,return
+2025,Communication Services,5,FOXA,0.5183,return
+2025,Consumer Discretionary,1,CVNA,1.0752,return
+2025,Consumer Discretionary,2,TPR,0.9873,return
+2025,Consumer Discretionary,3,RL,0.5503,return
+2025,Consumer Discretionary,4,GM,0.5424,return
+2025,Consumer Discretionary,5,EXPE,0.5327,return
+2025,Consumer Staples,1,DG,0.7961,return
+2025,Consumer Staples,2,DLTR,0.6414,return
+2025,Consumer Staples,3,MNST,0.4587,return
+2025,Consumer Staples,4,EL,0.4213,return
+2025,Consumer Staples,5,CASY,0.4012,return
+2025,Energy,1,VLO,0.3697,return
+2025,Energy,2,MPC,0.1917,return
+2025,Energy,3,EQT,0.1764,return
+2025,Energy,4,PSX,0.1751,return
+2025,Energy,5,XOM,0.1598,return
+2025,Financials,1,HOOD,2.0354,return
+2025,Financials,2,C,0.7038,return
+2025,Financials,3,IVZ,0.5694,return
+2025,Financials,4,GS,0.5664,return
+2025,Financials,5,BNY,0.5445,return
+2025,Health Care,1,CVS,0.8435,return
+2025,Health Care,2,CAH,0.7625,return
+2025,Health Care,3,IDXX,0.6363,return
+2025,Health Care,4,HCA,0.5671,return
+2025,Health Care,5,COR,0.5148,return
+2025,Industrials,1,FIX,1.2086,return
+2025,Industrials,2,GEV,0.9902,return
+2025,Industrials,3,HWM,0.8795,return
+2025,Industrials,4,GE,0.8573,return
+2025,Industrials,5,HII,0.8417,return
+2025,Information Technology,1,LITE,3.3906,return
+2025,Information Technology,2,WDC,2.8368,return
+2025,Information Technology,3,MU,2.4024,return
+2025,Information Technology,4,STX,2.2526,return
+2025,Information Technology,5,CIEN,1.7576,return
+2025,Materials,1,NEM,1.7282,return
+2025,Materials,2,ALB,0.6772,return
+2025,Materials,3,STLD,0.507,return
+2025,Materials,4,NUE,0.4203,return
+2025,Materials,5,CRH,0.3595,return
+2025,Real Estate,1,WELL,0.4986,return
+2025,Real Estate,2,VTR,0.3509,return
+2025,Real Estate,3,PLD,0.2508,return
+2025,Real Estate,4,CBRE,0.2247,return
+2025,Real Estate,5,SPG,0.1294,return
+2025,Utilities,1,NRG,0.7891,return
+2025,Utilities,2,CEG,0.588,return
+2025,Utilities,3,AEP,0.2938,return
+2025,Utilities,4,ETR,0.2534,return
+2025,Utilities,5,CNP,0.2374,return
