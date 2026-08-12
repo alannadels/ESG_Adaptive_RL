@@ -10,13 +10,13 @@ The detector consumes a daily OHLC price frame for the ESG universe (either the
 high-ESG index built by ``build_esg_index.py`` or an ESG ETF proxy) and labels
 each day as one of three regimes:
 
-    S1_calm    — low realised volatility, trending
-    S2_choppy  — elevated volatility, range-bound
-    S3_stress  — high volatility / drawdown
+    bull     — low realised volatility, above trend, near highs
+    neutral  — elevated volatility, range-bound
+    bear     — high volatility, below trend, deep drawdown
 
 Downstream, these labels are what the evolutionary layer will condition its
 per-regime reward weights on: the RL agent can hold a different E/S/G-vs-return
-trade-off in calm markets than in stressed ones.
+trade-off in bull markets than in bear ones.
 """
 
 from __future__ import annotations
@@ -28,17 +28,17 @@ import numpy as np
 import pandas as pd
 
 from esg_regime.classifier import (
-    DIRECTIONAL,
     RegimeClassifier,
     RegimeConfig as _HMMConfig,
     finalize_regimes,
     in_sample_regimes,
+    normalize_regimes,
     walk_forward_regimes,
 )
 from esg_regime.features import LOCKED_FEATURES, compute_features
 
-# The three regime labels, ordered from calmest to most stressed.
-REGIMES: List[str] = ["S1_calm", "S2_choppy", "S3_stress"]
+# The three regime labels, ordered most-bullish/calmest to most-bearish/stressed.
+REGIMES: List[str] = ["bull", "neutral", "bear"]
 
 
 @dataclass

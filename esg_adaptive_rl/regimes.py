@@ -8,8 +8,9 @@ Three pluggable detectors, driven by :class:`RegimeConfig`:
 
     - ``"hmm"`` (DEFAULT) : the 3-state walk-forward Gaussian HMM from
       :mod:`esg_regime` (filtered posteriors, monthly expanding-window refits —
-      the one causal Markov-switching protocol). Its vol-ordered states map
-      S1_calm->bull, S2_choppy->neutral, S3_stress->bear. Chosen as default after
+      the one causal Markov-switching protocol). It emits bull/neutral/bear
+      directly; its states are vol-ordered and that ordering coincides with the
+      trend ordering on every universe tested. Chosen as default after
       a 11-detector comparison across 6 universes (see
       esg_regime/results/HEURISTICS_BENCHMARKS.md): stress/calm vol separation
       2.73 vs 1.70 for the 50/200 crossover, overlay dSharpe +0.11 vs +0.03,
@@ -209,11 +210,13 @@ def _hmm_labels(prices: pd.Series, cfg: RegimeConfig) -> pd.Series:
             ``RegimeConfig(detector="crossover")``.
     """
     from esg_regime.benchmark_compare import hmm_labels
+    from esg_regime.classifier import normalize_regimes
 
     lab = hmm_labels(cfg.ticker)
-    mapping = {"S1_calm": "bull", "S2_choppy": "neutral", "S3_stress": "bear"}
-    series = (lab.assign(date=pd.to_datetime(lab["date"]))
-                 .set_index("date")["regime"].map(mapping))
+    # esg_regime emits bull/neutral/bear directly; normalize_regimes translates
+    # any label paths still cached under the pre-rename S1/S2/S3 names.
+    series = normalize_regimes(
+        lab.assign(date=pd.to_datetime(lab["date"])).set_index("date")["regime"])
     aligned = series.reindex(pd.to_datetime(prices.index), method="ffill")
     return pd.Series(aligned.fillna("neutral").values, index=prices.index,
                      name="regime")

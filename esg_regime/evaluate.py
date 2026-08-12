@@ -10,7 +10,7 @@ Two validation protocols, both look-ahead-free:
                 model trained only on its past. Uses the whole series.
 
 Strategy overlay on the ESG series:
-  Calm (S1)   -> 100% invested   Choppy (S2) -> 60%   Stress (S3) -> 0% (cash)
+  bull -> 100% invested   neutral -> 60%   bear -> 0% (cash)
 Signals are lagged one day; cash earns a flat rate; turnover is charged.
 
 Data sources:
@@ -44,7 +44,7 @@ os.makedirs(RESULTS, exist_ok=True)
 TRADING_DAYS = 252
 CASH_ANNUAL = 0.02
 COST_BPS = 1.0
-WEIGHTS = {"S1_calm": 1.0, "S2_choppy": 0.6, "S3_stress": 0.0}
+WEIGHTS = {"bull": 1.0, "neutral": 0.6, "bear": 0.0}
 
 
 # --------------------------------------------------------------------------- data
@@ -107,7 +107,7 @@ def regime_conditional(reg: pd.DataFrame) -> pd.DataFrame:
     g["ann_ret"] = g["mean"] * TRADING_DAYS
     g["ann_vol"] = g["std"] * np.sqrt(TRADING_DAYS)
     g["sharpe"] = g["ann_ret"] / g["ann_vol"]
-    return g.reindex(["S1_calm", "S2_choppy", "S3_stress"])[
+    return g.reindex(["bull", "neutral", "bear"])[
         ["ann_ret", "ann_vol", "sharpe", "count"]]
 
 
@@ -138,9 +138,9 @@ def evaluate(source: str, cfg: Optional[RegimeDetectorConfig] = None) -> Dict:
     for tag, reg in (("TRAIN (in-sample)", reg_train), ("TEST  (out-of-sample)", reg_test)):
         ov = overlay_returns(reg)
         mix = reg["regime"].value_counts(normalize=True).reindex(
-            ["S1_calm", "S2_choppy", "S3_stress"]).fillna(0)
+            ["bull", "neutral", "bear"]).fillna(0)
         print(f"\n  {tag}   regime mix: "
-              f"Calm {mix['S1_calm']:.0%} / Choppy {mix['S2_choppy']:.0%} / Stress {mix['S3_stress']:.0%}")
+              f"bull {mix['bull']:.0%} / neutral {mix['neutral']:.0%} / bear {mix['bear']:.0%}")
         print(f"    Buy & Hold : {_fmt(perf(ov['bh_ret']))}")
         print(f"    Overlay    : {_fmt(perf(ov['strat_ret']))}")
 
@@ -153,9 +153,9 @@ def evaluate(source: str, cfg: Optional[RegimeDetectorConfig] = None) -> Dict:
     reg_wf = det.walk_forward(feats)
     ov = overlay_returns(reg_wf)
     mix = reg_wf["regime"].value_counts(normalize=True).reindex(
-        ["S1_calm", "S2_choppy", "S3_stress"]).fillna(0)
-    print(f"  regime mix: Calm {mix['S1_calm']:.0%} / Choppy {mix['S2_choppy']:.0%} / "
-          f"Stress {mix['S3_stress']:.0%}")
+        ["bull", "neutral", "bear"]).fillna(0)
+    print(f"  regime mix: bull {mix['bull']:.0%} / neutral {mix['neutral']:.0%} / "
+          f"bear {mix['bear']:.0%}")
     print(f"    Buy & Hold : {_fmt(perf(ov['bh_ret']))}")
     print(f"    Overlay    : {_fmt(perf(ov['strat_ret']))}")
 

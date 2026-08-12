@@ -41,7 +41,7 @@ from esg_regime.evaluate import load_prices, overlay_returns, perf  # noqa: E402
 from esg_regime.heuristics import HEURISTICS, REGIME_ORDER  # noqa: E402
 from esg_regime.regime import MarketRegimeDetector, RegimeDetectorConfig  # noqa: E402
 
-S1, S2, S3 = REGIME_ORDER
+BULL, NEUTRAL, BEAR = REGIME_ORDER
 ESG_UNIVERSES = ["SUSA", "DSI", "ESGU"]
 BENCHMARKS = ["^GSPC", "QQQ", "SPY"]
 UNIVERSES = ESG_UNIVERSES + BENCHMARKS
@@ -100,13 +100,13 @@ def grade(prices: pd.DataFrame, labels: pd.DataFrame) -> dict:
 
     return {
         "days": len(d),
-        "calm_pct": mix.get(S1, 0.0), "choppy_pct": mix.get(S2, 0.0),
-        "stress_pct": mix.get(S3, 0.0),
-        "stress_days": int(counts.get(S3, 0)),
+        "calm_pct": mix.get(BULL, 0.0), "choppy_pct": mix.get(NEUTRAL, 0.0),
+        "stress_pct": mix.get(BEAR, 0.0),
+        "stress_days": int(counts.get(BEAR, 0)),
         "switches_per_year": switches / years if years else np.nan,
-        "calm_vol": vol[S1], "stress_vol": vol[S3],
-        "vol_ratio": vol[S3] / vol[S1] if vol[S1] and np.isfinite(vol[S1]) else np.nan,
-        "stress_ann_ret": ret[S3],
+        "calm_vol": vol[BULL], "stress_vol": vol[BEAR],
+        "vol_ratio": vol[BEAR] / vol[BULL] if vol[BULL] and np.isfinite(vol[BULL]) else np.nan,
+        "stress_ann_ret": ret[BEAR],
         "bh_sharpe": bh["Sharpe"], "ov_sharpe": st["Sharpe"],
         "d_sharpe": st["Sharpe"] - bh["Sharpe"],
         "bh_dd": bh["MaxDD"], "ov_dd": st["MaxDD"],

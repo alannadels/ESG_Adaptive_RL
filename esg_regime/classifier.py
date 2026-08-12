@@ -2,10 +2,10 @@
 
 Same architecture as the reference SPY model (TradingAgentV2/v2/regime_core):
   - Gaussian-emission HMM, diagonal covariance, 3 states.
-  - Label-pin by REALIZED-VOL mean (lowest->Calm S1 .. highest->Stress S3).
+  - Label-pin by REALIZED-VOL mean (lowest->bull .. highest->bear); see REGIMES.
   - FILTERED posteriors (forward algorithm) — point-in-time, no look-ahead.
   - Anti-whipsaw hysteresis + deterministic guardrail
-    (close<SMA200 & realized-vol backwardation -> Stress).
+    (close<SMA200 & realized-vol backwardation -> bear).
 
 `in_sample_regimes(feats)` fits once on full history (optimistic);
 `walk_forward_regimes(feats)` is the honest OOS path (retrain monthly on an
@@ -24,24 +24,43 @@ from scipy.stats import multivariate_normal
 
 from esg_regime.features import LOCKED_FEATURES
 
-REGIMES = ["S1_calm", "S2_choppy", "S3_stress"]
-
-# The same three states named directionally. The vol-ordered and trend-ordered
-# rankings of the fitted states coincide on every universe tested (SPY, QQQ,
-# SUSA, DSI, ESGU, esg_index) — the leverage effect: volatility rises as prices
-# fall. So S1/S2/S3 *are* bull/neutral/bear, and the mapping below is empirical,
-# not cosmetic. Measured state characteristics on SPY (2005-2026):
+# The three regimes, ordered calmest/most-bullish -> most-stressed/most-bearish.
+# These names are DIRECTIONAL and match esg_adaptive_rl.regimes.REGIMES, so the
+# labels the RL trains on need no translation.
 #
-#   S1_calm   / bull    : realized vol 10%, drawdown  -1%, trend  +8.3%
-#   S2_choppy / neutral : realized vol 19%, drawdown  -7%, trend  +3.3%
-#   S3_stress / bear    : realized vol 32%, drawdown -18%, trend  -8.5%
+# The naming is empirical, not cosmetic: ranking the fitted states by mean trend
+# gives the same order as ranking by mean realized volatility on every universe
+# tested (SPY, QQQ, SUSA, DSI, ESGU, esg_index) — the leverage effect, volatility
+# rises as prices fall — and walk-forward labels under either criterion are
+# identical on 100% of 5,117 SPY days across 233 refits. Measured state
+# characteristics on SPY (2005-2026):
+#
+#   bull    : realized vol 10%, drawdown  -1%, trend  +8.3%  (~69 days' dwell)
+#   neutral : realized vol 19%, drawdown  -7%, trend  +3.3%  (~31 days' dwell)
+#   bear    : realized vol 32%, drawdown -18%, trend  -8.5%  (~49 days' dwell)
 #
 # Caveat for interpretation: the states separate sharply on *contemporaneous*
 # character and on forward VOLATILITY (~3x), but only weakly on forward RETURN
 # (bear-state forward returns are near zero, not deeply negative, because
-# rebounds live inside the same state). Label them "bear" for risk, not as a
-# claim that returns will be negative.
-DIRECTIONAL = {"S1_calm": "bull", "S2_choppy": "neutral", "S3_stress": "bear"}
+# rebounds live inside the same state). "bear" is a claim about risk and market
+# position, not a prediction of negative returns.
+REGIMES = ["bull", "neutral", "bear"]
+
+# Pre-rename label names, still present in older cached CSVs. Use
+# :func:`normalize_regimes` when reading any persisted label path.
+LEGACY_REGIMES = {"S1_calm": "bull", "S2_choppy": "neutral", "S3_stress": "bear"}
+
+
+def normalize_regimes(labels):
+    """Map any legacy S1_calm/S2_choppy/S3_stress values to bull/neutral/bear.
+
+    Args:
+        labels: A pandas Series (or anything with ``.map``) of regime labels.
+
+    Returns:
+        The same labels with legacy names translated; current names pass through.
+    """
+    return labels.map(lambda x: LEGACY_REGIMES.get(x, x))
 
 
 @dataclass
@@ -53,8 +72,8 @@ class RegimeConfig:
     seed: int = 0
     features: tuple = LOCKED_FEATURES
     # Which state characteristic orders the labels. "vol" ranks by mean realized
-    # volatility (lowest -> S1_calm); "trend" ranks by mean price-vs-SMA200
-    # (highest -> S1_calm, i.e. most bullish). The two agree on every universe
+    # volatility (lowest -> bull); "trend" ranks by mean price-vs-SMA200
+    # (highest -> bull, i.e. most bullish). The two agree on every universe
     # tested; "trend" makes the bull/neutral/bear reading explicit.
     label_by: str = "vol"
 
@@ -89,13 +108,13 @@ class RegimeClassifier:
         self.model = best[1]
         states = self.model.predict(X)
         if self.cfg.label_by == "trend":
-            # Most bullish (highest price-vs-SMA200) -> S1; most bearish -> S3.
+            # Most bullish (highest price-vs-SMA200) -> bull; most bearish -> bear.
             key = feats["trend"].to_numpy(float)
             means = {s: float(np.nanmean(key[states == s])) if np.any(states == s) else -np.inf
                      for s in range(self.cfg.n_states)}
             order = sorted(means, key=lambda s: -means[s])
         else:
-            # Lowest realized volatility -> S1; highest -> S3.
+            # Lowest realized volatility -> bull; highest -> bear.
             key = feats["realized_vol"].to_numpy(float)
             means = {s: float(np.nanmean(key[states == s])) if np.any(states == s) else np.inf
                      for s in range(self.cfg.n_states)}
@@ -157,7 +176,7 @@ def finalize_regimes(feats: pd.DataFrame, raw_regime: list[str], raw_conf,
     out["regime"] = confirmed
     # ESG guardrail: below the 200d trend AND short-vol elevated vs long-vol
     guard = (out["close"] < out["sma200"]) & (out["rv_term_structure"] > 0)
-    out.loc[guard, "regime"] = "S3_stress"
+    out.loc[guard, "regime"] = "bear"
     out["guardrail"] = guard
     return out
 
@@ -195,5 +214,5 @@ def walk_forward_regimes(feats: pd.DataFrame, cfg: RegimeConfig | None = None,
         _label(r, end)
         r = end
     c = cfg or RegimeConfig()
-    return finalize_regimes(feats, [x or "S1_calm" for x in raw_regime], raw_conf,
+    return finalize_regimes(feats, [x or "bull" for x in raw_regime], raw_conf,
                             c.conf_threshold, c.dwell)
