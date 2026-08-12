@@ -28,6 +28,7 @@ import numpy as np
 import pandas as pd
 
 from esg_regime.classifier import (
+    DIRECTIONAL,
     RegimeClassifier,
     RegimeConfig as _HMMConfig,
     finalize_regimes,
@@ -67,6 +68,7 @@ class RegimeDetectorConfig:
     min_train: int = 252
     retrain_every: int = 21
     split_date: str = "2021-01-01"
+    label_by: str = "vol"
 
     def to_hmm(self) -> _HMMConfig:
         """Project onto the low-level HMM config used by the classifier."""
@@ -76,6 +78,7 @@ class RegimeDetectorConfig:
             conf_threshold=self.conf_threshold,
             dwell=self.dwell,
             features=self.features,
+            label_by=self.label_by,
         )
 
 

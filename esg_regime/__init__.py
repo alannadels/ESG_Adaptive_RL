@@ -26,6 +26,7 @@ from esg_regime.features import (  # noqa: F401
     compute_features,
 )
 from esg_regime.classifier import (  # noqa: F401
+    DIRECTIONAL,
     REGIMES,
     RegimeClassifier,
     finalize_regimes,

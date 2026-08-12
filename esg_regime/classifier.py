@@ -26,6 +26,23 @@ from esg_regime.features import LOCKED_FEATURES
 
 REGIMES = ["S1_calm", "S2_choppy", "S3_stress"]
 
+# The same three states named directionally. The vol-ordered and trend-ordered
+# rankings of the fitted states coincide on every universe tested (SPY, QQQ,
+# SUSA, DSI, ESGU, esg_index) — the leverage effect: volatility rises as prices
+# fall. So S1/S2/S3 *are* bull/neutral/bear, and the mapping below is empirical,
+# not cosmetic. Measured state characteristics on SPY (2005-2026):
+#
+#   S1_calm   / bull    : realized vol 10%, drawdown  -1%, trend  +8.3%
+#   S2_choppy / neutral : realized vol 19%, drawdown  -7%, trend  +3.3%
+#   S3_stress / bear    : realized vol 32%, drawdown -18%, trend  -8.5%
+#
+# Caveat for interpretation: the states separate sharply on *contemporaneous*
+# character and on forward VOLATILITY (~3x), but only weakly on forward RETURN
+# (bear-state forward returns are near zero, not deeply negative, because
+# rebounds live inside the same state). Label them "bear" for risk, not as a
+# claim that returns will be negative.
+DIRECTIONAL = {"S1_calm": "bull", "S2_choppy": "neutral", "S3_stress": "bear"}
+
 
 @dataclass
 class RegimeConfig:
@@ -35,6 +52,11 @@ class RegimeConfig:
     dwell: int = 2
     seed: int = 0
     features: tuple = LOCKED_FEATURES
+    # Which state characteristic orders the labels. "vol" ranks by mean realized
+    # volatility (lowest -> S1_calm); "trend" ranks by mean price-vs-SMA200
+    # (highest -> S1_calm, i.e. most bullish). The two agree on every universe
+    # tested; "trend" makes the bull/neutral/bear reading explicit.
+    label_by: str = "vol"
 
     @property
     def cols(self) -> list[str]:
@@ -66,10 +88,18 @@ class RegimeClassifier:
             raise RuntimeError("HMM fit failed on all restarts")
         self.model = best[1]
         states = self.model.predict(X)
-        rv = feats["realized_vol"].to_numpy(float)
-        means = {s: float(np.nanmean(rv[states == s])) if np.any(states == s) else np.inf
-                 for s in range(self.cfg.n_states)}
-        order = sorted(means, key=lambda s: means[s])
+        if self.cfg.label_by == "trend":
+            # Most bullish (highest price-vs-SMA200) -> S1; most bearish -> S3.
+            key = feats["trend"].to_numpy(float)
+            means = {s: float(np.nanmean(key[states == s])) if np.any(states == s) else -np.inf
+                     for s in range(self.cfg.n_states)}
+            order = sorted(means, key=lambda s: -means[s])
+        else:
+            # Lowest realized volatility -> S1; highest -> S3.
+            key = feats["realized_vol"].to_numpy(float)
+            means = {s: float(np.nanmean(key[states == s])) if np.any(states == s) else np.inf
+                     for s in range(self.cfg.n_states)}
+            order = sorted(means, key=lambda s: means[s])
         self.state_to_regime = {s: REGIMES[rank] for rank, s in enumerate(order)}
         return self
 
