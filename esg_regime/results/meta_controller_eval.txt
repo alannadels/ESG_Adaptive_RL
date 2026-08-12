@@ -1,0 +1,32 @@
+Loading universe (50 tickers) + real ESG...
+Train 3522 days (< 2019-01-01) | Test 1910 days (2019-01-02 -> 2026-08-07)
+
+=== seed 0 ===
+  training single allocator (no regime switching)...
+  [hmm] trained 3 specialists on {'bull': 1838, 'neutral': 1114, 'bear': 570}
+  [crossover] trained 3 specialists on {'bull': 2348, 'neutral': 654, 'bear': 520}
+
+=== seed 1 ===
+  training single allocator (no regime switching)...
+  [hmm] trained 3 specialists on {'bull': 1838, 'neutral': 1114, 'bear': 570}
+  [crossover] trained 3 specialists on {'bull': 2348, 'neutral': 654, 'bear': 520}
+
+=== seed 2 ===
+  training single allocator (no regime switching)...
+  [hmm] trained 3 specialists on {'bull': 1838, 'neutral': 1114, 'bear': 570}
+  [crossover] trained 3 specialists on {'bull': 2348, 'neutral': 654, 'bear': 520}
+
+================================================================================================
+  HELD-OUT TEST (2019-01-01 onward) — identical days for every variant, mean of 3 seeds
+================================================================================================
+variant                    CAGR      Vol   Sharpe     MaxDD    CVaR5
+meta_hmm                 15.47%   19.68%    0.830   -37.00%   -2.86%
+meta_crossover           15.28%   19.52%    0.827   -36.26%   -2.84%
+no_regime                15.89%   19.55%    0.853   -36.47%   -2.84%
+equal_weight             15.25%   19.60%    0.823   -36.69%   -2.86%
+
+  Sharpe by seed — hmm ['0.835', '0.836', '0.818'] | crossover ['0.826', '0.816', '0.838']
+  Mean difference (hmm - crossover): +0.003
+
+Saved esg_regime/results/meta_controller_eval.json
+EXIT=0

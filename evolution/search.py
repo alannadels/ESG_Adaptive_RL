@@ -112,7 +112,14 @@ def _run_xnes(tracker: _BestTracker, cfg: EvolutionConfig) -> None:
 
     low, high = cfg.weight_low, cfg.weight_high
     problem = {
-        "fitness_function": lambda x: -tracker(x),  # pypop7 minimizes
+        # pypop7 minimizes. It also treats the boundaries below as an *initialization*
+        # range rather than a constraint, so the search distribution drifts outside the
+        # box (observed: values in [-1.0, 5.2] for a [0, 3] box). Clip before scoring so
+        # xNES searches the same non-negative box as CMA-ES (hard `bounds`) and the
+        # mealpy optimizers (`FloatVar(lb, ub)`) — otherwise the head-to-head comparison
+        # is unfair, and negative weights invert a factor's meaning (a negative w_s
+        # rewards *low* Social scores) and break the `w / w.sum()` normalization.
+        "fitness_function": lambda x: -tracker(np.clip(x, low, high)),
         "ndim_problem": _N_WEIGHTS,
         "lower_boundary": np.full(_N_WEIGHTS, low),
         "upper_boundary": np.full(_N_WEIGHTS, high),

@@ -103,6 +103,96 @@ the strict-exclusion universe may already capture most of the ESG effect,
 leaving little for the weighting to add. That is itself a publishable, honest
 result about the price of virtue under a values-compliant mandate.
 
+---
+
+# Part 2 — Head-to-head on identical days (the meta-controller)
+
+Part 1 scores each labeling *inside its own regime buckets*, which hold different
+dates — so `hmm neutral` (Sharpe 2.12) and `crossover neutral` (0.48) are not
+comparable. This part runs the architecture the project proposes, which is:
+
+1. split the timeline at **2019-01-01** (test spans COVID-2020 and the 2022 bear);
+2. per labeling, train one PPO specialist per regime on that labeling's TRAIN days;
+3. walk the **same 1,910 test days**, letting each labeling's point-in-time label
+   choose which specialist acts;
+4. score the single combined equity curve.
+
+Reward weights are held fixed across all specialists, so the only difference
+between the two arms is the labeling. Three seeds, averaged.
+Reproduce: `python meta_controller_eval.py`.
+
+| Labeling | TRAIN bull/neutral/bear | TEST bull/neutral/bear |
+|---|---|---|
+| hmm | 1,838 / 1,114 / 570 | 956 / 694 / 260 |
+| crossover | 2,348 / 654 / 520 | 1,414 / **192** / 304 |
+
+## Result: no measurable difference — between labelings, or from no regimes at all
+
+| Variant | CAGR | Vol | Sharpe | MaxDD | CVaR5 |
+|---|---:|---:|---:|---:|---:|
+| meta_hmm | 15.47% | 19.68% | 0.830 | −37.00% | −2.86% |
+| meta_crossover | 15.28% | 19.52% | 0.827 | −36.26% | −2.84% |
+| **no_regime** (single allocator) | 15.89% | 19.55% | **0.853** | −36.47% | −2.84% |
+| equal_weight | 15.25% | 19.60% | 0.823 | −36.69% | −2.86% |
+
+Sharpe by seed — hmm `[0.835, 0.836, 0.818]`, crossover `[0.826, 0.816, 0.838]`.
+**Mean difference: +0.003.** Seed-to-seed spread within one method (~0.018) is six
+times the difference between methods, and the crossover wins on seed 2. There is
+no signal here.
+
+Worse for the architecture: the **no-regime single allocator scores highest**, and
+every variant lands within 0.03 Sharpe of plain equal-weight.
+
+## Why: the allocator is equal-weight in disguise
+
+Diagnostic on a trained allocator rolled over the test window (50 assets):
+
+| Measure | Value | Equal-weight reference |
+|---|---:|---:|
+| Mean max weight | 0.0282 | 0.0200 |
+| Mean min weight | 0.0128 | 0.0200 |
+| Effective N positions | **48.1** | 50.0 |
+| Mean daily turnover | 0.0009 | 0 |
+| **Corr. with equal-weight returns** | **0.9993** | 1.0 |
+
+The policy is a near-uniform softmax that barely trades. Regime labels select
+between three allocators that are all effectively the same portfolio, so **no
+labeling can show an effect** — there is nothing for the regime signal to act
+through. This also explains Part 1's tiny margins (+0.011 to +0.047) and why
+evolved weights barely beat return-only.
+
+## What this means
+
+**The bottleneck is the allocator, not the regime labels.** The regime layer is
+independently validated (2–3x stress/calm volatility separation out-of-sample,
+54% drawdown reduction in the overlay backtest), but the current PPO setup cannot
+express a differentiated portfolio, so none of that reaches the P&L.
+
+Likely causes, in order of suspicion:
+1. **Action parameterization.** A softmax over 50 raw scores starts uniform, and
+   the reward difference between two near-uniform long-only portfolios of 50
+   correlated large-caps is minute — so the gradient pushing away from uniform is
+   very weak.
+2. **Reward scale.** Daily net returns are ~5e-4; the ESG terms are O(1) but
+   nearly constant across portfolios, so little differentiates candidates.
+3. **Turnover cost** (10 bps per unit turnover) actively penalizes deviating.
+4. **Training budget** (120k steps/specialist) — real, but secondary to the above.
+
+**Recommended next steps before any further regime work:**
+- Sanity-check that PPO beats a *random* policy at all on this env; if not, the
+  issue is the env/reward, not the hyperparameters.
+- Rescale or standardize the reward, and consider allowing concentration (e.g.
+  temperature on the softmax, or top-k weights).
+- Re-run this exact head-to-head afterwards — it is cheap and is the honest test
+  of whether regime conditioning buys anything.
+
+Until an allocator can differentiate, comparing regime detectors on downstream RL
+performance cannot discriminate between them. The right comparison of detectors
+today is the direct one in `HEURISTICS_BENCHMARKS.md`, where the HMM does separate
+volatility states 2.73x vs the crossover's 1.70x.
+
+---
+
 ## Budget caveat
 
 CMA-ES only, population 10 x 10 generations, 10k PPO steps per candidate, one
