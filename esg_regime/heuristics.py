@@ -1,30 +1,29 @@
 """Rule-based (heuristic) regime detectors — causal, point-in-time.
 
 Standard practitioner / academic rules for labeling equity-market regimes, each
-mapped onto the same 3-state scheme the HMM uses (S1_calm / S2_choppy /
-S3_stress) so every detector can be graded by the same harness
+mapped onto the same 3-state scheme the HMM uses (bull / neutral /
+bear) so every detector can be graded by the same harness
 (:mod:`esg_regime.benchmark_compare`).
 
 Detectors (all causal — each day's label uses only data through that day):
 
   ``ma_crossover``    The repo's production rule (esg_adaptive_rl.regimes):
                       50/200 SMA crossover, 2% neutral band, 10-day dwell.
-                      bull->S1, neutral->S2, bear->S3.
   ``trend_200``       The repo's baseline: price vs 200 SMA with band.
   ``drawdown_bear``   The classic industry convention: >=20% below the running
-                      peak is a bear market (S3), >=10% a correction (S2),
-                      else S1. (S&P Dow Jones / press convention.)
+                      peak is a bear market, >=10% a correction (neutral),
+                      else bull. (S&P Dow Jones / press convention.)
   ``consec_down``     Streak rule (user-suggested family): N trailing
-                      consecutive negative closes. streak>=5 -> S3,
-                      streak in {3,4} -> S2, else S1.
+                      consecutive negative closes. streak>=5 -> bear,
+                      streak in {3,4} -> neutral, else bull.
   ``downday_frac``    Smoother cousin: fraction of down days in the last 10.
-                      >=0.7 -> S3, >=0.5 -> S2, else S1.
+                      >=0.7 -> bear, >=0.5 -> neutral, else bull.
   ``vol_percentile``  Realized 20d vol vs its own expanding distribution
-                      through t-1: >85th pct -> S3, >60th -> S2, else S1.
-  ``vix_threshold``   Classic VIX cutoffs: VIX<20 -> S1, 20-30 -> S2,
-                      >30 -> S3. (Uses broad ^VIX for every universe.)
+                      through t-1: >85th pct -> bear, >60th -> neutral, else bull.
+  ``vix_threshold``   Classic VIX cutoffs: VIX<20 -> bull, 20-30 -> neutral,
+                      >30 -> bear. (Uses broad ^VIX for every universe.)
   ``mom_12m``         Time-series momentum sign (Moskowitz-Ooi-Pedersen 2012):
-                      trailing 252d return > +5% -> S1, < -5% -> S3, else S2.
+                      trailing 252d return > +5% -> bull, < -5% -> bear, else neutral.
   ``lunde_timmermann``Lunde-Timmermann (2004) first-passage filter, baseline
                       20%/15% thresholds — the causal academic bull/bear rule.
   ``ret_sign_60``     Trailing 60d return sign with +/-5% band — the deep-RL
@@ -44,8 +43,8 @@ from typing import Callable, Dict
 import numpy as np
 import pandas as pd
 
-S1, S2, S3 = "S1_calm", "S2_choppy", "S3_stress"
-REGIME_ORDER = [S1, S2, S3]
+BULL, NEUTRAL, BEAR = "bull", "neutral", "bear"
+REGIME_ORDER = [BULL, NEUTRAL, BEAR]
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, "data")
@@ -77,8 +76,7 @@ def ma_crossover(prices: pd.DataFrame) -> pd.DataFrame:
     from esg_adaptive_rl.regimes import RegimeConfig, label_regimes
     s = pd.Series(prices["close"].values, index=pd.to_datetime(prices["date"]))
     lab = label_regimes(s, RegimeConfig(detector="crossover"))
-    m = {"bull": S1, "neutral": S2, "bear": S3}
-    return _out(prices["date"], [m[x] for x in lab])
+    return _out(prices["date"], list(lab))       # already bull/neutral/bear
 
 
 def trend_200(prices: pd.DataFrame) -> pd.DataFrame:
@@ -86,8 +84,7 @@ def trend_200(prices: pd.DataFrame) -> pd.DataFrame:
     from esg_adaptive_rl.regimes import RegimeConfig, label_regimes
     s = pd.Series(prices["close"].values, index=pd.to_datetime(prices["date"]))
     lab = label_regimes(s, RegimeConfig(detector="trend"))
-    m = {"bull": S1, "neutral": S2, "bear": S3}
-    return _out(prices["date"], [m[x] for x in lab])
+    return _out(prices["date"], list(lab))       # already bull/neutral/bear
 
 
 def drawdown_bear(prices: pd.DataFrame,
@@ -95,7 +92,7 @@ def drawdown_bear(prices: pd.DataFrame,
     """Classic 10% correction / 20% bear convention off the running peak."""
     close = prices["close"].astype(float)
     dd = close / close.cummax() - 1.0
-    lab = np.where(dd <= -bear, S3, np.where(dd <= -correction, S2, S1))
+    lab = np.where(dd <= -bear, BEAR, np.where(dd <= -correction, NEUTRAL, BULL))
     return _out(prices["date"], lab)
 
 
@@ -108,7 +105,7 @@ def consec_down(prices: pd.DataFrame, stress_n: int = 5, choppy_n: int = 3) -> p
             streak += 1
         else:
             streak = 0
-        out.append(S3 if streak >= stress_n else S2 if streak >= choppy_n else S1)
+        out.append(BEAR if streak >= stress_n else NEUTRAL if streak >= choppy_n else BULL)
     return _out(prices["date"], out)
 
 
@@ -117,7 +114,7 @@ def downday_frac(prices: pd.DataFrame, window: int = 10,
     """Fraction of down days in a rolling window — smoother streak cousin."""
     ret = prices["close"].astype(float).pct_change()
     frac = (ret < 0).rolling(window).mean()
-    lab = np.where(frac >= stress_f, S3, np.where(frac >= choppy_f, S2, S1))
+    lab = np.where(frac >= stress_f, BEAR, np.where(frac >= choppy_f, NEUTRAL, BULL))
     return _out(prices["date"], lab)
 
 
@@ -128,19 +125,19 @@ def vol_percentile(prices: pd.DataFrame, window: int = 20,
     vol = ret.rolling(window).std() * np.sqrt(252)
     q_lo = vol.expanding(min_periods=120).quantile(choppy_q).shift(1)
     q_hi = vol.expanding(min_periods=120).quantile(stress_q).shift(1)
-    lab = np.where(vol >= q_hi, S3, np.where(vol >= q_lo, S2, S1))
-    lab = np.where(q_lo.isna(), S1, lab)          # warm-up: default calm
+    lab = np.where(vol >= q_hi, BEAR, np.where(vol >= q_lo, NEUTRAL, BULL))
+    lab = np.where(q_lo.isna(), BULL, lab)          # warm-up: default bull
     return _out(prices["date"], lab)
 
 
 def vix_threshold(prices: pd.DataFrame, calm_max: float = 20.0,
                   stress_min: float = 30.0) -> pd.DataFrame:
-    """Classic VIX cutoffs (<20 calm, 20-30 choppy, >30 stress)."""
+    """Classic VIX cutoffs (<20 bull, 20-30 neutral, >30 bear)."""
     vix = _load_vix()
     d = pd.to_datetime(prices["date"])
     v = vix.reindex(d, method="ffill").to_numpy()
-    lab = np.where(v > stress_min, S3, np.where(v > calm_max, S2, S1))
-    lab = np.where(~np.isfinite(v), S1, lab)
+    lab = np.where(v > stress_min, BEAR, np.where(v > calm_max, NEUTRAL, BULL))
+    lab = np.where(~np.isfinite(v), BULL, lab)
     return _out(prices["date"], lab)
 
 
@@ -148,8 +145,8 @@ def mom_12m(prices: pd.DataFrame, band: float = 0.05) -> pd.DataFrame:
     """12-month time-series momentum sign with a +/-5% neutral band."""
     close = prices["close"].astype(float)
     mom = close / close.shift(252) - 1.0
-    lab = np.where(mom > band, S1, np.where(mom < -band, S3, S2))
-    lab = np.where(mom.isna(), S2, lab)
+    lab = np.where(mom > band, BULL, np.where(mom < -band, BEAR, NEUTRAL))
+    lab = np.where(mom.isna(), NEUTRAL, lab)
     return _out(prices["date"], lab)
 
 
@@ -161,20 +158,20 @@ def lunde_timmermann(prices: pd.DataFrame, bull_thresh: float = 0.20,
     In a bull state, track the running max since the last trough; switch to
     bear when price falls ``bear_thresh`` below it. In a bear state, track the
     running min since the last peak; switch to bull when price rises
-    ``bull_thresh`` above it. Two states only: bull->S1, bear->S3.
+    ``bull_thresh`` above it. Two states only: bull and bear.
     """
     close = prices["close"].astype(float).to_numpy()
-    state, ext = S1, close[0] if len(close) else np.nan   # ext: running max/min
+    state, ext = BULL, close[0] if len(close) else np.nan   # ext: running max/min
     out = []
     for p in close:
-        if state == S1:
+        if state == BULL:
             ext = max(ext, p)
             if p <= ext * (1 - bear_thresh):
-                state, ext = S3, p
+                state, ext = BEAR, p
         else:
             ext = min(ext, p)
             if p >= ext * (1 + bull_thresh):
-                state, ext = S1, p
+                state, ext = BULL, p
         out.append(state)
     return _out(prices["date"], out)
 
@@ -185,8 +182,8 @@ def ret_sign_60(prices: pd.DataFrame, window: int = 60, band: float = 0.05) -> p
     with a +/-band neutral zone."""
     close = prices["close"].astype(float)
     cum = close / close.shift(window) - 1.0
-    lab = np.where(cum > band, S1, np.where(cum < -band, S3, S2))
-    lab = np.where(cum.isna(), S2, lab)
+    lab = np.where(cum > band, BULL, np.where(cum < -band, BEAR, NEUTRAL))
+    lab = np.where(cum.isna(), NEUTRAL, lab)
     return _out(prices["date"], lab)
 
 

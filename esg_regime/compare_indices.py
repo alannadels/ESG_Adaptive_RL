@@ -69,8 +69,8 @@ def run_one(ticker: str) -> dict:
         rc = regime_conditional(reg)
 
         bh, st = perf(ov["bh_ret"]), perf(ov["strat_ret"])
-        calm_vol = rc.loc["S1_calm", "ann_vol"] if "S1_calm" in rc.index else np.nan
-        stress_vol = rc.loc["S3_stress", "ann_vol"] if "S3_stress" in rc.index else np.nan
+        calm_vol = rc.loc["bull", "ann_vol"] if "bull" in rc.index else np.nan
+        stress_vol = rc.loc["bear", "ann_vol"] if "bear" in rc.index else np.nan
         mix = reg["regime"].value_counts(normalize=True)
 
         # persist the label path so we can measure cross-index agreement
@@ -83,7 +83,7 @@ def run_one(ticker: str) -> dict:
             "start": str(feats["date"].min().date()), "end": str(feats["date"].max().date()),
             "calm_vol": calm_vol, "stress_vol": stress_vol,
             "vol_ratio": stress_vol / calm_vol if calm_vol else np.nan,
-            "stress_pct": mix.get("S3_stress", 0.0),
+            "stress_pct": mix.get("bear", 0.0),
             "bh_sharpe": bh["Sharpe"], "ov_sharpe": st["Sharpe"],
             "d_sharpe": st["Sharpe"] - bh["Sharpe"],
             "bh_dd": bh["MaxDD"], "ov_dd": st["MaxDD"],
@@ -113,8 +113,8 @@ def agreement() -> pd.DataFrame:
             continue
         rows.append({"ticker": t, "shared_days": len(j),
                      "exact_match": (j.a == j.b).mean(),
-                     "stress_both": ((j.a == "S3_stress") & (j.b == "S3_stress")).sum()
-                     / max(1, (j.a == "S3_stress").sum())})
+                     "stress_both": ((j.a == "bear") & (j.b == "bear")).sum()
+                     / max(1, (j.a == "bear").sum())})
     return pd.DataFrame(rows).sort_values("exact_match", ascending=False)
 
 

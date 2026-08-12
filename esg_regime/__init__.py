@@ -26,11 +26,12 @@ from esg_regime.features import (  # noqa: F401
     compute_features,
 )
 from esg_regime.classifier import (  # noqa: F401
-    DIRECTIONAL,
+    LEGACY_REGIMES,
     REGIMES,
     RegimeClassifier,
     finalize_regimes,
     in_sample_regimes,
+    normalize_regimes,
     walk_forward_regimes,
 )
 from esg_regime.regime import (  # noqa: F401

@@ -11,7 +11,7 @@ import pandas as pd
 HERE = os.path.dirname(os.path.abspath(__file__))
 RESULTS = os.path.join(HERE, "results")
 
-COLORS = {"S1_calm": "#2ca02c", "S2_choppy": "#ff7f0e", "S3_stress": "#d62728"}
+COLORS = {"bull": "#2ca02c", "neutral": "#ff7f0e", "bear": "#d62728"}
 
 
 def plot(source: str) -> str:
@@ -33,7 +33,7 @@ def plot(source: str) -> str:
                   fontsize=13)
     ax1.set_ylabel("Index level / price")
     handles = [plt.Rectangle((0, 0), 1, 1, color=c, alpha=0.4) for c in COLORS.values()]
-    ax1.legend(handles, ["Calm (S1)", "Choppy (S2)", "Stress (S3)"], loc="upper left", ncol=3)
+    ax1.legend(handles, ["Bull", "Neutral", "Bear"], loc="upper left", ncol=3)
     ax1.grid(alpha=0.25)
 
     ax2.plot(df["date"], df["bh_equity"], label="Buy & Hold", color="#1f77b4", lw=1.3)
