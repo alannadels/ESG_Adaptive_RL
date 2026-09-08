@@ -1,0 +1,28 @@
+# Test / QA configuration for ESG-Adaptive RL.
+# Consumed by pytest, coverage, and mutmut when run from the repository root.
+
+[tool.pytest.ini_options]
+testpaths = ["test"]
+addopts = "--strict-markers --tb=short -ra"
+markers = [
+    "slow: long-running tests (PPO training, HMM walk-forward, search sweeps)",
+    "network: tests that download market data via yfinance",
+    "data: tests that read committed repo datasets (Dataset/, esg_regime/results/)",
+    "bdd: pytest-bdd Gherkin scenario tests",
+    "mutation: fast, deterministic tests used as mutation-testing oracles",
+]
+
+[tool.coverage.run]
+branch = true
+source = ["esg_adaptive_rl", "evolution", "esg_regime"]
+omit = ["*/__init__.py", "*/test/*", "*/tests/*"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+fail_under = 60
+
+[tool.mutmut]
+paths_to_mutate = "esg_adaptive_rl evolution"
+runner = "pytest -x -q"
+tests_dir = "test"

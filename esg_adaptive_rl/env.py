@@ -90,6 +90,9 @@ class PortfolioEnv(gym.Env):
         self._weights_cfg = reward_weights
         self._lookback = int(lookback)
         self._cost_rate = float(transaction_cost_rate)
+        # Optional per-day tradability mask (T, N) from the point-in-time snapshot
+        # universe; None when the legacy fixed universe is in use.
+        self._tradable = data.tradable
 
         self._n_days, self._n_assets = self._returns.shape
         # Need at least ``lookback`` days of history before the first decision, and at
@@ -114,6 +117,35 @@ class PortfolioEnv(gym.Env):
         self._t: int = self._lookback
         self._prev_weights: np.ndarray = np.full(self._n_assets, 1.0 / self._n_assets)
         self._history: Dict[str, List[float]] = {}
+
+    def _apply_tradability(self, weights: np.ndarray, t: int) -> np.ndarray:
+        """Zero out and renormalize positions the snapshot mask forbids at day ``t``.
+
+        With the point-in-time snapshot universe, a name outside its year's snapshot
+        (or without a price quote) can never be held: its weight is forced to zero and
+        the remainder is renormalized to stay fully invested. Defensive fallbacks keep
+        the weights on the simplex even on degenerate days.
+
+        Args:
+            weights: Softmax weights over all assets.
+            t: The day the weights are held over.
+
+        Returns:
+            Weights supported only on tradable names, still summing to one.
+        """
+        if self._tradable is None:
+            return weights
+        allowed = self._tradable[t]
+        masked = weights * allowed
+        total = float(masked.sum())
+        if total > 0.0:
+            return masked / total
+        # No tradable name received positive mass: equal-weight the tradable set.
+        n_allowed = int(allowed.sum())
+        if n_allowed > 0:
+            return allowed.astype(np.float64) / n_allowed
+        # Degenerate day (no tradable names): stay equal-weight rather than crash.
+        return np.full_like(weights, 1.0 / weights.size)
 
     def _get_observation(self) -> np.ndarray:
         """Build the observation for the current decision index ``self._t``.
@@ -159,8 +191,11 @@ class PortfolioEnv(gym.Env):
 
         # First decision happens once a full lookback window is available.
         self._t = self._lookback
-        # Start from an equal-weight portfolio so the first step's turnover is defined.
-        self._prev_weights = np.full(self._n_assets, 1.0 / self._n_assets)
+        # Start from an equal-weight portfolio so the first step's turnover is defined;
+        # under the snapshot mask, only tradable names get initial mass.
+        self._prev_weights = self._apply_tradability(
+            np.full(self._n_assets, 1.0 / self._n_assets), self._t
+        )
         # Fresh trajectory record for evaluation/metrics.
         self._history = {
             "net_returns": [],
@@ -185,8 +220,11 @@ class PortfolioEnv(gym.Env):
         """
         t = self._t
 
-        # 1. Convert raw scores to long-only weights on the simplex.
-        weights = _softmax(np.asarray(action, dtype=np.float64))
+        # 1. Convert raw scores to long-only weights on the simplex, restricted to the
+        #    names the snapshot universe allows on the day being held.
+        weights = self._apply_tradability(
+            _softmax(np.asarray(action, dtype=np.float64)), t
+        )
 
         # 2. Realise the portfolio return over day t and charge transaction costs on the
         #    turnover relative to the previously held weights.
