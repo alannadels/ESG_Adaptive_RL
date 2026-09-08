@@ -59,6 +59,57 @@ rankings with `python build_top_performers.py` (writes `esg_top_performers.csv`,
 data is only fully populated for ~the last 3 years (overall ESG is deeper); Energy has no
 representation by design.
 
+> For the backtest, the fixed list above is superseded by the point-in-time,
+> year-stamped universe of Section 1.5 — the fixed list's hindsight selection
+> (2017–2025 scores traded over 2005–2026) is a look-ahead that the dynamic
+> universe removes.
+
+---
+
+## 1.5 Point-in-time universe snapshots (survivorship-free selection)
+
+`build_universe_snapshots.py` re-selects the top-5-per-sector universe **every
+year** using only what was known before that year — no hindsight survivors, no
+2017–2025 scores traded over 2005. Two artifacts make it work:
+
+- **`Dataset/sp500_membership_history.csv`** — per-ticker membership spans
+  (`ticker, sector, industry, entry_date, exit_date`), built by
+  `build_membership_history.py` from the *year-end revisions* of Wikipedia's
+  "List of S&P 500 companies" (2007–2025). Wikipedia's change-event tables are
+  known-incomplete (they omit Bear Stearns, WaMu, GE's removal, ...), so the
+  builder samples the full constituent table as it stood at each year-end —
+  a complete, as-of membership list per year — and resolves it into spans.
+  Spans are annual-granularity: a name present in the year-`Y` table is a
+  member from Jan 1 of `Y+1` until Jan 1 of `Y+2` after its last appearance.
+  The first year-end table exists for 2007, so **the first snapshot year is
+  2008** (the 2005–2007 window stays covered by the fixed legacy universe).
+- **`Dataset/universe_snapshots.csv`** — one row per selected name per year:
+  `year, ticker, sector, esg_rank, ret_rank, esg_years, ret_years, min_years,
+  esg_mean, selected`.
+
+**Selection timing (look-ahead-free, mirrors `esg_data.py`'s publication lag):**
+the snapshot for year `Y` is the universe effective Jan 1 of `Y`; membership
+comes from the year-end-`(Y-1)` table; an ESG score for calendar year `c` is
+known from June of `c+1`, so the ESG leg ranks FY `Y-11 .. Y-2`; annual returns
+for `c` are known at year-end, so the return leg ranks calendar years
+`Y-10 .. Y-1`. Each leg takes the top-5 per GICS sector per window year; names
+top-5 in **both** legs for ≥ 3 window years are "selected", remaining slots are
+filled with the best-ESG names (the mandate's exclusion-replacement rule).
+
+**Remaining caveats (all documented in the code):**
+- Static current-vintage GICS sectors (the 2016 Real Estate split is not
+  restated historically); names whose Refinitiv RIC base ≠ yfinance ticker
+  cannot join the ESG table and never rank (same convention as the legacy
+  pipeline); entry/exit dates are annual-granularity; the Refinitiv export's
+  own historical coverage is thin before ~2006, so early snapshots rank on
+  fewer score years.
+
+**Regenerate:**
+```bash
+python build_membership_history.py   # -> Dataset/sp500_membership_history.csv (needs network)
+python build_universe_snapshots.py   # -> Dataset/universe_snapshots.csv (downloads ~950 ticker histories)
+```
+
 ---
 
 ## 2. The regime datasets
@@ -134,6 +185,10 @@ env = PortfolioEnv(train, RewardWeights(w_return=1.0, w_e=0.1, w_s=0.1, w_g=0.1,
 ### Other entry points
 - `python train_single.py` — train one fixed-weight allocator (single regime, sanity check).
 - `python evolve_weights.py` — the eight-optimizer sweep on the full period (no regime split).
+- `python evolve_meta.py` — **meta-controller backtest**: per-regime specialists (trained
+  strictly on dates before the split) switched by the causal label of day `t-1` over the
+  test window, with whipsaw (switches/yr) and turnover accounting; runs fully offline from
+  the cached regime datasets. See `esg_adaptive_rl/meta.py`.
 
 ### Data flow summary
 ```

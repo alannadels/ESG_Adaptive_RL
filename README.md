@@ -139,22 +139,27 @@ ESG_Adaptive_RL/
 ├── requirements.txt
 ├── .gitignore
 ├── train_single.py            # entry point: train + evaluate one fixed-weight allocator
+├── evolve_regimes.py          # entry point: per-regime 8-optimizer reward-weight evolution
+├── evolve_regimes_compare.py  # entry point: per-regime evolution under HMM vs crossover labels
+├── evolve_meta.py             # entry point: meta-controller backtest over per-regime specialists
+├── build_membership_history.py # point-in-time S&P 500 membership spans (Wikipedia revision samples)
+├── build_universe_snapshots.py # year-stamped, look-ahead-free universe re-selection per year
 └── esg_adaptive_rl/
     ├── __init__.py
-    ├── config.py              # universe, dates, lookback, reward weights, PPO settings
-    ├── data.py                # price download + time-indexed placeholder ESG table
+    ├── config.py              # 50-name screened universe, dates, lookback, reward weights, PPO settings
+    ├── data.py                # price download + ESG tables (synthetic or real) + regime-CSV loader
+    ├── esg_data.py            # real Refinitiv ESG loader (annual→daily, publication lag)
     ├── reward.py              # configurable multi-factor reward (the swappable seam)
     ├── env.py                 # custom Gymnasium portfolio environment (look-ahead-safe)
-    └── metrics.py             # return, Sharpe, CVaR, drawdown, ESG profile
+    ├── meta.py                # MetaController: regime-switching over per-regime specialist policies
+    ├── metrics.py             # return, Sharpe, CVaR, drawdown, ESG profile
+    └── regimes.py             # causal regime labeling: HMM (default) / 50-200 crossover / trend
 ```
 
 Planned modules (not yet implemented):
 
 ```
-evolution/   # CMA-ES / DE / L-SHADE outer loop over the reward-weight vector
-regimes/     # causal market-regime labeling + HMM / rule-based detector
-meta/        # regime-switching meta-controller over the per-regime policies
-baselines/   # return-only RL, fixed-weight RL, Riskfolio frontier, 60/40, equal-weight
+baselines/   # Riskfolio frontier, 60/40, plain HMM-regime allocator
 eval/        # significance tests, crisis-window robustness, figures
 ```
 
@@ -227,13 +232,24 @@ current code does from what remains to be built.
   Results section below.
 - Rule-based regime labeling, per-regime evolutionary search over reward weights
   (eight nature-inspired optimizers), and a real ESG loader (`evolve_regimes.py`).
+- HMM-vs-crossover per-regime RL training comparison (`evolve_regimes_compare.py`),
+  feeding the specialists' evolved reward weights into a live-switching
+  **regime-switching meta-controller** (`esg_adaptive_rl/meta.py` + `evolve_meta.py`):
+  the switcher applies the label-appropriate specialist policy every day (causal
+  label of day `t-1`, whipsaw/turnover accounted) and backtests the whole system
+  against single-policy and 1/N baselines on the 2021+ window.
+- **Point-in-time universe snapshots** (`build_membership_history.py` +
+  `build_universe_snapshots.py`): yearly top-5-per-sector re-selection from the
+  S&P 500's year-end constituent tables (Wikipedia revision samples) with
+  publication-lag-correct ESG/return windows, replacing the retrospective fixed
+  universe (2017–2025 scores traded over 2005–2026) for universe construction —
+  no hindsight survivors, no look-ahead; first snapshot year 2008.
 
 ### Not yet implemented (planned)
 
 - Real, look-ahead-free historical ESG / impact data to replace the placeholder table.
 - Per-regime evolved schedules finalized for the three regimes (bull / neutral / bear).
-- The regime-switching meta-controller over the per-regime policies.
-- Baselines: return-only RL, fixed-weight RL, the static convex ESG–CVaR frontier
+- Baselines: the static convex ESG–CVaR frontier
   (Riskfolio-Lib), equal-weight, 60/40, and a plain HMM-regime allocator.
 - Full evaluation: multiple seeds, significance tests, a crisis-window stress test, and
   the headline factor-importance figure.
@@ -275,7 +291,8 @@ Reported **per regime and overall**, with significance tests across seeds:
 - [ ] Evolutionary outer loop (CMA-ES / DE / L-SHADE) over the reward-weight vector -- Alan
 - [ ] Causal regime labeling + detector -- Satya
 - [ ] Per-regime evolved schedules (bull / neutral / bear) and the factor-importance figure
-- [ ] Regime-switching meta-controller -- Gurjot
+- [x] Regime-switching meta-controller (specialists + causal switcher, `esg_adaptive_rl/meta.py`
+  + `evolve_meta.py`; first backtest pending the HPC run) -- Gurjot
 - [ ] Baselines + full evaluation (multiple seeds, significance, crisis-window robustness) -- Gurjot
 - [ ] Paper write-up + reproducibility release
 
