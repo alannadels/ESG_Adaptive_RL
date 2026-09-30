@@ -15,7 +15,7 @@ change to the environment or the agent.
 from __future__ import annotations
 
 import hashlib
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Tuple
 
 import numpy as np
@@ -46,6 +46,11 @@ class MarketData:
     tickers: List[str]
     returns: np.ndarray
     esg: Dict[str, np.ndarray]
+    # Optional (T, N) boolean mask: True when asset j may be held on day t. Used by the
+    # point-in-time snapshot universe (a name is tradable only in years its snapshot
+    # selects it, with a price quote available that day). None = all assets always
+    # tradable (the legacy fixed-universe behaviour).
+    tradable: Optional[np.ndarray] = field(default=None)
 
 
 def _stable_seed(text: str) -> int:
@@ -168,6 +173,27 @@ def load_market_data(
     return MarketData(dates=dates, tickers=list(tickers), returns=returns, esg=esg)
 
 
+def _mask_subset(data: MarketData, mask: np.ndarray) -> MarketData:
+    """Build a row-subset of a :class:`MarketData` bundle (splits share this).
+
+    Args:
+        data: The full bundle.
+        mask: Boolean row selector aligned to ``data.dates``.
+
+    Returns:
+        A new bundle with rows selected by ``mask``; the optional ``tradable`` mask
+        (if present) is row-sliced along with everything else.
+    """
+    tradable = data.tradable[mask] if data.tradable is not None else None
+    return MarketData(
+        dates=data.dates[mask],
+        tickers=data.tickers,
+        returns=data.returns[mask],
+        esg={factor: matrix[mask] for factor, matrix in data.esg.items()},
+        tradable=tradable,
+    )
+
+
 def split_by_date(
     data: MarketData,
     split_date: str,
@@ -189,15 +215,7 @@ def split_by_date(
     train_mask = data.dates < boundary
     test_mask = ~train_mask
 
-    def _subset(mask: np.ndarray) -> MarketData:
-        return MarketData(
-            dates=data.dates[mask],
-            tickers=data.tickers,
-            returns=data.returns[mask],
-            esg={factor: matrix[mask] for factor, matrix in data.esg.items()},
-        )
-
-    return _subset(train_mask), _subset(test_mask)
+    return _mask_subset(data, train_mask), _mask_subset(data, test_mask)
 
 
 def split_by_fraction(
@@ -220,15 +238,7 @@ def split_by_fraction(
     n = data.returns.shape[0]
     cut = int(n * train_fraction)
 
-    def _slice(sl: slice) -> MarketData:
-        return MarketData(
-            dates=data.dates[sl],
-            tickers=data.tickers,
-            returns=data.returns[sl],
-            esg={factor: matrix[sl] for factor, matrix in data.esg.items()},
-        )
-
-    return _slice(slice(0, cut)), _slice(slice(cut, n))
+    return _mask_subset(data, slice(0, cut)), _mask_subset(data, slice(cut, n))
 
 
 def load_index_close(ticker: str, start: str, end: str) -> pd.Series:
@@ -285,4 +295,126 @@ def load_regime_dataset(path: str) -> MarketData:
         tickers=list(tickers),
         returns=returns.to_numpy(dtype=np.float64),
         esg=esg,
+    )
+
+
+def snapshot_tradability(
+    snapshots: pd.DataFrame,
+    tickers: List[str],
+    dates: pd.DatetimeIndex,
+    returns: np.ndarray,
+) -> np.ndarray:
+    """Build the per-day tradability mask from the snapshot universe table.
+
+    A name is tradable on day ``t`` only when (a) the snapshot of ``t``'s calendar
+    year selects it (point-in-time membership, no look-ahead) and (b) a price quote
+    exists that day. Everything else is masked out so the agent can never hold it.
+
+    Args:
+        snapshots: The ``universe_snapshots.csv`` table (``year, ticker, ...``).
+        tickers: The asset axis of the returned mask (the superset).
+        dates: Trading dates of the dataset.
+        returns: The ``(T, N)`` return matrix (NaN marks a missing quote).
+
+    Returns:
+        Boolean array of shape ``(T, N)``.
+    """
+    year_sets = {
+        int(year): set(group["ticker"].astype(str))
+        for year, group in snapshots.groupby("year")
+    }
+    years = pd.DatetimeIndex(dates).year.to_numpy()
+    mask = np.zeros((len(dates), len(tickers)), dtype=bool)
+    for j, ticker in enumerate(tickers):
+        member_years = [year for year, names in year_sets.items() if ticker in names]
+        if not member_years:
+            continue
+        in_snapshot = np.isin(years, member_years)
+        has_price = ~np.isnan(returns[:, j])
+        mask[:, j] = in_snapshot & has_price
+    return mask
+
+
+def load_snapshot_market_data(
+    snapshot_path: str,
+    start: str,
+    end: str,
+    esg_path: str,
+    esg_anchor_year: int = 2025,
+) -> MarketData:
+    """Load the point-in-time snapshot universe as a superset bundle with a mask.
+
+    Unlike :func:`load_market_data` (a fixed ticker list, global ``dropna``), this
+    loads every ticker that *any* yearly snapshot ever selected and attaches a
+    ``(T, N)`` ``tradable`` mask; the environment forces the position of a masked-out
+    name to zero. Missing price quotes (pre-listing / post-delisting of a superset
+    member) are masked out and filled with a zero return, which the mask makes
+    unreachable.
+
+    Args:
+        snapshot_path: Path to ``Dataset/universe_snapshots.csv``.
+        start: Start date (``YYYY-MM-DD``), inclusive.
+        end: End date (``YYYY-MM-DD``), exclusive per yfinance convention.
+        esg_path: Path to the Refinitiv ESG CSV.
+        esg_anchor_year: Calendar year that fiscal-year offset 0 (FY0) corresponds to.
+
+    Returns:
+        A :class:`MarketData` bundle whose ``tradable`` mask encodes the yearly
+        universes. Days before the first snapshot year are dropped (nothing is
+        tradable there).
+
+    Raises:
+        ValueError: If the snapshot file is empty or no price data can be loaded.
+    """
+    from esg_adaptive_rl.esg_data import build_esg_arrays, load_refinitiv_esg
+
+    snapshots = pd.read_csv(snapshot_path)
+    if snapshots.empty:
+        raise ValueError(f"No rows in snapshot universe file {snapshot_path!r}.")
+    superset = sorted(snapshots["ticker"].astype(str).unique())
+
+    raw = yf.download(
+        superset,
+        start=start,
+        end=end,
+        auto_adjust=True,
+        progress=False,
+        repair=True,
+    )
+    if raw.empty:
+        raise ValueError("yfinance returned no data for the snapshot superset.")
+
+    close = raw["Close"].reindex(columns=superset) if "Close" in raw.columns.get_level_values(0) else raw
+    # A superset member with no quotes at all cannot be traded in any year; drop it
+    # (and its snapshot rows) rather than letting NaNs poison every other column.
+    have_prices = [t for t in superset if close[t].notna().any()]
+    dropped = sorted(set(superset) - set(have_prices))
+    if dropped:
+        print(f"WARNING: {len(dropped)} snapshot tickers have no price data and are "
+              f"dropped: {dropped[:10]}{' ...' if len(dropped) > 10 else ''}")
+    if not have_prices:
+        raise ValueError("None of the snapshot tickers returned price data.")
+    snapshots = snapshots[snapshots["ticker"].isin(have_prices)]
+    close = close[have_prices]
+
+    returns_df = close.pct_change()
+    dates = returns_df.dropna(how="all").index
+    first_year = int(snapshots["year"].min())
+    dates = dates[dates >= pd.Timestamp(first_year, 1, 1)]
+    returns = returns_df.loc[dates].to_numpy(dtype=np.float64)
+
+    parsed = load_refinitiv_esg(esg_path)
+    esg = build_esg_arrays(parsed, have_prices, dates, anchor_year=esg_anchor_year)
+
+    tradable = snapshot_tradability(snapshots, have_prices, dates, returns)
+    # NaN returns (pre-listing / post-delisting) are masked out above; zero-fill them
+    # so observations and dot products stay finite on the unreachable entries.
+    returns = np.where(np.isnan(returns), 0.0, returns)
+
+    return MarketData(
+        dates=pd.DatetimeIndex(dates),
+        tickers=have_prices,
+        returns=returns,
+        esg=esg,
+        tradable=tradable,
     )
