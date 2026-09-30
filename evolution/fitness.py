@@ -52,7 +52,8 @@ def evaluate_weights(
     lookback: int = base_config.LOOKBACK,
     transaction_cost_rate: float = base_config.TRANSACTION_COST_RATE,
     regime_mask: Optional[np.ndarray] = None,
-) -> float:
+    return_history: bool = False,
+):
     """Train a PPO allocator under ``weights`` and score it out-of-sample.
 
     Args:
@@ -67,10 +68,15 @@ def evaluate_weights(
         transaction_cost_rate: Env transaction-cost rate.
         regime_mask: Optional boolean array aligned to the evaluation trajectory; if
             given, the fitness is computed only over the selected (single-regime) steps.
+        return_history: If ``True``, return ``(fitness, history)`` where ``history`` is
+            the evaluation-roll trajectory dict (including per-day ``weights``), or
+            ``(fitness, None)`` on failure. If ``False`` (default), return just the
+            scalar fitness, so existing callers are unaffected.
 
     Returns:
-        The scalar fitness (higher is better). Returns a large negative value if training
-        or evaluation fails, so the search discards the candidate gracefully.
+        The scalar fitness (higher is better), or a ``(fitness, history)`` tuple when
+        ``return_history`` is set. A large negative fitness is returned if training or
+        evaluation fails, so the search discards the candidate gracefully.
     """
     try:
         # Inner loop: train a PPO allocator under the candidate reward weights.
@@ -120,8 +126,9 @@ def evaluate_weights(
         metrics = summarize(history, alpha=base_config.CVAR_ALPHA)
         fitness = float(metrics[metric])
         # Guard against non-finite scores (e.g. a degenerate all-zero-return window).
-        return fitness if np.isfinite(fitness) else _FAILURE_FITNESS
+        fitness = fitness if np.isfinite(fitness) else _FAILURE_FITNESS
+        return (fitness, history) if return_history else fitness
 
     except Exception:
         # A bad candidate (e.g. numerically unstable reward) should not kill the search.
-        return _FAILURE_FITNESS
+        return (_FAILURE_FITNESS, None) if return_history else _FAILURE_FITNESS

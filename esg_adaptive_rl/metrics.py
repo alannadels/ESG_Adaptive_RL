@@ -108,6 +108,206 @@ def conditional_value_at_risk(returns: np.ndarray, alpha: float = 0.05) -> float
     return float(np.mean(worst))
 
 
+def sortino_ratio(
+    returns: np.ndarray,
+    periods_per_year: int = TRADING_DAYS,
+    risk_free_rate: float = 0.0,
+) -> float:
+    """Annualised Sortino ratio: excess return per unit of *downside* deviation.
+
+    Like the Sharpe ratio but penalising only harmful (below-target) volatility, so a
+    strategy is not charged for upside variability. The target is the per-period
+    risk-free rate.
+
+    Args:
+        returns: Daily simple returns.
+        periods_per_year: Number of periods per year.
+        risk_free_rate: Annual risk-free rate, converted to per-period internally.
+
+    Returns:
+        The annualised Sortino ratio, or 0.0 if the downside deviation is zero/undefined.
+    """
+    returns = np.asarray(returns, dtype=np.float64)
+    if returns.shape[0] < 2:
+        return 0.0
+    per_period_rf = risk_free_rate / periods_per_year
+    excess = returns - per_period_rf
+    # Downside deviation: RMS of the shortfall below the target (upside set to zero).
+    shortfall = np.minimum(excess, 0.0)
+    downside_dev = math.sqrt(float(np.mean(shortfall ** 2)))
+    if downside_dev == 0.0:
+        return 0.0
+    return float(np.mean(excess) / downside_dev * math.sqrt(periods_per_year))
+
+
+def calmar_ratio(returns: np.ndarray, periods_per_year: int = TRADING_DAYS) -> float:
+    """Calmar ratio: annualised return divided by the magnitude of the max drawdown.
+
+    A higher value means more return earned per unit of worst-case peak-to-trough pain.
+
+    Args:
+        returns: Daily simple returns.
+        periods_per_year: Number of periods per year (for the annualised return).
+
+    Returns:
+        The Calmar ratio, or 0.0 if the maximum drawdown is zero/undefined.
+    """
+    returns = np.asarray(returns, dtype=np.float64)
+    if returns.shape[0] == 0:
+        return 0.0
+    mdd = abs(max_drawdown(returns))
+    if mdd == 0.0:
+        return 0.0
+    return float(annualized_return(returns, periods_per_year) / mdd)
+
+
+def _align_nonempty(port: np.ndarray, bench: np.ndarray) -> Tuple[np.ndarray, np.ndarray]:
+    """Coerce a portfolio/benchmark return pair to equal-length float arrays.
+
+    Args:
+        port: Portfolio daily returns.
+        bench: Benchmark daily returns (already date-aligned to ``port`` by the caller).
+
+    Returns:
+        The two arrays as float64, truncated to their common length.
+    """
+    port = np.asarray(port, dtype=np.float64)
+    bench = np.asarray(bench, dtype=np.float64)
+    n = min(port.shape[0], bench.shape[0])
+    return port[:n], bench[:n]
+
+
+def beta(port: np.ndarray, bench: np.ndarray) -> float:
+    """Market beta: sensitivity of the portfolio's returns to the benchmark's.
+
+    ``beta = cov(port, bench) / var(bench)``. A beta of 1 moves one-for-one with the
+    benchmark; below 1 is less market-sensitive.
+
+    Args:
+        port: Portfolio daily returns.
+        bench: Benchmark daily returns, date-aligned to ``port``.
+
+    Returns:
+        The beta, or 0.0 if the benchmark variance is zero or fewer than two points.
+    """
+    port, bench = _align_nonempty(port, bench)
+    if port.shape[0] < 2:
+        return 0.0
+    var_bench = float(np.var(bench, ddof=1))
+    if var_bench == 0.0:
+        return 0.0
+    cov = float(np.cov(port, bench, ddof=1)[0, 1])
+    return cov / var_bench
+
+
+def jensen_alpha(
+    port: np.ndarray,
+    bench: np.ndarray,
+    periods_per_year: int = TRADING_DAYS,
+    risk_free_rate: float = 0.0,
+) -> float:
+    """Annualised Jensen's alpha: CAPM-style excess return not explained by market beta.
+
+    ``alpha_period = mean(port - rf) - beta * mean(bench - rf)``, annualised by scaling
+    by ``periods_per_year``. Positive alpha means the portfolio out-earned what its market
+    exposure alone would predict.
+
+    Args:
+        port: Portfolio daily returns.
+        bench: Benchmark daily returns, date-aligned to ``port``.
+        periods_per_year: Number of periods per year (annualisation factor).
+        risk_free_rate: Annual risk-free rate, converted to per-period internally.
+
+    Returns:
+        The annualised alpha, or 0.0 for a series shorter than two points.
+    """
+    port, bench = _align_nonempty(port, bench)
+    if port.shape[0] < 2:
+        return 0.0
+    per_period_rf = risk_free_rate / periods_per_year
+    b = beta(port, bench)
+    alpha_period = float(np.mean(port - per_period_rf) - b * np.mean(bench - per_period_rf))
+    return alpha_period * periods_per_year
+
+
+def information_ratio(
+    port: np.ndarray,
+    bench: np.ndarray,
+    periods_per_year: int = TRADING_DAYS,
+) -> float:
+    """Annualised information ratio: mean active return over tracking error.
+
+    ``IR = mean(port - bench) / std(port - bench)``, annualised. Measures active return
+    earned per unit of active risk taken versus the benchmark.
+
+    Args:
+        port: Portfolio daily returns.
+        bench: Benchmark daily returns, date-aligned to ``port``.
+        periods_per_year: Number of periods per year (annualisation factor).
+
+    Returns:
+        The annualised information ratio, or 0.0 if active risk is zero/undefined.
+    """
+    port, bench = _align_nonempty(port, bench)
+    if port.shape[0] < 2:
+        return 0.0
+    active = port - bench
+    std_active = float(np.std(active, ddof=1))
+    if std_active == 0.0:
+        return 0.0
+    return float(np.mean(active) / std_active * math.sqrt(periods_per_year))
+
+
+def tracking_error(
+    port: np.ndarray,
+    bench: np.ndarray,
+    periods_per_year: int = TRADING_DAYS,
+) -> float:
+    """Annualised tracking error: volatility of the active (portfolio minus benchmark) return.
+
+    Args:
+        port: Portfolio daily returns.
+        bench: Benchmark daily returns, date-aligned to ``port``.
+        periods_per_year: Number of periods per year (annualisation factor).
+
+    Returns:
+        The annualised tracking error, or 0.0 for a series shorter than two points.
+    """
+    port, bench = _align_nonempty(port, bench)
+    if port.shape[0] < 2:
+        return 0.0
+    active = port - bench
+    return float(np.std(active, ddof=1) * math.sqrt(periods_per_year))
+
+
+def benchmark_metrics(
+    port: np.ndarray,
+    bench: np.ndarray,
+    periods_per_year: int = TRADING_DAYS,
+    risk_free_rate: float = 0.0,
+) -> Dict[str, float]:
+    """Bundle the benchmark-relative metrics for one (portfolio, benchmark) pair.
+
+    Args:
+        port: Portfolio daily returns.
+        bench: Benchmark daily returns, date-aligned to ``port`` by the caller.
+        periods_per_year: Number of periods per year (annualisation factor).
+        risk_free_rate: Annual risk-free rate for the alpha calculation.
+
+    Returns:
+        A dict with ``beta``, ``alpha`` (annualised), ``info_ratio``, ``tracking_error``,
+        and ``cov_days`` (the number of aligned observations the metrics used).
+    """
+    port, bench = _align_nonempty(port, bench)
+    return {
+        "beta": beta(port, bench),
+        "alpha": jensen_alpha(port, bench, periods_per_year, risk_free_rate),
+        "info_ratio": information_ratio(port, bench, periods_per_year),
+        "tracking_error": tracking_error(port, bench, periods_per_year),
+        "cov_days": int(port.shape[0]),
+    }
+
+
 def max_drawdown(returns: np.ndarray) -> float:
     """Maximum drawdown of the cumulative equity curve.
 
@@ -144,6 +344,8 @@ def summarize(history: Dict[str, np.ndarray], alpha: float = 0.05) -> Dict[str, 
         "annual_return": annualized_return(net_returns),
         "annual_volatility": annualized_volatility(net_returns),
         "sharpe": sharpe_ratio(net_returns),
+        "sortino": sortino_ratio(net_returns),
+        "calmar": calmar_ratio(net_returns),
         f"cvar_{int(alpha * 100)}": conditional_value_at_risk(net_returns, alpha),
         "max_drawdown": max_drawdown(net_returns),
         # Average realised ESG exposure of the held portfolio over the episode.

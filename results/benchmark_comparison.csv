@@ -1,0 +1,13 @@
+benchmark,regime,alpha,beta,info_ratio
+DSI,bull,0.0551,0.688,0.083
+DSI,neutral,-0.0324,0.788,-1.063
+DSI,bear,0.0152,0.909,0.153
+SPY,bull,0.0427,0.768,0.075
+SPY,neutral,-0.0295,0.842,-0.94
+SPY,bear,0.0093,0.94,0.122
+SPYX,bull,0.0434,0.758,0.062
+SPYX,neutral,-0.0252,0.833,-0.857
+SPYX,bear,0.0187,0.94,0.228
+SUSA,bull,0.0455,0.776,0.15
+SUSA,neutral,-0.0146,0.828,-0.758
+SUSA,bear,0.0072,0.918,0.038
