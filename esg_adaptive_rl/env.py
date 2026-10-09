@@ -204,6 +204,9 @@ class PortfolioEnv(gym.Env):
             "esg_E": [],
             "esg_S": [],
             "esg_G": [],
+            # Per-step portfolio weights (one length-N vector per day), so the mean
+            # allocation to each asset over an episode can be recovered downstream.
+            "weights": [],
         }
 
         return self._get_observation(), {}
@@ -259,6 +262,9 @@ class PortfolioEnv(gym.Env):
         self._history["esg_E"].append(esg_e)
         self._history["esg_S"].append(esg_s)
         self._history["esg_G"].append(esg_g)
+        # Record the actual per-asset weights held over this day (aligned to
+        # ``self._tickers``) so per-stock mean allocation can be summarized later.
+        self._history["weights"].append(weights)
 
         # 7. Carry the chosen weights forward and advance the clock.
         self._prev_weights = weights

@@ -111,8 +111,14 @@ def _run_xnes(tracker: _BestTracker, cfg: EvolutionConfig) -> None:
     from pypop7.optimizers.nes.xnes import XNES
 
     low, high = cfg.weight_low, cfg.weight_high
+    # xNES is an unconstrained natural-evolution strategy: unlike CMA and the mealpy
+    # optimizers, pypop7 treats the boundaries as initialization hints, not hard limits,
+    # so it can propose (and return) weights outside the [low, high] box — including
+    # negative reward weights. Project every candidate into the box before it is scored,
+    # so xNES searches the same non-negative space as the other seven optimizers and its
+    # reported best weights are directly comparable.
     problem = {
-        "fitness_function": lambda x: -tracker(x),  # pypop7 minimizes
+        "fitness_function": lambda x: -tracker(np.clip(x, low, high)),  # pypop7 minimizes
         "ndim_problem": _N_WEIGHTS,
         "lower_boundary": np.full(_N_WEIGHTS, low),
         "upper_boundary": np.full(_N_WEIGHTS, high),
