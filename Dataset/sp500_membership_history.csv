@@ -1,0 +1,979 @@
+ticker,sector,industry,entry_date,exit_date
+A,Health Care,Life Sciences Tools & Services,2000-06-05,
+AA,Materials,Metals & Mining,1900-01-01,2017-01-01
+AAL,Industrials,Passenger Airlines,2016-01-01,2025-01-01
+AAP,Consumer Discretionary,Specialty Retail,2016-01-01,2024-01-01
+AAPL,Information Technology,"Technology Hardware, Storage & Peripherals",1982-11-30,
+ABBV,Health Care,Biotechnology,2014-01-01,
+ABC,,,1900-01-01,2024-01-01
+ABI,,,1900-01-01,2010-01-01
+ABK,,,1900-01-01,2009-01-01
+ABMD,,,2019-01-01,2023-01-01
+ABNB,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",2024-01-01,
+ABT,Health Care,Health Care Equipment,1957-03-04,
+ACAS,,,2009-01-01,2010-01-01
+ACE,,,1900-01-01,2009-01-01
+ACE,,,2011-01-01,2017-01-01
+ACGL,Financials,Property & Casualty Insurance,2023-01-01,
+ACN,Information Technology,IT Consulting & Other Services,2012-01-01,
+ACS,,,1900-01-01,2011-01-01
+ACT,Financials,Financial Services,2014-01-01,2016-01-01
+ADBE,Information Technology,Application Software,1997-05-05,
+ADCT,Health Care,Biotechnology,1900-01-01,2009-01-01
+ADI,Information Technology,Semiconductors,1999-10-12,
+ADM,Consumer Staples,Agricultural Products & Services,1957-03-04,
+ADP,Industrials,Human Resource & Employment Services,1981-03-31,
+ADS,,,2014-01-01,2021-01-01
+ADSK,Information Technology,Application Software,1989-12-01,
+ADT,Consumer Discretionary,Diversified Consumer Services,2013-01-01,2017-01-01
+AEE,Utilities,Multi-Utilities,1991-09-19,
+AEP,Utilities,Electric Utilities,1957-03-04,
+AES,Utilities,Independent Power Producers & Energy Traders,1998-10-02,
+AET,,,1900-01-01,2019-01-01
+AFL,Financials,Life & Health Insurance,1999-05-28,
+AGN,,,1900-01-01,2021-01-01
+AIG,Financials,Multi-line Insurance,1980-03-31,
+AIV,Real Estate,Residential REITs,1900-01-01,2021-01-01
+AIZ,Financials,Multi-line Insurance,2007-04-10,
+AJG,Financials,Insurance Brokers,2017-01-01,
+AKAM,Information Technology,Internet Services & Infrastructure,2009-01-01,
+AKS,,,2009-01-01,2012-01-01
+ALB,Materials,Specialty Chemicals,2017-01-01,
+ALGN,Health Care,Health Care Supplies,2018-01-01,
+ALK,Industrials,Passenger Airlines,2017-01-01,2024-01-01
+ALL,Financials,Property & Casualty Insurance,1995-07-13,
+ALLE,Industrials,Building Products,2014-01-01,
+ALTR,,,1900-01-01,2016-01-01
+ALXN,,,2013-01-01,2022-01-01
+AMAT,Information Technology,Semiconductor Materials & Equipment,1995-03-16,
+AMCR,Materials,Paper & Plastic Packaging Products & Materials,2020-01-01,
+AMD,Information Technology,Semiconductors,1900-01-01,2014-01-01
+AMD,Information Technology,Semiconductors,2018-01-01,
+AME,Industrials,Electrical Components & Equipment,2014-01-01,
+AMG,Financials,Capital Markets,2015-01-01,2020-01-01
+AMGN,Health Care,Biotechnology,1992-01-02,
+AMP,Financials,Asset Management & Custody Banks,2005-10-03,
+AMT,Real Estate,Telecom Tower REITs,2007-11-19,
+AMZN,Consumer Discretionary,Broadline Retail,2005-11-18,
+AN,Consumer Discretionary,Specialty Retail,1900-01-01,2018-01-01
+ANDV,,,2018-01-01,2019-01-01
+ANET,Information Technology,Communications Equipment,2019-01-01,
+ANF,Consumer Discretionary,Specialty Retail,2009-01-01,2014-01-01
+ANR,,,2012-01-01,2013-01-01
+ANSS,,,2018-01-01,2026-01-01
+ANTM,,,2015-01-01,2023-01-01
+AOC,,,1900-01-01,2010-01-01
+AON,Financials,Insurance Brokers,2010-01-01,
+AOS,Industrials,Building Products,2018-01-01,
+APA,Energy,Oil & Gas Exploration & Production,1997-07-28,
+APC,,,1900-01-01,2020-01-01
+APD,Materials,Industrial Gases,1985-04-30,
+APH,Information Technology,Electronic Components,2011-01-01,
+APO,Financials,Asset Management & Custody Banks,2025-01-01,
+APOL,,,1900-01-01,2014-01-01
+APP,Communication Services,Advertising,2026-01-01,
+APTV,Consumer Discretionary,Automotive Parts & Equipment,2018-01-01,
+ARE,Real Estate,Office REITs,2018-01-01,
+ARES,Financials,Asset Management & Custody Banks,2026-01-01,
+ARG,,,2011-01-01,2017-01-01
+ARNC,,,2017-01-01,2021-01-01
+ASH,Materials,Chemicals,1900-01-01,2011-01-01
+ASN,,,1900-01-01,2009-01-01
+ATI,Industrials,Aerospace & Defense,1900-01-01,2016-01-01
+ATO,Utilities,Gas Utilities,2020-01-01,
+ATVI,,,2016-01-01,2024-01-01
+AV,,,1900-01-01,2009-01-01
+AVB,Real Estate,Residential REITs,1900-01-01,
+AVGO,Information Technology,Semiconductors,2015-01-01,
+AVP,,,1900-01-01,2016-01-01
+AVY,Materials,Paper & Plastic Packaging Products & Materials,1987-12-31,
+AW,,,1900-01-01,2010-01-01
+AWK,Utilities,Water Utilities,2017-01-01,
+AXON,Industrials,Aerospace & Defense,2024-01-01,
+AXP,Financials,Consumer Finance,1976-06-30,
+AYE,,,1900-01-01,2012-01-01
+AYI,Industrials,Electrical Equipment,2017-01-01,2019-01-01
+AZO,Consumer Discretionary,Automotive Retail,1997-01-02,
+BA,Industrials,Aerospace & Defense,1957-03-04,
+BAC,Financials,Diversified Banks,1976-06-30,
+BALL,Materials,"Metal, Glass & Plastic Containers",2023-01-01,
+BAX,Health Care,Health Care Equipment,1972-09-30,
+BBBY,Consumer Discretionary,Specialty Retail,1900-01-01,2018-01-01
+BBT,Financials,Banks,1900-01-01,2020-01-01
+BBWI,Consumer Discretionary,Specialty Retail,2022-01-01,2025-01-01
+BBY,Consumer Discretionary,Computer & Electronics Retail,1999-06-29,
+BC,Consumer Discretionary,Leisure Products,1900-01-01,2009-01-01
+BCR,,,1900-01-01,2019-01-01
+BDK,,,1900-01-01,2011-01-01
+BDX,Health Care,Health Care Equipment,1972-09-30,
+BEAM,Health Care,Biotechnology,2012-01-01,2015-01-01
+BEN,Financials,Asset Management & Custody Banks,1998-04-30,
+BF-B,Consumer Staples,Distillers & Vintners,1982-10-31,
+BG,Consumer Staples,Agricultural Products & Services,2024-01-01,
+BHF,Financials,Insurance,2018-01-01,2020-01-01
+BHGE,,,2018-01-01,2020-01-01
+BHI,,,1900-01-01,2018-01-01
+BIG,,,1900-01-01,2014-01-01
+BIIB,Health Care,Biotechnology,2003-11-13,
+BIO,Health Care,Life Sciences Tools & Services,2021-01-01,2025-01-01
+BJS,,,1900-01-01,2011-01-01
+BK,,,1900-01-01,
+BKNG,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",2019-01-01,
+BKR,Energy,Oil & Gas Equipment & Services,2020-01-01,
+BLDR,Industrials,Building Products,2024-01-01,
+BLK,Financials,Asset Management & Custody Banks,2012-01-01,
+BLL,,,1900-01-01,2023-01-01
+BMC,,,1900-01-01,2014-01-01
+BMET,,,1900-01-01,2009-01-01
+BMS,,,1900-01-01,2015-01-01
+BMY,Health Care,Pharmaceuticals,1957-03-04,
+BNI,,,1900-01-01,2011-01-01
+BNY,Financials,Asset Management & Custody Banks,1995-03-31,
+BOL,,,1900-01-01,2009-01-01
+BR,Industrials,Data Processing & Outsourced Services,2019-01-01,
+BRCM,,,1900-01-01,2017-01-01
+BRK-B,Financials,Multi-Sector Holdings,2011-01-01,
+BRL,,,1900-01-01,2009-01-01
+BRO,Financials,Insurance Brokers,2022-01-01,
+BSC,,,1900-01-01,2009-01-01
+BSX,Health Care,Health Care Equipment,1995-02-24,
+BTU,Energy,"Oil, Gas & Consumable Fuels",1900-01-01,2015-01-01
+BUD,,,1900-01-01,2009-01-01
+BWA,Consumer Discretionary,Automobile Components,2012-01-01,2026-01-01
+BX,Financials,Asset Management & Custody Banks,2024-01-01,
+BXLT,,,2016-01-01,2017-01-01
+BXP,Real Estate,Office REITs,2006-04-03,
+C,Financials,Diversified Banks,1988-05-31,
+CA,,,1900-01-01,2019-01-01
+CAG,Consumer Staples,Food Products,1900-01-01,
+CAH,Health Care,Health Care Distributors,1997-05-27,
+CAM,,,2009-01-01,2017-01-01
+CARR,Industrials,Building Products,2021-01-01,
+CASY,Consumer Staples,Food Retail,2026-04-09,
+CAT,Industrials,Construction Machinery & Heavy Transportation Equipment,1957-03-04,
+CB,Financials,Property & Casualty Insurance,1900-01-01,
+CBE,,,1900-01-01,2011-01-01
+CBE,,,2012-01-01,2013-01-01
+CBG,,,1900-01-01,2019-01-01
+CBH,,,1900-01-01,2009-01-01
+CBOE,Financials,Financial Exchanges & Data,2018-01-01,2020-01-01
+CBRE,Real Estate,Real Estate Services,2019-01-01,
+CBS,,,1900-01-01,2020-01-01
+CC,Materials,Chemicals,1900-01-01,2009-01-01
+CCE,,,1900-01-01,2017-01-01
+CCI,Real Estate,Telecom Tower REITs,2013-01-01,
+CCL,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",1998-12-22,
+CCU,,,1900-01-01,2009-01-01
+CDAY,,,2022-01-01,2025-01-01
+CDNS,Information Technology,Application Software,2018-01-01,
+CDW,Information Technology,Technology Distributors,2020-01-01,
+CE,Materials,Chemicals,2019-01-01,2026-01-01
+CEG,Utilities,Electric Utilities,1900-01-01,2013-01-01
+CEG,Utilities,Electric Utilities,2023-01-01,
+CELG,,,1900-01-01,2020-01-01
+CEPH,,,2010-01-01,2012-01-01
+CERN,,,2011-01-01,2023-01-01
+CF,Materials,Fertilizers & Agricultural Chemicals,2009-01-01,
+CFC,,,1900-01-01,2009-01-01
+CFG,Financials,Regional Banks,2017-01-01,
+CFN,,,2010-01-01,2016-01-01
+CHD,Consumer Staples,Household Products,2016-01-01,
+CHK,,,1900-01-01,2019-01-01
+CHRW,Industrials,Air Freight & Logistics,2007-03-02,
+CHTR,Communication Services,Cable & Satellite,2017-01-01,
+CI,Health Care,Health Care Services,1976-06-30,
+CIEN,Information Technology,Communications Equipment,1900-01-01,2011-01-01
+CINF,Financials,Property & Casualty Insurance,1997-12-18,
+CIT,,,1900-01-01,2010-01-01
+CL,Consumer Staples,Household Products,1957-03-04,
+CLF,Materials,Metals & Mining,2011-01-01,2015-01-01
+CLX,Consumer Staples,Household Products,1969-03-31,
+CMA,,,1900-01-01,2025-01-01
+CMCSA,Communication Services,Cable & Satellite,2002-11-19,
+CME,Financials,Financial Exchanges & Data,2006-08-11,
+CMG,Consumer Discretionary,Restaurants,2012-01-01,
+CMI,Industrials,Construction Machinery & Heavy Transportation Equipment,1965-03-31,
+CMS,Utilities,Multi-Utilities,1957-03-04,
+CNC,Health Care,Managed Health Care,2017-01-01,
+CNP,Utilities,Multi-Utilities,1985-07-31,
+CNX,Energy,"Oil, Gas & Consumable Fuels",1900-01-01,2017-01-01
+COF,Financials,Consumer Finance,1998-07-01,
+COG,,,2009-01-01,2022-01-01
+COH,,,1900-01-01,2018-01-01
+COHR,Information Technology,Electronic Components,2026-03-23,
+COIN,Financials,Financial Exchanges & Data,2026-01-01,
+COL,,,1900-01-01,2019-01-01
+COO,Health Care,Health Care Supplies,2017-01-01,
+COP,Energy,Oil & Gas Exploration & Production,1957-03-04,
+COR,Health Care,Health Care Distributors,2024-01-01,
+COST,Consumer Staples,Consumer Staples Merchandise Retail,1993-10-01,
+COTY,Consumer Staples,Personal Care Products,2017-01-01,2021-01-01
+COV,,,2009-01-01,2010-01-01
+COV,,,2012-01-01,2016-01-01
+CPAY,Financials,Transaction & Payment Processing Services,2025-01-01,
+CPB,Consumer Staples,Food Products,1900-01-01,
+CPGX,,,2016-01-01,2017-01-01
+CPRI,Consumer Discretionary,"Textiles, Apparel & Luxury Goods",2020-01-01,2021-01-01
+CPRT,Industrials,Diversified Support Services,2019-01-01,
+CPT,Real Estate,Multi-Family Residential REITs,2023-01-01,
+CPWR,,,1900-01-01,2013-01-01
+CRH,Materials,Construction Materials,2025-12-22,
+CRL,Health Care,Life Sciences Tools & Services,2022-01-01,
+CRM,Information Technology,Application Software,2009-01-01,
+CRWD,Information Technology,Systems Software,2025-01-01,
+CSC,,,1900-01-01,2016-01-01
+CSCO,Information Technology,Communications Equipment,1993-12-01,
+CSGP,Real Estate,Real Estate Services,2023-01-01,
+CSRA,,,2016-01-01,2019-01-01
+CSX,Industrials,Rail Transportation,1957-03-04,
+CTAS,Industrials,Diversified Support Services,2001-03-01,
+CTL,,,1900-01-01,2021-01-01
+CTLT,,,2021-01-01,2025-01-01
+CTRA,,,2022-01-01,
+CTSH,Information Technology,IT Consulting & Other Services,2006-11-17,
+CTVA,Materials,Fertilizers & Agricultural Chemicals,2020-01-01,
+CTX,,,1900-01-01,2010-01-01
+CTXS,,,1900-01-01,2023-01-01
+CVC,,,2012-01-01,2017-01-01
+CVG,,,1900-01-01,2011-01-01
+CVH,,,1900-01-01,2014-01-01
+CVNA,Consumer Discretionary,Automotive Retail,2025-12-22,
+CVS,Health Care,Health Care Services,1957-03-04,
+CVX,Energy,Integrated Oil & Gas,1957-03-04,
+CXO,,,2017-01-01,2022-01-01
+CZN,,,1900-01-01,2009-01-01
+CZR,Consumer Discretionary,"Hotels, Restaurants & Leisure",2022-01-01,2026-01-01
+D,Utilities,Multi-Utilities,1900-01-01,
+DAL,Industrials,Passenger Airlines,2014-01-01,
+DASH,Consumer Discretionary,Specialized Consumer Services,2026-01-01,
+DAY,,,2025-01-01,
+DD,Industrials,Industrial Conglomerates,1900-01-01,2018-01-01
+DD,Industrials,Industrial Conglomerates,2020-01-01,
+DDOG,Information Technology,Application Software,2026-01-01,
+DDR,,,2009-01-01,2010-01-01
+DDS,Consumer Discretionary,Broadline Retail,1900-01-01,2009-01-01
+DE,Industrials,Agricultural & Farm Machinery,1957-03-04,
+DECK,Consumer Discretionary,Footwear,2025-01-01,
+DELL,Information Technology,"Technology Hardware, Storage & Peripherals",1900-01-01,2014-01-01
+DELL,Information Technology,"Technology Hardware, Storage & Peripherals",2025-01-01,
+DF,,,1900-01-01,2014-01-01
+DFS,,,2009-01-01,2026-01-01
+DG,Consumer Staples,Consumer Staples Merchandise Retail,1900-01-01,2009-01-01
+DG,Consumer Staples,Consumer Staples Merchandise Retail,2013-01-01,
+DGX,Health Care,Health Care Services,2002-12-12,
+DHI,Consumer Discretionary,Homebuilding,2005-06-22,
+DHR,Health Care,Life Sciences Tools & Services,1998-11-18,
+DIS,Communication Services,Movies & Entertainment,1976-06-30,
+DISCA,,,2011-01-01,2023-01-01
+DISCK,,,2015-01-01,2023-01-01
+DISH,,,2018-01-01,2024-01-01
+DJ,,,1900-01-01,2009-01-01
+DLPH,,,2013-01-01,2018-01-01
+DLR,Real Estate,Data Center REITs,2017-01-01,
+DLTR,Consumer Staples,Consumer Staples Merchandise Retail,2012-01-01,
+DNB,,,2009-01-01,2018-01-01
+DNR,,,2010-01-01,2016-01-01
+DO,,,2010-01-01,2017-01-01
+DOC,Real Estate,Health Care REITs,2025-01-01,
+DOV,Industrials,Industrial Machinery & Supplies & Components,1985-10-31,
+DOW,Materials,Commodity Chemicals,1900-01-01,2018-01-01
+DOW,Materials,Commodity Chemicals,2020-01-01,
+DPS,,,2009-01-01,2019-01-01
+DPZ,Consumer Discretionary,Restaurants,2021-01-01,
+DRE,,,2018-01-01,2023-01-01
+DRI,Consumer Discretionary,Restaurants,1995-05-31,
+DTE,Utilities,Multi-Utilities,1957-03-04,
+DTV,,,1900-01-01,2016-01-01
+DUK,Utilities,Electric Utilities,1976-06-30,
+DV,Communication Services,Media,2010-01-01,2013-01-01
+DVA,Health Care,Health Care Services,2009-01-01,
+DVN,Energy,Oil & Gas Exploration & Production,2000-08-30,
+DWDP,,,2018-01-01,2020-01-01
+DXC,Information Technology,IT Services,2018-01-01,2024-01-01
+DXCM,Health Care,Health Care Equipment,2021-01-01,
+DYN,Health Care,Biotechnology,1900-01-01,2011-01-01
+EA,Communication Services,Entertainment,2012-01-01,
+EBAY,Consumer Discretionary,Broadline Retail,2002-07-22,
+ECHO,Communication Services,Wireless Telecommunication Services,2026-03-23,
+ECL,Materials,Specialty Chemicals,1989-01-31,
+ED,Utilities,Multi-Utilities,1957-03-04,
+EDS,,,1900-01-01,2009-01-01
+EFX,Industrials,Research & Consulting Services,1997-06-19,
+EG,Financials,Reinsurance,2024-01-01,
+EIX,Utilities,Electric Utilities,1957-03-04,
+EK,,,1900-01-01,2012-01-01
+EL,Consumer Staples,Personal Care Products,2006-01-05,
+ELV,Health Care,Managed Health Care,2023-01-01,
+EMC,,,1900-01-01,2017-01-01
+EME,Industrials,Construction & Engineering,2026-01-01,
+EMN,Materials,Chemicals,1900-01-01,2026-01-01
+EMR,Industrials,Electrical Components & Equipment,1965-03-31,
+ENDP,,,2016-01-01,2018-01-01
+ENPH,Information Technology,Semiconductors & Semiconductor Equipment,2022-01-01,2026-01-01
+EOG,Energy,Oil & Gas Exploration & Production,2000-11-02,
+EP,Energy,"Oil, Gas & Consumable Fuels",1900-01-01,2013-01-01
+EPAM,Information Technology,IT Services,2022-01-01,
+EQ,Health Care,Biotechnology,1900-01-01,2010-01-01
+EQIX,Real Estate,Data Center REITs,2016-01-01,
+EQR,Real Estate,Residential REITs,1900-01-01,
+EQT,Energy,Oil & Gas Exploration & Production,2023-01-01,
+ERIE,Financials,Insurance Brokers,2025-01-01,
+ERTS,,,1900-01-01,2012-01-01
+ES,Utilities,Electric Utilities,2016-01-01,
+ESRX,,,1900-01-01,2019-01-01
+ESS,Real Estate,Multi-Family Residential REITs,2015-01-01,
+ESV,,,1900-01-01,2010-01-01
+ESV,,,2013-01-01,2017-01-01
+ETFC,,,1900-01-01,2021-01-01
+ETN,Industrials,Electrical Components & Equipment,1957-03-04,
+ETR,Utilities,Electric Utilities,1957-03-04,
+ETSY,Consumer Discretionary,Broadline Retail,2021-01-01,2025-01-01
+EVHC,,,2017-01-01,2019-01-01
+EVRG,Utilities,Electric Utilities,2019-01-01,
+EW,Health Care,Health Care Equipment,2012-01-01,
+EXC,Utilities,Electric Utilities,1957-03-04,
+EXE,Energy,Oil & Gas Exploration & Production,2026-01-01,
+EXPD,Industrials,Air Freight & Logistics,2009-01-01,
+EXPE,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",2009-01-01,
+EXR,Real Estate,Self-Storage REITs,2017-01-01,
+F,Consumer Discretionary,Automobile Manufacturers,1957-03-04,
+FANG,Energy,Oil & Gas Exploration & Production,2019-01-01,
+FAST,Industrials,Trading Companies & Distributors,2009-01-01,
+FB,,,2014-01-01,2023-01-01
+FBHS,,,2017-01-01,2023-01-01
+FCX,Materials,Copper,1900-01-01,
+FDC,,,1900-01-01,2009-01-01
+FDO,,,1900-01-01,2016-01-01
+FDS,Financials,Financial Exchanges & Data,2022-01-01,
+FDX,Industrials,Air Freight & Logistics,1980-12-31,
+FDXF,Industrials,Cargo Ground Transportation,2026-06-01,
+FE,Utilities,Electric Utilities,1997-11-28,
+FERG,Industrials,Building Products,2026-08-05,
+FFIV,Information Technology,Communications Equipment,2012-01-01,
+FHN,Financials,Banks,1900-01-01,2014-01-01
+FI,,,2024-01-01,2026-01-01
+FICO,Information Technology,Application Software,2024-01-01,
+FII,,,1900-01-01,2014-01-01
+FIS,Financials,Transaction & Payment Processing Services,2006-11-10,
+FISV,Financials,Transaction & Payment Processing Services,1900-01-01,2024-01-01
+FISV,Financials,Transaction & Payment Processing Services,2026-01-01,
+FITB,Financials,Regional Banks,1996-03-29,
+FIX,Industrials,Construction & Engineering,2025-12-22,
+FL,,,2017-01-01,2020-01-01
+FLEX,Information Technology,Electronic Manufacturing Services,2026-06-22,
+FLIR,,,2010-01-01,2022-01-01
+FLR,Industrials,Construction & Engineering,1900-01-01,2020-01-01
+FLS,Industrials,Machinery,2009-01-01,2022-01-01
+FLT,,,2019-01-01,2025-01-01
+FMC,Materials,Chemicals,2010-01-01,2026-01-01
+FNM,,,1900-01-01,2009-01-01
+FO,,,1900-01-01,2012-01-01
+FOSL,Consumer Discretionary,"Textiles, Apparel & Luxury Goods",2013-01-01,2017-01-01
+FOX,Communication Services,Broadcasting,2019-03-19,
+FOXA,Communication Services,Broadcasting,2019-03-19,
+FPL,,,1900-01-01,2011-01-01
+FRC,,,2020-01-01,2024-01-01
+FRE,,,1900-01-01,2009-01-01
+FRT,Real Estate,Retail REITs,2017-01-01,
+FRX,,,1900-01-01,2015-01-01
+FSLR,Information Technology,Semiconductors,2023-01-01,
+FTI,Energy,Energy Equipment & Services,2010-01-01,2022-01-01
+FTNT,Information Technology,Systems Software,2019-01-01,
+FTR,,,2009-01-01,2018-01-01
+FTV,Industrials,Industrial Machinery & Supplies & Components,2017-01-01,
+GAS,,,1900-01-01,2017-01-01
+GCI,,,1900-01-01,2016-01-01
+GD,Industrials,Aerospace & Defense,1957-03-04,
+GDDY,Information Technology,Internet Services & Infrastructure,2025-01-01,
+GE,Industrials,Aerospace & Defense,1957-03-04,
+GEHC,Health Care,Health Care Equipment,2024-01-01,
+GEN,Information Technology,Systems Software,2023-01-01,
+GENZ,,,1900-01-01,2012-01-01
+GEV,Industrials,Heavy Electrical Equipment,2025-01-01,
+GGP,,,2009-01-01,2010-01-01
+GGP,,,2014-01-01,2019-01-01
+GHC,Consumer Discretionary,Diversified Consumer Services,2014-01-01,2015-01-01
+GILD,Health Care,Biotechnology,2004-07-01,
+GIS,Consumer Staples,Packaged Foods & Meats,1957-03-04,
+GL,Financials,Life & Health Insurance,2020-01-01,
+GLW,Information Technology,Electronic Components,1995-02-27,
+GM,Consumer Discretionary,Automobile Manufacturers,1900-01-01,2010-01-01
+GM,Consumer Discretionary,Automobile Manufacturers,2014-01-01,
+GMCR,,,2015-01-01,2017-01-01
+GME,Consumer Discretionary,Specialty Retail,2009-01-01,2017-01-01
+GNRC,Industrials,Heavy Electrical Equipment,2022-01-01,
+GNW,Financials,Insurance,1900-01-01,2016-01-01
+GOOG,Communication Services,Interactive Media & Services,1900-01-01,
+GOOGL,Communication Services,Interactive Media & Services,2015-01-01,
+GPC,Consumer Discretionary,Distributors,1973-12-31,
+GPN,Financials,Transaction & Payment Processing Services,2017-01-01,
+GPS,,,1900-01-01,2023-01-01
+GR,,,1900-01-01,2013-01-01
+GRMN,Consumer Discretionary,Consumer Electronics,2013-01-01,
+GS,Financials,Investment Banking & Brokerage,2002-07-22,
+GT,Consumer Discretionary,Automobile Components,1900-01-01,2020-01-01
+GWW,Industrials,Industrial Machinery & Supplies & Components,1981-06-30,
+HAL,Energy,Oil & Gas Equipment & Services,1957-03-04,
+HAR,,,1900-01-01,2018-01-01
+HAS,Consumer Discretionary,Leisure Products,1984-09-30,
+HBAN,Financials,Regional Banks,1997-08-28,
+HBI,,,2016-01-01,2022-01-01
+HCA,Health Care,Health Care Facilities,2016-01-01,
+HCBK,,,1900-01-01,2016-01-01
+HCN,,,2010-01-01,2019-01-01
+HCP,,,2009-01-01,2020-01-01
+HCR,,,1900-01-01,2009-01-01
+HD,Consumer Discretionary,Home Improvement Retail,1988-03-31,
+HES,,,1900-01-01,2026-01-01
+HET,,,1900-01-01,2009-01-01
+HFC,,,2019-01-01,2022-01-01
+HIG,Financials,Property & Casualty Insurance,1957-03-04,
+HII,Industrials,Aerospace & Defense,2019-01-01,
+HLT,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",1900-01-01,2009-01-01
+HLT,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",2018-01-01,
+HNZ,,,1900-01-01,2014-01-01
+HOG,Consumer Discretionary,Automobiles,1900-01-01,2021-01-01
+HOLX,,,2017-01-01,
+HON,Industrials,Industrial Conglomerates,1957-03-04,
+HONA,Industrials,Aerospace & Defense,2026-06-29,
+HOOD,Financials,Investment Banking & Brokerage,2026-01-01,
+HOT,,,1900-01-01,2017-01-01
+HP,Energy,Energy Equipment & Services,2011-01-01,2021-01-01
+HPC,,,1900-01-01,2010-01-01
+HPE,Information Technology,"Technology Hardware, Storage & Peripherals",2016-01-01,
+HPQ,Information Technology,"Technology Hardware, Storage & Peripherals",1974-12-31,
+HRB,Consumer Discretionary,Diversified Consumer Services,1900-01-01,2021-01-01
+HRL,Consumer Staples,Packaged Foods & Meats,2010-01-01,
+HRS,,,2009-01-01,2020-01-01
+HSIC,Health Care,Health Care Distributors,2016-01-01,
+HSP,,,1900-01-01,2016-01-01
+HST,Real Estate,Hotel & Resort REITs,2009-01-01,
+HSY,Consumer Staples,Packaged Foods & Meats,1957-03-04,
+HUBB,Industrials,Industrial Machinery & Supplies & Components,2024-01-01,
+HUM,Health Care,Managed Health Care,1900-01-01,
+HWM,Industrials,Aerospace & Defense,2021-01-01,
+IACI,,,1900-01-01,2009-01-01
+IBKR,Financials,Investment Banking & Brokerage,2026-01-01,
+IBM,Information Technology,IT Consulting & Other Services,1957-03-04,
+ICE,Financials,Financial Exchanges & Data,2009-01-01,
+IDXX,Health Care,Health Care Equipment,2018-01-01,
+IEX,Industrials,Industrial Machinery & Supplies & Components,2020-01-01,
+IFF,Materials,Specialty Chemicals,1976-03-31,
+IGT,,,1900-01-01,2015-01-01
+ILMN,Health Care,Life Sciences Tools & Services,2016-01-01,2025-01-01
+INCY,Health Care,Biotechnology,2018-01-01,
+INFO,,,2018-01-01,2023-01-01
+INTC,Information Technology,Semiconductors,1976-12-31,
+INTU,Information Technology,Application Software,2000-12-05,
+INVH,Real Estate,Single-Family Residential REITs,2023-01-01,
+IP,Materials,Paper & Plastic Packaging Products & Materials,1957-03-04,
+IPG,,,1900-01-01,2026-01-01
+IPGP,Information Technology,"Electronic Equipment, Instruments & Components",2019-01-01,2023-01-01
+IQV,Health Care,Life Sciences Tools & Services,2018-01-01,
+IR,Industrials,Industrial Machinery & Supplies & Components,1900-01-01,2010-01-01
+IR,Industrials,Industrial Machinery & Supplies & Components,2020-03-03,
+IRM,Real Estate,Other Specialized REITs,2009-01-06,
+ISRG,Health Care,Health Care Equipment,2009-01-01,
+IT,Information Technology,IT Consulting & Other Services,2018-01-01,
+ITT,Industrials,Machinery,1900-01-01,2012-01-01
+ITW,Industrials,Industrial Machinery & Supplies & Components,1986-02-28,
+IVZ,Financials,Asset Management & Custody Banks,2009-01-01,
+J,Industrials,Construction & Engineering,2020-01-01,
+JAVA,,,1900-01-01,2011-01-01
+JBHT,Industrials,Cargo Ground Transportation,2016-01-01,
+JBL,Information Technology,Electronic Manufacturing Services,1900-01-01,2015-01-01
+JBL,Information Technology,Electronic Manufacturing Services,2024-01-01,
+JCI,Industrials,Building Products,1900-01-01,
+JCP,,,1900-01-01,2014-01-01
+JDSU,,,1900-01-01,2014-01-01
+JEC,,,2009-01-01,2020-01-01
+JEF,Financials,Capital Markets,2019-01-01,2020-01-01
+JKHY,Financials,Transaction & Payment Processing Services,2019-01-01,
+JNJ,Health Care,Pharmaceuticals,1973-06-30,
+JNPR,,,1900-01-01,2026-01-01
+JNS,,,1900-01-01,2012-01-01
+JNY,,,1900-01-01,2010-01-01
+JOY,,,2012-01-01,2016-01-01
+JPM,Financials,Diversified Banks,1975-06-30,
+JWN,,,1900-01-01,2021-01-01
+K,,,1900-01-01,2026-01-01
+KBH,Consumer Discretionary,Household Durables,1900-01-01,2011-01-01
+KDP,Consumer Staples,Soft Drinks & Non-alcoholic Beverages,2023-01-01,
+KEY,Financials,Regional Banks,1994-03-01,
+KEYS,Information Technology,Electronic Equipment & Instruments,2019-01-01,
+KFT,,,2009-01-01,2013-01-01
+KG,Financials,Insurance,1900-01-01,2012-01-01
+KHC,Consumer Staples,Packaged Foods & Meats,2016-01-01,
+KIM,Real Estate,Retail REITs,2006-04-04,
+KKR,Financials,Asset Management & Custody Banks,2025-01-01,
+KLAC,Information Technology,Semiconductor Materials & Equipment,1997-09-30,
+KMB,Consumer Staples,Household Products,1957-03-04,
+KMI,Energy,Oil & Gas Storage & Transportation,1900-01-01,2009-01-01
+KMI,Energy,Oil & Gas Storage & Transportation,2013-01-01,
+KMX,Consumer Discretionary,Specialty Retail,2011-01-01,2026-01-01
+KO,Consumer Staples,Soft Drinks & Non-alcoholic Beverages,1957-03-04,
+KORS,,,2014-01-01,2020-01-01
+KR,Consumer Staples,Food Retail,1957-03-04,
+KRFT,,,2013-01-01,2016-01-01
+KSE,,,1900-01-01,2009-01-01
+KSS,Consumer Discretionary,Broadline Retail,1900-01-01,2021-01-01
+KSU,,,2014-01-01,2022-01-01
+KVUE,Consumer Staples,Personal Care Products,2024-01-01,
+L,Financials,Multi-line Insurance,2009-01-01,
+LB,,,2014-01-01,2022-01-01
+LDOS,Industrials,Diversified Support Services,2020-01-01,
+LEG,Consumer Discretionary,Household Durables,1900-01-01,2022-01-01
+LEH,,,1900-01-01,2009-01-01
+LEN,Consumer Discretionary,Homebuilding,2005-10-04,
+LH,Health Care,Health Care Services,2004-11-01,
+LHX,Industrials,Aerospace & Defense,2020-01-01,
+LIFE,,,2010-01-01,2015-01-01
+LII,Industrials,Building Products,2025-01-01,
+LIN,Materials,Industrial Gases,2019-01-01,
+LITE,Information Technology,Communications Equipment,2026-03-23,
+LIZ,,,1900-01-01,2009-01-01
+LKQ,Consumer Discretionary,Distributors,2017-01-01,2026-01-01
+LLL,,,1900-01-01,2020-01-01
+LLTC,,,1900-01-01,2018-01-01
+LLY,Health Care,Pharmaceuticals,1970-12-31,
+LM,,,1900-01-01,2017-01-01
+LMT,Industrials,Aerospace & Defense,1957-03-04,
+LNC,Financials,Insurance,1900-01-01,2024-01-01
+LNT,Utilities,Electric Utilities,2017-01-01,
+LO,,,2009-01-01,2016-01-01
+LOW,Consumer Discretionary,Home Improvement Retail,1984-02-29,
+LRCX,Information Technology,Semiconductor Materials & Equipment,2013-01-01,
+LSI,,,1900-01-01,2015-01-01
+LTD,,,1900-01-01,2014-01-01
+LTR,,,1900-01-01,2009-01-01
+LUK,,,2009-01-01,2019-01-01
+LULU,Consumer Discretionary,"Apparel, Accessories & Luxury Goods",2024-01-01,
+LUMN,Communication Services,Diversified Telecommunication Services,2021-01-01,2024-01-01
+LUV,Industrials,Passenger Airlines,1994-07-01,
+LVLT,,,2015-01-01,2018-01-01
+LVS,Consumer Discretionary,Casinos & Gaming,2020-01-01,
+LW,Consumer Staples,Food Products,2019-01-01,
+LXK,,,1900-01-01,2013-01-01
+LYB,Materials,Specialty Chemicals,2013-01-01,
+LYV,Communication Services,Movies & Entertainment,2020-01-01,
+M,Consumer Discretionary,Broadline Retail,1900-01-01,2021-01-01
+MA,Financials,Transaction & Payment Processing Services,2009-01-01,
+MAA,Real Estate,Multi-Family Residential REITs,2017-01-01,
+MAC,Real Estate,Retail REITs,2014-01-01,2020-01-01
+MAR,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",1998-05-29,
+MAS,Industrials,Building Products,1981-06-30,
+MAT,Consumer Discretionary,Leisure Products,1900-01-01,2020-01-01
+MBI,Financials,Insurance,1900-01-01,2011-01-01
+MCD,Consumer Discretionary,Restaurants,1970-06-30,
+MCHP,Information Technology,Semiconductors,2007-09-07,
+MCK,Health Care,Health Care Distributors,1999-01-13,
+MCO,Financials,Financial Exchanges & Data,1998-07-01,
+MDLZ,Consumer Staples,Packaged Foods & Meats,2013-01-01,
+MDP,,,1900-01-01,2012-01-01
+MDT,Health Care,Health Care Equipment,1986-10-31,
+MEE,,,2009-01-01,2012-01-01
+MEL,,,1900-01-01,2009-01-01
+MER,,,1900-01-01,2010-01-01
+MET,Financials,Life & Health Insurance,2000-12-11,
+META,Communication Services,Interactive Media & Services,2023-01-01,
+MFE,,,2009-01-01,2012-01-01
+MGM,Consumer Discretionary,Casinos & Gaming,2018-01-01,
+MHFI,,,2014-01-01,2017-01-01
+MHK,Consumer Discretionary,Household Durables,2014-01-01,2026-01-01
+MHP,,,1900-01-01,2014-01-01
+MHS,,,1900-01-01,2013-01-01
+MI,,,1900-01-01,2012-01-01
+MIL,,,1900-01-01,2011-01-01
+MJN,,,2011-01-01,2018-01-01
+MKC,Consumer Staples,Packaged Foods & Meats,2003-03-20,
+MKTX,Financials,Capital Markets,2020-01-01,2026-01-01
+MLM,Materials,Construction Materials,2015-01-01,
+MMC,,,1900-01-01,
+MMI,Real Estate,Real Estate Management & Development,2012-01-01,2013-01-01
+MMM,Industrials,Industrial Conglomerates,1957-03-04,
+MNK,,,2015-01-01,2018-01-01
+MNST,Consumer Staples,Soft Drinks & Non-alcoholic Beverages,1900-01-01,2010-01-01
+MNST,Consumer Staples,Soft Drinks & Non-alcoholic Beverages,2013-01-01,
+MO,Consumer Staples,Tobacco,1957-03-04,
+MOH,Health Care,Health Care Providers & Services,2023-01-01,
+MOLX,,,1900-01-01,2014-01-01
+MON,,,1900-01-01,2019-01-01
+MOS,Materials,Fertilizers & Agricultural Chemicals,2012-01-01,
+MOT,,,1900-01-01,2012-01-01
+MPC,Energy,Oil & Gas Refining & Marketing,2012-01-01,
+MPWR,Information Technology,Semiconductors,2022-01-01,
+MRK,Health Care,Pharmaceuticals,1957-03-04,
+MRNA,Health Care,Biotechnology,2022-01-01,
+MRO,,,1900-01-01,2025-01-01
+MRSH,Financials,Insurance Brokers,1987-08-31,
+MRVL,Information Technology,Semiconductors,2026-06-22,
+MS,Financials,Investment Banking & Brokerage,1993-07-29,
+MSCI,Financials,Financial Exchanges & Data,2019-01-01,
+MSFT,Information Technology,Systems Software,1994-06-01,
+MSI,Information Technology,Communications Equipment,2012-01-01,
+MTB,Financials,Regional Banks,2004-02-23,
+MTCH,Communication Services,Interactive Media & Services,2022-01-01,
+MTD,Health Care,Life Sciences Tools & Services,2017-01-01,
+MTG,Financials,Financial Services,1900-01-01,2009-01-01
+MTW,Industrials,Machinery,2009-01-01,2010-01-01
+MU,Information Technology,Semiconductors,1994-09-27,
+MUR,Energy,"Oil, Gas & Consumable Fuels",1900-01-01,2018-01-01
+MWV,,,1900-01-01,2016-01-01
+MWW,,,2010-01-01,2012-01-01
+MXIM,,,1900-01-01,2009-01-01
+MXIM,,,2019-01-01,2022-01-01
+MYL,,,1900-01-01,2021-01-01
+NAVI,Financials,Consumer Finance,2015-01-01,2019-01-01
+NBL,,,2009-01-01,2021-01-01
+NBR,Energy,Energy Equipment & Services,1900-01-01,2016-01-01
+NCC,,,1900-01-01,2010-01-01
+NCLH,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",2018-01-01,
+NCR,,,1900-01-01,2009-01-01
+NDAQ,Financials,Financial Exchanges & Data,2009-01-01,
+NDSN,Industrials,Industrial Machinery & Supplies & Components,2023-01-01,
+NE,Energy,Energy Equipment & Services,1900-01-01,2010-01-01
+NE,Energy,Energy Equipment & Services,2012-01-01,2016-01-01
+NEE,Utilities,Multi-Utilities,2011-01-01,
+NEM,Materials,Gold,1969-06-30,
+NFLX,Communication Services,Movies & Entertainment,2012-01-01,
+NFX,,,2012-01-01,2020-01-01
+NI,Utilities,Multi-Utilities,2000-11-02,
+NKE,Consumer Discretionary,"Apparel, Accessories & Luxury Goods",1988-11-30,
+NKTR,Health Care,Pharmaceuticals,2019-01-01,2020-01-01
+NLOK,,,2020-01-01,2023-01-01
+NLSN,,,2014-01-01,2023-01-01
+NOC,Industrials,Aerospace & Defense,1957-03-04,
+NOV,Energy,Energy Equipment & Services,1900-01-01,2022-01-01
+NOVL,,,1900-01-01,2012-01-01
+NOW,Information Technology,Systems Software,2020-01-01,
+NRG,Utilities,Independent Power Producers & Energy Traders,2011-01-01,
+NSC,Industrials,Rail Transportation,1957-03-04,
+NSM,,,1900-01-01,2012-01-01
+NTAP,Information Technology,"Technology Hardware, Storage & Peripherals",1999-06-25,
+NTRS,Financials,Asset Management & Custody Banks,1998-01-30,
+NU,Financials,Banks,2010-01-01,2016-01-01
+NUE,Materials,Steel,1985-04-30,
+NVDA,Information Technology,Semiconductors,2001-11-30,
+NVLS,,,1900-01-01,2013-01-01
+NVR,Consumer Discretionary,Homebuilding,2020-01-01,
+NWL,Consumer Discretionary,Household Durables,1900-01-01,2024-01-01
+NWS,Communication Services,Publishing,2016-01-01,
+NWS-A,,,1900-01-01,2010-01-01
+NWSA,Communication Services,Publishing,2013-08-01,
+NXPI,Information Technology,Semiconductors,2022-01-01,
+NYT,Communication Services,Media,1900-01-01,2012-01-01
+NYX,,,2009-01-01,2014-01-01
+O,Real Estate,Retail REITs,2016-01-01,
+ODFL,Industrials,Cargo Ground Transportation,2020-01-01,
+ODP,,,1900-01-01,2012-01-01
+OGN,Health Care,Pharmaceuticals,2022-01-01,2024-01-01
+OI,Materials,Containers & Packaging,2010-01-01,2017-01-01
+OKE,Energy,Oil & Gas Storage & Transportation,2011-01-01,
+OMC,Communication Services,Advertising,1997-12-31,
+OMX,,,1900-01-01,2009-01-01
+ON,Information Technology,Semiconductors,2023-01-01,
+ORCL,Information Technology,Application Software,1989-08-31,
+ORLY,Consumer Discretionary,Automotive Retail,2010-01-01,
+OTIS,Industrials,Industrial Machinery & Supplies & Components,2021-01-01,
+OXY,Energy,Oil & Gas Exploration & Production,1957-03-04,
+PANW,Information Technology,Systems Software,2024-01-01,
+PARA,,,2023-01-01,2026-01-01
+PAYC,Industrials,Professional Services,2021-01-01,
+PAYX,Industrials,Human Resource & Employment Services,1998-10-01,
+PBCT,,,2010-01-01,2023-01-01
+PBG,,,1900-01-01,2011-01-01
+PBI,Industrials,Commercial Services & Supplies,1900-01-01,2018-01-01
+PCAR,Industrials,Construction Machinery & Heavy Transportation Equipment,1980-12-31,
+PCG,Utilities,Multi-Utilities,1900-01-01,2020-01-01
+PCG,Utilities,Multi-Utilities,2023-01-01,
+PCL,,,1900-01-01,2017-01-01
+PCLN,,,2011-01-01,2019-01-01
+PCP,,,1900-01-01,2017-01-01
+PCS,,,2010-01-01,2014-01-01
+PD,Information Technology,Software,1900-01-01,2009-01-01
+PDCO,,,1900-01-01,2019-01-01
+PEAK,,,2020-01-01,2025-01-01
+PEG,Utilities,Electric Utilities,1957-03-04,
+PENN,Consumer Discretionary,"Hotels, Restaurants & Leisure",2022-01-01,2023-01-01
+PEP,Consumer Staples,Soft Drinks & Non-alcoholic Beverages,1957-03-04,
+PETM,,,2013-01-01,2016-01-01
+PFE,Health Care,Pharmaceuticals,1957-03-04,
+PFG,Financials,Life & Health Insurance,2002-07-22,
+PG,Consumer Staples,Personal Care Products,1957-03-04,
+PGN,,,1900-01-01,2013-01-01
+PGR,Financials,Property & Casualty Insurance,1997-08-04,
+PH,Industrials,Industrial Machinery & Supplies & Components,1985-11-30,
+PHM,Consumer Discretionary,Homebuilding,1984-04-30,
+PKG,Materials,Paper & Plastic Packaging Products & Materials,2018-01-01,
+PKI,,,1900-01-01,2024-01-01
+PLD,Real Estate,Industrial REITs,2003-07-17,
+PLL,,,1900-01-01,2016-01-01
+PLTR,Information Technology,Application Software,2025-01-01,
+PM,Consumer Staples,Tobacco,2009-01-01,
+PNC,Financials,Diversified Banks,1988-04-30,
+PNR,Industrials,Industrial Machinery & Supplies & Components,2013-01-01,
+PNW,Utilities,Multi-Utilities,1999-10-04,
+PODD,Health Care,Health Care Equipment,2024-01-01,
+POM,,,2009-01-01,2017-01-01
+POOL,Consumer Discretionary,Distributors,2021-01-01,
+PPG,Materials,Specialty Chemicals,1957-03-04,
+PPL,Utilities,Electric Utilities,2001-10-01,
+PRGO,Health Care,Pharmaceuticals,2012-01-01,2022-01-01
+PRU,Financials,Life & Health Insurance,2002-07-22,
+PSA,Real Estate,Self-Storage REITs,2005-08-19,
+PSKY,Communication Services,Movies & Entertainment,2026-01-01,
+PSX,Energy,Oil & Gas Refining & Marketing,2013-01-01,
+PTC,Information Technology,Application Software,2022-01-01,
+PTV,,,1900-01-01,2011-01-01
+PVH,Consumer Discretionary,"Textiles, Apparel & Luxury Goods",2014-01-01,2023-01-01
+PWR,Industrials,Construction & Engineering,2010-01-01,
+PX,,,1900-01-01,2019-01-01
+PXD,,,2009-01-01,2025-01-01
+PYPL,Financials,Transaction & Payment Processing Services,2016-01-01,
+Q,Information Technology,Semiconductor Materials & Equipment,1900-01-01,2012-01-01
+Q,Information Technology,Semiconductor Materials & Equipment,2026-01-01,
+QCOM,Information Technology,Semiconductors,1999-07-22,
+QEP,,,2011-01-01,2016-01-01
+QLGC,,,1900-01-01,2012-01-01
+QRVO,Information Technology,Semiconductors & Semiconductor Equipment,2016-01-01,2025-01-01
+R,Industrials,Ground Transportation,1900-01-01,2018-01-01
+RAI,,,1900-01-01,2018-01-01
+RCL,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",2015-01-01,
+RDC,,,1900-01-01,2015-01-01
+RDDT,Communication Services,Interactive Media & Services,2026-08-18,
+RE,,,2018-01-01,2024-01-01
+REG,Real Estate,Retail REITs,2018-01-01,
+REGN,Health Care,Biotechnology,2014-01-01,
+RF,Financials,Regional Banks,1998-08-28,
+RHI,Industrials,Professional Services,1900-01-01,2025-01-01
+RHT,,,2010-01-01,2020-01-01
+RIG,Energy,Energy Equipment & Services,1900-01-01,2010-01-01
+RIG,Energy,Energy Equipment & Services,2014-01-01,2018-01-01
+RJF,Financials,Investment Banking & Brokerage,2018-01-01,
+RL,Consumer Discretionary,"Apparel, Accessories & Luxury Goods",2007-02-02,
+RMD,Health Care,Health Care Equipment,2018-01-01,
+ROH,,,1900-01-01,2010-01-01
+ROK,Industrials,Electrical Components & Equipment,2000-03-12,
+ROL,Industrials,Environmental & Facilities Services,2019-01-01,
+ROP,Information Technology,Electronic Equipment & Instruments,2010-01-01,
+ROST,Consumer Discretionary,Apparel Retail,2011-01-01,
+RRC,Energy,"Oil, Gas & Consumable Fuels",2009-01-01,2019-01-01
+RRD,,,1900-01-01,2013-01-01
+RSG,Industrials,Environmental & Facilities Services,2010-01-01,
+RSH,,,1900-01-01,2012-01-01
+RTN,,,1900-01-01,2021-01-01
+RTX,Industrials,Aerospace & Defense,2021-01-01,
+RVTY,Health Care,Health Care Equipment,2024-01-01,
+RX,,,1900-01-01,2011-01-01
+S,Information Technology,Software,1900-01-01,2014-01-01
+SAF,,,1900-01-01,2009-01-01
+SAI,,,2011-01-01,2014-01-01
+SANM,Information Technology,"Electronic Equipment, Instruments & Components",1900-01-01,2009-01-01
+SBAC,Real Estate,Telecom Tower REITs,2018-01-01,
+SBNY,Financials,Banks,2022-01-01,2024-01-01
+SBUX,Consumer Discretionary,Restaurants,2000-06-07,
+SCG,,,2010-01-01,2020-01-01
+SCHW,Financials,Investment Banking & Brokerage,1997-06-02,
+SE,Consumer Discretionary,Broadline Retail,1900-01-01,2018-01-01
+SEDG,Information Technology,Semiconductors & Semiconductor Equipment,2022-01-01,2024-01-01
+SEE,,,1900-01-01,2024-01-01
+SGP,,,1900-01-01,2010-01-01
+SGPPRB,,,2010-01-01,2011-01-01
+SHLD,,,1900-01-01,2013-01-01
+SHW,Materials,Specialty Chemicals,1964-06-30,
+SIAL,,,1900-01-01,2016-01-01
+SIG,Consumer Discretionary,Specialty Retail,2016-01-01,2019-01-01
+SII,,,1900-01-01,2011-01-01
+SIVB,,,2019-01-01,2024-01-01
+SJM,Consumer Staples,Packaged Foods & Meats,2009-01-01,
+SLB,Energy,Oil & Gas Equipment & Services,1957-03-04,
+SLE,,,1900-01-01,2013-01-01
+SLG,Real Estate,Office REITs,2016-01-01,2022-01-01
+SLM,Financials,Consumer Finance,1900-01-01,2015-01-01
+SLR,,,1900-01-01,2009-01-01
+SMCI,Information Technology,"Technology Hardware, Storage & Peripherals",2025-01-01,
+SNA,Industrials,Industrial Machinery & Supplies & Components,1982-09-30,
+SNDK,Information Technology,"Technology Hardware, Storage & Peripherals",1900-01-01,2017-01-01
+SNDK,Information Technology,"Technology Hardware, Storage & Peripherals",2026-01-01,
+SNI,,,2009-01-01,2019-01-01
+SNPS,Information Technology,Application Software,2018-01-01,
+SNV,,,1900-01-01,2009-01-01
+SO,Utilities,Electric Utilities,1957-03-04,
+SOLS,,,2026-01-01,
+SOLV,Health Care,Health Care Technology,2025-01-01,
+SOV,,,1900-01-01,2010-01-01
+SPG,Real Estate,Retail REITs,2002-06-26,
+SPGI,Financials,Financial Exchanges & Data,2017-01-01,
+SPLS,,,1900-01-01,2018-01-01
+SRCL,,,2010-01-01,2019-01-01
+SRE,Utilities,Multi-Utilities,1900-01-01,
+SSP,Communication Services,Media,1900-01-01,2009-01-01
+STE,Health Care,Health Care Equipment,2020-01-01,
+STI,Industrials,Electrical Equipment,1900-01-01,2020-01-01
+STJ,,,1900-01-01,2018-01-01
+STLD,Materials,Steel,2023-01-01,
+STR,,,1900-01-01,2011-01-01
+STT,Financials,Asset Management & Custody Banks,2003-03-14,
+STX,Information Technology,"Technology Hardware, Storage & Peripherals",2013-01-01,
+STZ,Consumer Staples,Distillers & Vintners,2005-07-01,
+SUN,Energy,"Oil, Gas & Consumable Fuels",1900-01-01,2013-01-01
+SVU,,,1900-01-01,2013-01-01
+SW,Materials,Paper & Plastic Packaging Products & Materials,2025-01-01,
+SWK,Industrials,Industrial Machinery & Supplies & Components,1982-09-30,
+SWKS,Information Technology,Semiconductors,2016-01-01,
+SWN,,,2009-01-01,2018-01-01
+SWY,,,1900-01-01,2016-01-01
+SYF,Financials,Consumer Finance,2016-01-01,
+SYK,Health Care,Health Care Equipment,2000-12-12,
+SYMC,,,1900-01-01,2020-01-01
+SYY,Consumer Staples,Food Distributors,1986-12-31,
+T,Communication Services,Integrated Telecommunication Services,1983-11-30,
+TAP,Consumer Staples,Brewers,1976-06-30,
+TDC,Information Technology,Software,2009-01-01,2018-01-01
+TDG,Industrials,Aerospace & Defense,2017-01-01,
+TDY,Information Technology,Electronic Equipment & Instruments,2021-01-01,
+TE,Information Technology,Semiconductors & Semiconductor Equipment,1900-01-01,2017-01-01
+TECH,Health Care,Life Sciences Tools & Services,2022-01-01,
+TEG,,,1900-01-01,2016-01-01
+TEK,,,1900-01-01,2009-01-01
+TEL,Information Technology,Electronic Manufacturing Services,2012-01-01,
+TER,Information Technology,Semiconductor Materials & Equipment,1900-01-01,2014-01-01
+TER,Information Technology,Semiconductor Materials & Equipment,2021-01-01,
+TEX,Industrials,Machinery,1900-01-01,2009-01-01
+TFC,Financials,Diversified Banks,2020-01-01,
+TFX,Health Care,Health Care Equipment & Supplies,2020-01-01,2026-01-01
+TGNA,,,2016-01-01,2018-01-01
+TGT,Consumer Staples,Consumer Staples Merchandise Retail,1976-12-31,
+THC,Health Care,Health Care Providers & Services,1900-01-01,2017-01-01
+TIE,,,2009-01-01,2013-01-01
+TIF,,,1900-01-01,2022-01-01
+TIN,,,1900-01-01,2009-01-01
+TJX,Consumer Discretionary,Apparel Retail,1985-09-30,
+TKO,Communication Services,Movies & Entertainment,2026-01-01,
+TLAB,,,1900-01-01,2012-01-01
+TMK,,,1900-01-01,2020-01-01
+TMO,Health Care,Life Sciences Tools & Services,2004-08-03,
+TMUS,Communication Services,Wireless Telecommunication Services,2020-01-01,
+TPL,Energy,Oil & Gas Exploration & Production,2025-01-01,
+TPR,Consumer Discretionary,"Apparel, Accessories & Luxury Goods",2018-01-01,
+TRB,,,1900-01-01,2009-01-01
+TRGP,Energy,Oil & Gas Storage & Transportation,2023-01-01,
+TRIP,Communication Services,Interactive Media & Services,2012-01-01,2020-01-01
+TRMB,Information Technology,Application Software,2022-01-01,
+TROW,Financials,Asset Management & Custody Banks,1900-01-01,
+TRV,Financials,Property & Casualty Insurance,2002-08-21,
+TSCO,Consumer Discretionary,Other Specialty Retail,2015-01-01,
+TSG,,,1900-01-01,2009-01-01
+TSLA,Consumer Discretionary,Automobile Manufacturers,2021-01-01,
+TSN,Consumer Staples,Packaged Foods & Meats,2005-08-10,
+TSO,,,2009-01-01,2018-01-01
+TSS,,,2009-01-01,2020-01-01
+TT,Industrials,Building Products,1900-01-01,2009-01-01
+TT,Industrials,Building Products,2021-01-01,
+TTD,Communication Services,Advertising,2026-01-01,
+TTWO,Communication Services,Interactive Home Entertainment,2019-01-01,
+TWC,,,2010-01-01,2017-01-01
+TWTR,,,2019-01-01,2023-01-01
+TWX,,,1900-01-01,2019-01-01
+TXN,Information Technology,Semiconductors,2001-03-12,
+TXT,Industrials,Aerospace & Defense,1978-12-31,
+TXU,,,1900-01-01,2009-01-01
+TYC,,,1900-01-01,2010-01-01
+TYC,,,2011-01-01,2017-01-01
+TYL,Information Technology,Application Software,2021-01-01,
+UA,,,2015-01-01,2023-01-01
+UAA,Consumer Discretionary,"Textiles, Apparel & Luxury Goods",2017-01-01,2023-01-01
+UAL,Industrials,Passenger Airlines,2016-01-01,
+UBER,Industrials,Passenger Ground Transportation,2024-01-01,
+UDR,Real Estate,Multi-Family Residential REITs,2017-01-01,
+UHS,Health Care,Health Care Facilities,2015-01-01,
+UIS,Information Technology,IT Services,1900-01-01,2010-01-01
+ULTA,Consumer Discretionary,Other Specialty Retail,2017-01-01,
+UNH,Health Care,Managed Health Care,1994-07-01,
+UNM,Financials,Insurance,1900-01-01,2022-01-01
+UNP,Industrials,Rail Transportation,1957-03-04,
+UPS,Industrials,Air Freight & Logistics,2002-07-22,
+URBN,Consumer Discretionary,Specialty Retail,2011-01-01,2018-01-01
+URI,Industrials,Trading Companies & Distributors,2015-01-01,
+USB,Financials,Diversified Banks,1999-11-01,
+UST,,,1900-01-01,2009-01-01
+UTX,,,1900-01-01,2021-01-01
+UVN,,,1900-01-01,2009-01-01
+V,Financials,Transaction & Payment Processing Services,2011-01-01,
+VAR,,,1900-01-01,2022-01-01
+VEEV,Health Care,Health Care Technology,2026-05-07,
+VFC,Consumer Discretionary,"Textiles, Apparel & Luxury Goods",1900-01-01,2025-01-01
+VIA-B,,,1900-01-01,2010-01-01
+VIAB,,,2010-01-01,2020-01-01
+VIAC,,,2020-01-01,2023-01-01
+VICI,Real Estate,Hotel & Resort REITs,2023-01-01,
+VLO,Energy,Oil & Gas Refining & Marketing,2002-12-20,
+VLTO,Industrials,Environmental & Facilities Services,2024-01-01,
+VMC,Materials,Construction Materials,1999-06-30,
+VMRK,Real Estate,Multi-Family Residential REITs,2001-12-03,
+VNO,Real Estate,Office REITs,1900-01-01,2024-01-01
+VNT,Information Technology,"Electronic Equipment, Instruments & Components",2021-01-01,2022-01-01
+VRSK,Industrials,Research & Consulting Services,2016-01-01,
+VRSN,Information Technology,Internet Services & Infrastructure,2006-02-01,
+VRT,Industrials,Electrical Components & Equipment,2026-03-23,
+VRTX,Health Care,Biotechnology,2014-01-01,
+VST,Utilities,Electric Utilities,2025-01-01,
+VTR,Real Estate,Health Care REITs,2010-01-01,
+VTRS,Health Care,Pharmaceuticals,2021-01-01,
+VZ,Communication Services,Integrated Telecommunication Services,1983-11-30,
+WAB,Industrials,Construction Machinery & Heavy Transportation Equipment,2020-01-01,
+WAG,,,1900-01-01,2016-01-01
+WAT,Health Care,Life Sciences Tools & Services,2002-01-02,
+WB,,,1900-01-01,2010-01-01
+WBA,,,2016-01-01,2026-01-01
+WBD,Communication Services,Broadcasting,2023-01-01,
+WCG,,,2019-01-01,2021-01-01
+WDAY,Information Technology,Application Software,2025-01-01,
+WDC,Information Technology,"Technology Hardware, Storage & Peripherals",2010-01-01,
+WEC,Utilities,Electric Utilities,2009-01-01,
+WELL,Real Estate,Health Care REITs,2019-01-01,
+WEN,Consumer Discretionary,"Hotels, Restaurants & Leisure",1900-01-01,2009-01-01
+WFC,Financials,Diversified Banks,1976-06-30,
+WFM,,,2012-01-01,2018-01-01
+WFMI,,,1900-01-01,2012-01-01
+WFR,,,2009-01-01,2012-01-01
+WFT,,,1900-01-01,2010-01-01
+WHR,Consumer Discretionary,Household Durables,1900-01-01,2025-01-01
+WIN,,,1900-01-01,2016-01-01
+WLP,,,1900-01-01,2015-01-01
+WLTW,,,2017-01-01,2023-01-01
+WM,Industrials,Environmental & Facilities Services,1998-08-31,
+WMB,Energy,Oil & Gas Storage & Transportation,1975-03-31,
+WMT,Consumer Staples,Consumer Staples Merchandise Retail,1982-08-31,
+WPI,,,1900-01-01,2014-01-01
+WPO,,,2009-01-01,2014-01-01
+WPX,,,2013-01-01,2015-01-01
+WRB,Financials,Property & Casualty Insurance,2020-01-01,
+WRK,,,2016-01-01,2025-01-01
+WSM,Consumer Discretionary,Homefurnishing Retail,2026-01-01,
+WST,Health Care,Health Care Supplies,2021-01-01,
+WTW,Financials,Insurance Brokers,2023-01-01,
+WU,Financials,Financial Services,1900-01-01,2022-01-01
+WWY,,,1900-01-01,2009-01-01
+WY,Real Estate,Timber REITs,1979-10-01,
+WYE,,,1900-01-01,2010-01-01
+WYN,,,1900-01-01,2019-01-01
+WYNN,Consumer Discretionary,Casinos & Gaming,2010-01-01,
+X,,,1900-01-01,2015-01-01
+XEC,,,2015-01-01,2021-01-01
+XEL,Utilities,Multi-Utilities,1957-03-04,
+XL,,,1900-01-01,2019-01-01
+XLNX,,,1900-01-01,2023-01-01
+XOM,Energy,Integrated Oil & Gas,1957-03-04,
+XRAY,Health Care,Health Care Equipment & Supplies,2010-01-01,2025-01-01
+XRX,Information Technology,"Technology Hardware, Storage & Peripherals",1900-01-01,2022-01-01
+XTO,,,1900-01-01,2011-01-01
+XYL,Industrials,Industrial Machinery & Supplies & Components,2012-01-01,
+XYZ,Financials,Transaction & Payment Processing Services,2026-01-01,
+YHOO,,,1900-01-01,2018-01-01
+YUM,Consumer Discretionary,Restaurants,1997-10-06,
+ZBH,Health Care,Health Care Equipment,2016-01-01,
+ZBRA,Information Technology,Electronic Equipment & Instruments,2020-01-01,
+ZION,Financials,Banks,1900-01-01,2025-01-01
+ZMH,,,1900-01-01,2016-01-01
+ZTS,Health Care,Pharmaceuticals,2014-01-01,

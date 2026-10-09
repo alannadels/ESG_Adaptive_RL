@@ -249,10 +249,12 @@ def split_by_regime(data, labels: pd.Series) -> Dict[str, "object"]:
     for regime in REGIMES:
         mask = aligned == regime
         if mask.any():
+            tradable = data.tradable[mask] if data.tradable is not None else None
             subsets[regime] = MarketData(
                 dates=data.dates[mask],
                 tickers=data.tickers,
                 returns=data.returns[mask],
                 esg={factor: matrix[mask] for factor, matrix in data.esg.items()},
+                tradable=tradable,
             )
     return subsets

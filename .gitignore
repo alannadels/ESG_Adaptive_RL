@@ -19,3 +19,10 @@ models/
 .DS_Store
 .idea/
 .vscode/
+
+# Test / QA artifacts
+.mutmut-cache/
+mutation_report.txt
+.coverage
+coverage.xml
+test/reports/

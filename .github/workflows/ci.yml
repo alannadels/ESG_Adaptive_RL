@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r test/requirements-test.txt
+
+      - name: Run fast QA suite
+        run: >
+          pytest -m "not slow and not network"
+          --cov=esg_adaptive_rl --cov=evolution --cov=esg_regime
+          --cov-branch --cov-report=term-missing --cov-report=xml
+
+      - name: Enforce coverage floor
+        run: coverage report --fail-under=60
+
+      - name: Upload coverage artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage.xml
