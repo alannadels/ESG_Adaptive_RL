@@ -26,3 +26,11 @@ mutation_report.txt
 .coverage
 coverage.xml
 test/reports/
+
+# Licensed market data (CRSP / Refinitiv via WRDS): regenerable with the wrds_* and
+# build_* scripts; must not be redistributed.
+wrds_data/
+*.parquet
+Dataset/cache/
+Dataset/universe_snapshots_crsp.csv
+results/matrix/
